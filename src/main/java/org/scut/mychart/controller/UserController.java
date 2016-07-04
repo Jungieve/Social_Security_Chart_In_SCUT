@@ -1,9 +1,9 @@
 package org.scut.mychart.controller;
 
 import javax.annotation.Resource;  
-import javax.servlet.http.HttpServletRequest;  
-  
-import org.springframework.stereotype.Controller;  
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;  
 import org.springframework.web.bind.annotation.RequestMapping;  
   
@@ -19,7 +19,7 @@ public class UserController {
       
     @RequestMapping("/showUser")
     @ResponseBody
-    public String toIndex(HttpServletRequest request,Model model){  
+    public String toIndex(HttpServletRequest request,Model model){
         String userId = String.valueOf(request.getParameter("id"));  
         AC01 ac01 = this.userService.getAC01ById(userId);  
         model.addAttribute("user", ac01);  

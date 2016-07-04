@@ -184,7 +184,13 @@
 		<version>0.41</version>
 		<scope>system</scope>
 		<systemPath>${basedir}/libs/ImpalaJDBC41.jar</systemPath>
-	</dependency>  
+	</dependency>
+	  <!--Echart类包-->
+	  <dependency>
+		  <groupId>com.github.abel533</groupId>
+		  <artifactId>ECharts</artifactId>
+		  <version>2.2.7</version>
+	  </dependency>
   </dependencies>
   <build>
     <finalName>mychart</finalName>
