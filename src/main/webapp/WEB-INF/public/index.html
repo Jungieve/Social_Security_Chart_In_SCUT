@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8"/>
+	<title>社保大数据业务平台</title>
+
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Bootstrap core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="css/grid.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
+	<!--[if lt IE 9]>
+	<link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<script src="js/jquery-1.5.2.min.js" type="text/javascript"></script>
+	<script src="js/hideshow.js" type="text/javascript"></script>
+	<script src="js/jquery.tablesorter.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/jquery.equalHeight.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function()
+				{
+					$(".tablesorter").tablesorter();
+				}
+		);
+		$(document).ready(function() {
+
+			//When page loads...
+			$(".tab_content").hide(); //Hide all content
+			$("ul.tabs li:first").addClass("active").show(); //Activate first tab
+			$(".tab_content:first").show(); //Show first tab content
+
+			//On Click Event
+			$("ul.tabs li").click(function() {
+
+				$("ul.tabs li").removeClass("active"); //Remove any "active" class
+				$(this).addClass("active"); //Add "active" class to selected tab
+				$(".tab_content").hide(); //Hide all tab content
+
+				var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
+				$(activeTab).fadeIn(); //Fade in the active ID content
+				return false;
+			});
+
+		});
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			$('.column').equalHeight();
+		});
+	</script>
+
+	<script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+	<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
+	<script type="text/javascript" src="js/analysis0.js"></script>
+	<script type="text/javascript" src="js/analysis1.js"></script>
+	<script type="text/javascript" src="js/analysis2.js"></script>
+	<script type="text/javascript" src="js/analysis3.js"></script>
+	<script type="text/javascript" src="js/analysis4.js"></script>
+	<script type="text/javascript" src="js/analysis5.js"></script>
+	<script type="text/javascript" src="js/analysis6.js"></script>
+	<script type="text/javascript" src="js/analysis7.js"></script>
+	<script type="text/javascript" src="js/analysis8.js"></script>
+</head>
+
+
+<body>
+
+<!--<header id="header">-->
+<!--<hgroup>-->
+<!--<h1 class="site_title"><a href="index.html">Website Admin</a></h1>-->
+<!--<h2 class="section_title">Dashboard</h2><div class="btn_view_site"><a href="http://www.medialoot.com">View Site</a></div>-->
+<!--</hgroup>-->
+<!--</header> &lt;!&ndash; end of header bar &ndash;&gt;-->
+
+<div class="navbar navbar-fixed-top navbar-inverse" >
+	<div class="container">
+		<a id="logo" href="/">社保大数据业务平台</a>
+		<nav>
+			<ul class="nav navbar-nav pull-right">
+				<li><a href="https://rubytutorial-jungieve.c9users.io/">主页</a></li>
+				<li><a href="https://rubytutorial-jungieve.c9users.io/help">帮助</a></li>
+				<li><a href="http://125.216.242.244:8080/ETL/html/index.html">预处理</a></li>
+				<li><a href="http://125.216.242.244:8080/olap/">OLAP分析</a></li>
+				<li><a href="http://125.216.242.244:8080/openreports/">报表展示</a></li>
+				<li><a href="http://125.216.242.244:8080/highChart">业务样例</a></li>
+				<li><a href="https://rubytutorial-jungieve.c9users.io/users">其他成员</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">账户</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</div>
+
+<div class="spacer"></div>
+<div class="spacer"></div>
+<div class="spacer"></div>
+
+<aside id="sidebar" class="column">
+
+
+	<h3>养老保险</h3>
+	<ul class="toggle">
+		<!--icn_new_article icn_edit_article icn_categories -->
+		<li class="icn_add_user"><a href="#" >人数</a></li>
+		<li class="icn_view_users"><a href="#">总值</a></li>
+		<li class="icn_profile"><a href="#">平均值</a></li>
+	</ul>
+	<h3>医疗保险</h3>
+	<ul class="toggle">
+		<li class="icn_add_user"><a href="#">人数</a></li>
+		<li class="icn_view_users"><a href="#">总值</a></li>
+		<li class="icn_profile"><a href="#">平均值</a></li>
+	</ul>
+	<h3>失业保险</h3>
+	<ul class="toggle">
+		<!--icn_folder icn_photo icn_audio-->
+		<li class="icn_add_user"><a href="#">人数</a></li>
+		<li class="icn_view_users"><a href="#">总值</a></li>
+		<li class="icn_profile"><a href="#">平均值</a></li>
+	</ul>
+
+
+</aside><!-- end of sidebar -->
+
+<section id="main" class="column">
+
+	<h4 class="alert_info">湖北省，孝感市，保险待遇支付统计分析实例</h4>
+
+	<article class="module width_full">
+		<header><h3>折线图</h3></header>
+		<div id="container" style="min-width:700px;height:400px"></div>
+
+
+		<div class="clear"></div>
+		</div>
+	</article><!-- end of stats article -->
+
+	<article class="module width_3_quarter">
+		<header><h3 class="tabs_involved">柱状图</h3>
+
+		</header>
+
+		<div id="container1" class="tab_container">
+
+		</div><!-- end of .tab_container -->
+
+	</article><!-- end of content manager article -->
+
+	<article class="module width_quarter">
+		<header><h3>饼图</h3></header>
+		<div id="container2" class="message_list">
+
+		</div>
+	</article><!-- end of messages article -->
+
+	<div  class="clear"></div>
+
+
+	<!--<article class="module width_full">-->
+	<!--<header><h3>Basic Styles</h3></header>-->
+	<!--<div class="module_content">-->
+
+	<!--</div>-->
+	<!--</article>&lt;!&ndash; end of styles article &ndash;&gt;-->
+	<div class="spacer"></div>
+</section>
+<script>js_method0()</script>
+</body>
+
+</html>

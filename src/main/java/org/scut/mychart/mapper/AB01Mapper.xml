@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.scut.mychart.mapper.AB01Mapper">
+  <resultMap id="BaseResultMap" type="org.scut.mychart.model.AB01">
+    <result column="oae001" jdbcType="BIGINT" property="oae001" />
+    <result column="aab001" jdbcType="VARCHAR" property="aab001" />
+    <result column="aab002" jdbcType="VARCHAR" property="aab002" />
+    <result column="aab003" jdbcType="VARCHAR" property="aab003" />
+    <result column="aab004" jdbcType="VARCHAR" property="aab004" />
+    <result column="aab042" jdbcType="VARCHAR" property="aab042" />
+    <result column="aab043" jdbcType="VARCHAR" property="aab043" />
+    <result column="aab006" jdbcType="VARCHAR" property="aab006" />
+    <result column="aab007" jdbcType="VARCHAR" property="aab007" />
+    <result column="aab008" jdbcType="TIMESTAMP" property="aab008" />
+    <result column="aab009" jdbcType="INTEGER" property="aab009" />
+    <result column="aab010" jdbcType="VARCHAR" property="aab010" />
+    <result column="aab011" jdbcType="TIMESTAMP" property="aab011" />
+    <result column="aab012" jdbcType="VARCHAR" property="aab012" />
+    <result column="aab016" jdbcType="VARCHAR" property="aab016" />
+    <result column="aab017" jdbcType="VARCHAR" property="aab017" />
+    <result column="aab018" jdbcType="VARCHAR" property="aab018" />
+    <result column="aab019" jdbcType="VARCHAR" property="aab019" />
+    <result column="aab020" jdbcType="VARCHAR" property="aab020" />
+    <result column="aab021" jdbcType="VARCHAR" property="aab021" />
+    <result column="aab022" jdbcType="VARCHAR" property="aab022" />
+    <result column="aab023" jdbcType="VARCHAR" property="aab023" />
+    <result column="aab024" jdbcType="VARCHAR" property="aab024" />
+    <result column="aab025" jdbcType="VARCHAR" property="aab025" />
+    <result column="aab026" jdbcType="VARCHAR" property="aab026" />
+    <result column="aab027" jdbcType="VARCHAR" property="aab027" />
+    <result column="aab028" jdbcType="VARCHAR" property="aab028" />
+    <result column="aab029" jdbcType="VARCHAR" property="aab029" />
+    <result column="aab030" jdbcType="VARCHAR" property="aab030" />
+    <result column="aab031" jdbcType="VARCHAR" property="aab031" />
+    <result column="aab032" jdbcType="VARCHAR" property="aab032" />
+    <result column="aab036" jdbcType="TIMESTAMP" property="aab036" />
+    <result column="aab301" jdbcType="VARCHAR" property="aab301" />
+    <result column="aab321" jdbcType="VARCHAR" property="aab321" />
+    <result column="aab341" jdbcType="VARCHAR" property="aab341" />
+    <result column="aab343" jdbcType="VARCHAR" property="aab343" />
+    <result column="aab353" jdbcType="VARCHAR" property="aab353" />
+    <result column="aae006" jdbcType="VARCHAR" property="aae006" />
+    <result column="aae007" jdbcType="VARCHAR" property="aae007" />
+    <result column="aae036" jdbcType="TIMESTAMP" property="aae036" />
+    <result column="aae013" jdbcType="VARCHAR" property="aae013" />
+    <result column="aae119" jdbcType="VARCHAR" property="aae119" />
+    <result column="bab020" jdbcType="VARCHAR" property="bab020" />
+    <result column="bab313" jdbcType="VARCHAR" property="bab313" />
+    <result column="bab314" jdbcType="TIMESTAMP" property="bab314" />
+    <result column="bkc055" jdbcType="VARCHAR" property="bkc055" />
+    <result column="oae300" jdbcType="BIGINT" property="oae300" />
+    <result column="oae301" jdbcType="BIGINT" property="oae301" />
+    <result column="bab003" jdbcType="VARCHAR" property="bab003" />
+    <result column="bab004" jdbcType="VARCHAR" property="bab004" />
+    <result column="bab011" jdbcType="VARCHAR" property="bab011" />
+    <result column="bab012" jdbcType="BIGINT" property="bab012" />
+    <result column="bab013" jdbcType="VARCHAR" property="bab013" />
+    <result column="bab014" jdbcType="VARCHAR" property="bab014" />
+    <result column="bab015" jdbcType="VARCHAR" property="bab015" />
+    <result column="bab016" jdbcType="VARCHAR" property="bab016" />
+    <result column="aab071" jdbcType="VARCHAR" property="aab071" />
+    <result column="aab324" jdbcType="VARCHAR" property="aab324" />
+    <result column="bab017" jdbcType="VARCHAR" property="bab017" />
+    <result column="bab018" jdbcType="VARCHAR" property="bab018" />
+    <result column="bab019" jdbcType="VARCHAR" property="bab019" />
+    <result column="bab021" jdbcType="VARCHAR" property="bab021" />
+    <result column="aab034" jdbcType="VARCHAR" property="aab034" />
+    <result column="aab051" jdbcType="VARCHAR" property="aab051" />
+    <result column="aab041" jdbcType="DECIMAL" property="aab041" />
+    <result column="bkb044" jdbcType="VARCHAR" property="bkb044" />
+  </resultMap>
+  <insert id="insert" parameterType="org.scut.mychart.model.AB01">
+    insert into ab01 (oae001, aab001, aab002, 
+      aab003, aab004, aab042, 
+      aab043, aab006, aab007, 
+      aab008, aab009, aab010, 
+      aab011, aab012, aab016, 
+      aab017, aab018, aab019, 
+      aab020, aab021, aab022, 
+      aab023, aab024, aab025, 
+      aab026, aab027, aab028, 
+      aab029, aab030, aab031, 
+      aab032, aab036, aab301, 
+      aab321, aab341, aab343, 
+      aab353, aae006, aae007, 
+      aae036, aae013, aae119, 
+      bab020, bab313, bab314, 
+      bkc055, oae300, oae301, 
+      bab003, bab004, bab011, 
+      bab012, bab013, bab014, 
+      bab015, bab016, aab071, 
+      aab324, bab017, bab018, 
+      bab019, bab021, aab034, 
+      aab051, aab041, bkb044
+      )
+    values (#{oae001,jdbcType=BIGINT}, #{aab001,jdbcType=VARCHAR}, #{aab002,jdbcType=VARCHAR}, 
+      #{aab003,jdbcType=VARCHAR}, #{aab004,jdbcType=VARCHAR}, #{aab042,jdbcType=VARCHAR}, 
+      #{aab043,jdbcType=VARCHAR}, #{aab006,jdbcType=VARCHAR}, #{aab007,jdbcType=VARCHAR}, 
+      #{aab008,jdbcType=TIMESTAMP}, #{aab009,jdbcType=INTEGER}, #{aab010,jdbcType=VARCHAR}, 
+      #{aab011,jdbcType=TIMESTAMP}, #{aab012,jdbcType=VARCHAR}, #{aab016,jdbcType=VARCHAR}, 
+      #{aab017,jdbcType=VARCHAR}, #{aab018,jdbcType=VARCHAR}, #{aab019,jdbcType=VARCHAR}, 
+      #{aab020,jdbcType=VARCHAR}, #{aab021,jdbcType=VARCHAR}, #{aab022,jdbcType=VARCHAR}, 
+      #{aab023,jdbcType=VARCHAR}, #{aab024,jdbcType=VARCHAR}, #{aab025,jdbcType=VARCHAR}, 
+      #{aab026,jdbcType=VARCHAR}, #{aab027,jdbcType=VARCHAR}, #{aab028,jdbcType=VARCHAR}, 
+      #{aab029,jdbcType=VARCHAR}, #{aab030,jdbcType=VARCHAR}, #{aab031,jdbcType=VARCHAR}, 
+      #{aab032,jdbcType=VARCHAR}, #{aab036,jdbcType=TIMESTAMP}, #{aab301,jdbcType=VARCHAR}, 
+      #{aab321,jdbcType=VARCHAR}, #{aab341,jdbcType=VARCHAR}, #{aab343,jdbcType=VARCHAR}, 
+      #{aab353,jdbcType=VARCHAR}, #{aae006,jdbcType=VARCHAR}, #{aae007,jdbcType=VARCHAR}, 
+      #{aae036,jdbcType=TIMESTAMP}, #{aae013,jdbcType=VARCHAR}, #{aae119,jdbcType=VARCHAR}, 
+      #{bab020,jdbcType=VARCHAR}, #{bab313,jdbcType=VARCHAR}, #{bab314,jdbcType=TIMESTAMP}, 
+      #{bkc055,jdbcType=VARCHAR}, #{oae300,jdbcType=BIGINT}, #{oae301,jdbcType=BIGINT}, 
+      #{bab003,jdbcType=VARCHAR}, #{bab004,jdbcType=VARCHAR}, #{bab011,jdbcType=VARCHAR}, 
+      #{bab012,jdbcType=BIGINT}, #{bab013,jdbcType=VARCHAR}, #{bab014,jdbcType=VARCHAR}, 
+      #{bab015,jdbcType=VARCHAR}, #{bab016,jdbcType=VARCHAR}, #{aab071,jdbcType=VARCHAR}, 
+      #{aab324,jdbcType=VARCHAR}, #{bab017,jdbcType=VARCHAR}, #{bab018,jdbcType=VARCHAR}, 
+      #{bab019,jdbcType=VARCHAR}, #{bab021,jdbcType=VARCHAR}, #{aab034,jdbcType=VARCHAR}, 
+      #{aab051,jdbcType=VARCHAR}, #{aab041,jdbcType=DECIMAL}, #{bkb044,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.scut.mychart.model.AB01">
+    insert into ab01
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oae001 != null">
+        oae001,
+      </if>
+      <if test="aab001 != null">
+        aab001,
+      </if>
+      <if test="aab002 != null">
+        aab002,
+      </if>
+      <if test="aab003 != null">
+        aab003,
+      </if>
+      <if test="aab004 != null">
+        aab004,
+      </if>
+      <if test="aab042 != null">
+        aab042,
+      </if>
+      <if test="aab043 != null">
+        aab043,
+      </if>
+      <if test="aab006 != null">
+        aab006,
+      </if>
+      <if test="aab007 != null">
+        aab007,
+      </if>
+      <if test="aab008 != null">
+        aab008,
+      </if>
+      <if test="aab009 != null">
+        aab009,
+      </if>
+      <if test="aab010 != null">
+        aab010,
+      </if>
+      <if test="aab011 != null">
+        aab011,
+      </if>
+      <if test="aab012 != null">
+        aab012,
+      </if>
+      <if test="aab016 != null">
+        aab016,
+      </if>
+      <if test="aab017 != null">
+        aab017,
+      </if>
+      <if test="aab018 != null">
+        aab018,
+      </if>
+      <if test="aab019 != null">
+        aab019,
+      </if>
+      <if test="aab020 != null">
+        aab020,
+      </if>
+      <if test="aab021 != null">
+        aab021,
+      </if>
+      <if test="aab022 != null">
+        aab022,
+      </if>
+      <if test="aab023 != null">
+        aab023,
+      </if>
+      <if test="aab024 != null">
+        aab024,
+      </if>
+      <if test="aab025 != null">
+        aab025,
+      </if>
+      <if test="aab026 != null">
+        aab026,
+      </if>
+      <if test="aab027 != null">
+        aab027,
+      </if>
+      <if test="aab028 != null">
+        aab028,
+      </if>
+      <if test="aab029 != null">
+        aab029,
+      </if>
+      <if test="aab030 != null">
+        aab030,
+      </if>
+      <if test="aab031 != null">
+        aab031,
+      </if>
+      <if test="aab032 != null">
+        aab032,
+      </if>
+      <if test="aab036 != null">
+        aab036,
+      </if>
+      <if test="aab301 != null">
+        aab301,
+      </if>
+      <if test="aab321 != null">
+        aab321,
+      </if>
+      <if test="aab341 != null">
+        aab341,
+      </if>
+      <if test="aab343 != null">
+        aab343,
+      </if>
+      <if test="aab353 != null">
+        aab353,
+      </if>
+      <if test="aae006 != null">
+        aae006,
+      </if>
+      <if test="aae007 != null">
+        aae007,
+      </if>
+      <if test="aae036 != null">
+        aae036,
+      </if>
+      <if test="aae013 != null">
+        aae013,
+      </if>
+      <if test="aae119 != null">
+        aae119,
+      </if>
+      <if test="bab020 != null">
+        bab020,
+      </if>
+      <if test="bab313 != null">
+        bab313,
+      </if>
+      <if test="bab314 != null">
+        bab314,
+      </if>
+      <if test="bkc055 != null">
+        bkc055,
+      </if>
+      <if test="oae300 != null">
+        oae300,
+      </if>
+      <if test="oae301 != null">
+        oae301,
+      </if>
+      <if test="bab003 != null">
+        bab003,
+      </if>
+      <if test="bab004 != null">
+        bab004,
+      </if>
+      <if test="bab011 != null">
+        bab011,
+      </if>
+      <if test="bab012 != null">
+        bab012,
+      </if>
+      <if test="bab013 != null">
+        bab013,
+      </if>
+      <if test="bab014 != null">
+        bab014,
+      </if>
+      <if test="bab015 != null">
+        bab015,
+      </if>
+      <if test="bab016 != null">
+        bab016,
+      </if>
+      <if test="aab071 != null">
+        aab071,
+      </if>
+      <if test="aab324 != null">
+        aab324,
+      </if>
+      <if test="bab017 != null">
+        bab017,
+      </if>
+      <if test="bab018 != null">
+        bab018,
+      </if>
+      <if test="bab019 != null">
+        bab019,
+      </if>
+      <if test="bab021 != null">
+        bab021,
+      </if>
+      <if test="aab034 != null">
+        aab034,
+      </if>
+      <if test="aab051 != null">
+        aab051,
+      </if>
+      <if test="aab041 != null">
+        aab041,
+      </if>
+      <if test="bkb044 != null">
+        bkb044,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="oae001 != null">
+        #{oae001,jdbcType=BIGINT},
+      </if>
+      <if test="aab001 != null">
+        #{aab001,jdbcType=VARCHAR},
+      </if>
+      <if test="aab002 != null">
+        #{aab002,jdbcType=VARCHAR},
+      </if>
+      <if test="aab003 != null">
+        #{aab003,jdbcType=VARCHAR},
+      </if>
+      <if test="aab004 != null">
+        #{aab004,jdbcType=VARCHAR},
+      </if>
+      <if test="aab042 != null">
+        #{aab042,jdbcType=VARCHAR},
+      </if>
+      <if test="aab043 != null">
+        #{aab043,jdbcType=VARCHAR},
+      </if>
+      <if test="aab006 != null">
+        #{aab006,jdbcType=VARCHAR},
+      </if>
+      <if test="aab007 != null">
+        #{aab007,jdbcType=VARCHAR},
+      </if>
+      <if test="aab008 != null">
+        #{aab008,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aab009 != null">
+        #{aab009,jdbcType=INTEGER},
+      </if>
+      <if test="aab010 != null">
+        #{aab010,jdbcType=VARCHAR},
+      </if>
+      <if test="aab011 != null">
+        #{aab011,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aab012 != null">
+        #{aab012,jdbcType=VARCHAR},
+      </if>
+      <if test="aab016 != null">
+        #{aab016,jdbcType=VARCHAR},
+      </if>
+      <if test="aab017 != null">
+        #{aab017,jdbcType=VARCHAR},
+      </if>
+      <if test="aab018 != null">
+        #{aab018,jdbcType=VARCHAR},
+      </if>
+      <if test="aab019 != null">
+        #{aab019,jdbcType=VARCHAR},
+      </if>
+      <if test="aab020 != null">
+        #{aab020,jdbcType=VARCHAR},
+      </if>
+      <if test="aab021 != null">
+        #{aab021,jdbcType=VARCHAR},
+      </if>
+      <if test="aab022 != null">
+        #{aab022,jdbcType=VARCHAR},
+      </if>
+      <if test="aab023 != null">
+        #{aab023,jdbcType=VARCHAR},
+      </if>
+      <if test="aab024 != null">
+        #{aab024,jdbcType=VARCHAR},
+      </if>
+      <if test="aab025 != null">
+        #{aab025,jdbcType=VARCHAR},
+      </if>
+      <if test="aab026 != null">
+        #{aab026,jdbcType=VARCHAR},
+      </if>
+      <if test="aab027 != null">
+        #{aab027,jdbcType=VARCHAR},
+      </if>
+      <if test="aab028 != null">
+        #{aab028,jdbcType=VARCHAR},
+      </if>
+      <if test="aab029 != null">
+        #{aab029,jdbcType=VARCHAR},
+      </if>
+      <if test="aab030 != null">
+        #{aab030,jdbcType=VARCHAR},
+      </if>
+      <if test="aab031 != null">
+        #{aab031,jdbcType=VARCHAR},
+      </if>
+      <if test="aab032 != null">
+        #{aab032,jdbcType=VARCHAR},
+      </if>
+      <if test="aab036 != null">
+        #{aab036,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aab301 != null">
+        #{aab301,jdbcType=VARCHAR},
+      </if>
+      <if test="aab321 != null">
+        #{aab321,jdbcType=VARCHAR},
+      </if>
+      <if test="aab341 != null">
+        #{aab341,jdbcType=VARCHAR},
+      </if>
+      <if test="aab343 != null">
+        #{aab343,jdbcType=VARCHAR},
+      </if>
+      <if test="aab353 != null">
+        #{aab353,jdbcType=VARCHAR},
+      </if>
+      <if test="aae006 != null">
+        #{aae006,jdbcType=VARCHAR},
+      </if>
+      <if test="aae007 != null">
+        #{aae007,jdbcType=VARCHAR},
+      </if>
+      <if test="aae036 != null">
+        #{aae036,jdbcType=TIMESTAMP},
+      </if>
+      <if test="aae013 != null">
+        #{aae013,jdbcType=VARCHAR},
+      </if>
+      <if test="aae119 != null">
+        #{aae119,jdbcType=VARCHAR},
+      </if>
+      <if test="bab020 != null">
+        #{bab020,jdbcType=VARCHAR},
+      </if>
+      <if test="bab313 != null">
+        #{bab313,jdbcType=VARCHAR},
+      </if>
+      <if test="bab314 != null">
+        #{bab314,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bkc055 != null">
+        #{bkc055,jdbcType=VARCHAR},
+      </if>
+      <if test="oae300 != null">
+        #{oae300,jdbcType=BIGINT},
+      </if>
+      <if test="oae301 != null">
+        #{oae301,jdbcType=BIGINT},
+      </if>
+      <if test="bab003 != null">
+        #{bab003,jdbcType=VARCHAR},
+      </if>
+      <if test="bab004 != null">
+        #{bab004,jdbcType=VARCHAR},
+      </if>
+      <if test="bab011 != null">
+        #{bab011,jdbcType=VARCHAR},
+      </if>
+      <if test="bab012 != null">
+        #{bab012,jdbcType=BIGINT},
+      </if>
+      <if test="bab013 != null">
+        #{bab013,jdbcType=VARCHAR},
+      </if>
+      <if test="bab014 != null">
+        #{bab014,jdbcType=VARCHAR},
+      </if>
+      <if test="bab015 != null">
+        #{bab015,jdbcType=VARCHAR},
+      </if>
+      <if test="bab016 != null">
+        #{bab016,jdbcType=VARCHAR},
+      </if>
+      <if test="aab071 != null">
+        #{aab071,jdbcType=VARCHAR},
+      </if>
+      <if test="aab324 != null">
+        #{aab324,jdbcType=VARCHAR},
+      </if>
+      <if test="bab017 != null">
+        #{bab017,jdbcType=VARCHAR},
+      </if>
+      <if test="bab018 != null">
+        #{bab018,jdbcType=VARCHAR},
+      </if>
+      <if test="bab019 != null">
+        #{bab019,jdbcType=VARCHAR},
+      </if>
+      <if test="bab021 != null">
+        #{bab021,jdbcType=VARCHAR},
+      </if>
+      <if test="aab034 != null">
+        #{aab034,jdbcType=VARCHAR},
+      </if>
+      <if test="aab051 != null">
+        #{aab051,jdbcType=VARCHAR},
+      </if>
+      <if test="aab041 != null">
+        #{aab041,jdbcType=DECIMAL},
+      </if>
+      <if test="bkb044 != null">
+        #{bkb044,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
