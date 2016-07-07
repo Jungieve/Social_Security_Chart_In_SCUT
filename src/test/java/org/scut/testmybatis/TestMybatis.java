@@ -11,7 +11,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;  
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;  
   
-import com.alibaba.fastjson.JSON;  
+import com.alibaba.fastjson.JSON;
+import com.github.abel533.echarts.Option;
+
 import org.scut.mychart.model.AC01;  
 import org.scut.mychart.service.IUserService;  
   
@@ -32,9 +34,14 @@ public class TestMybatis {
   
     @Test  
     public void test1() {  
-        AC01 ac01 = userService.getAC01ById("0010161257");  
-        System.out.println(ac01.getAac005());  
-        logger.info("springMVC test:"+ac01.getAac005());  
-        logger.info(JSON.toJSONString(ac01));  
+//      AC01 ac01 = userService.getAC01ById("0010161257");  
+//      System.out.println(ac01.getAac005());  
+//      logger.info("springMVC test:"+ac01.getAac005());  
+//      logger.info(JSON.toJSONString(ac01));  
+//  	Option option = userService.getChart01Option("endowment");
+		Option option = userService.getChart02Option("endowment");
+		logger.info(JSON.toJSONString(option,true)); 
+		logger.info(option.getxAxis());
+		logger.info(option.getyAxis());
     }  
 } 

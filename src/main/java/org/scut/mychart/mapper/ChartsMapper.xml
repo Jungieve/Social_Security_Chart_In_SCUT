@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.scut.mychart.mapper.ChartsMapper">
+	<!-- 开启二级缓存 -->
+	<cache size="1024" readOnly="true" />
+  	<select id="selectChart01Payment" parameterType="java.util.Map" resultType="org.scut.mychart.model.Chart01" statementType="STATEMENT">
+    	select sum(${payment}) as "total_payment",
+    	count(${table}.aac001) as "person_num",
+    	aac004 as "sex",the_year as "year", month_of_year as "month" 
+    	from ${table} join time on the_date= aae036 
+    	join ac01 on ac01.aac001=${table}.aac001
+    	group by aac004,the_year,month_of_year
+    	order by the_year,month_of_year,sex
+  	</select>
+  	<select id="selectChart03Payment" parameterType="java.util.Map" resultType="org.scut.mychart.model.Chart03" statementType="STATEMENT">
+    	select count(distinct ac20.aac001) as "person_num",
+    	sum(aac123) as "total_charges",
+    	aac004 as "sex",aac012 as "occupation",
+    	the_year as "year", month_of_year as "month" 
+    	from ac20 join time on the_date=aab193 
+    	join ac01 on ac01.aac001=ac20.aac001
+    	group by aac004,aac012,the_year,month_of_year
+    	order by the_year,month_of_year,aac004,aac012
+  	</select>
+</mapper>
