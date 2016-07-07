@@ -235,8 +235,16 @@ public class UserServiceImpl implements IUserService {
     	return option;
     }
     
+    //应用3
     public List<Chart03> getChart03Payment(){
     	return this.chartsDao.selectChart03Payment(new HashMap());
+    }
+    
+    public Option getChart03Option(){
+    	
+    	Option option = new Option();
+    	
+    	return option;
     }
     
     

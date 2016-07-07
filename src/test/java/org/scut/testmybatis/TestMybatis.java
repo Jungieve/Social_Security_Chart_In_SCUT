@@ -1,8 +1,13 @@
 package org.scut.testmybatis;
 
+import java.util.List;
+
 import javax.annotation.Resource;  
 
-import org.apache.log4j.Logger;  
+import org.apache.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;  
 import org.junit.runner.RunWith;  
@@ -14,7 +19,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.alibaba.fastjson.JSON;
 import com.github.abel533.echarts.Option;
 
-import org.scut.mychart.model.AC01;  
+import org.scut.mychart.model.AC01;
+import org.scut.mychart.model.Chart03;
 import org.scut.mychart.service.IUserService;  
   
 @RunWith(SpringJUnit4ClassRunner.class)     //表示继承了SpringJUnit4ClassRunner类  
@@ -39,9 +45,25 @@ public class TestMybatis {
 //      logger.info("springMVC test:"+ac01.getAac005());  
 //      logger.info(JSON.toJSONString(ac01));  
 //  	Option option = userService.getChart01Option("endowment");
-		Option option = userService.getChart02Option("endowment");
-		logger.info(JSON.toJSONString(option,true)); 
-		logger.info(option.getxAxis());
-		logger.info(option.getyAxis());
+//		Option option = userService.getChart02Option("endowment");
+//		logger.info(JSON.toJSONString(option,true)); 
+//		logger.info(option.getxAxis());
+//		logger.info(option.getyAxis());
+    	 List<Chart03> chart03 = userService.getChart03Payment();
+         JSONArray json = new JSONArray();
+         for(Chart03 c : chart03){
+             JSONObject jo = new JSONObject();
+             try {
+ 				jo.put("sex", c.getsex());
+ 				jo.put("year", c.getyear());
+ 				jo.put("person_num", c.getperson_num());
+ 				jo.put("total_payment", c.gettotal_payment());
+             } catch (JSONException e) {
+ 				// TODO Auto-generated catch block
+ 				e.printStackTrace();
+ 			}
+             json.put(jo);
+         }
+         logger.info(json.toString());
     }  
 } 

@@ -6,7 +6,7 @@ public class Chart03 {
 	private String   sex;
 	private String   occupation;
 	private Integer  year;
-	private Integer  month;
+//	private Integer  month;
 	//private String   the_month;
 	
 	public Double gettotal_payment() {
@@ -18,9 +18,9 @@ public class Chart03 {
 	public Integer getyear() {
         return year;
     }
-	public Integer getmonth() {
-        return month;
-    }
+//	public Integer getmonth() {
+//        return month;
+//    }
 //	public String getthe_month() {
 //        return the_month;
 //    }

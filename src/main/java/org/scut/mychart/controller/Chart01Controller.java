@@ -22,11 +22,11 @@ public class Chart01Controller {
       
     @RequestMapping("/chart01")
     @ResponseBody
-    public String toIndex(HttpServletRequest request,Model model){
+    public Option toIndex(HttpServletRequest request,Model model){
 
     	Option option = this.userService.getChart01Option("endowment");
     	model.addAttribute("data", option); 
-        return "showChart01";  //view?
+        return option;  //view?
 
     }  
 }  
