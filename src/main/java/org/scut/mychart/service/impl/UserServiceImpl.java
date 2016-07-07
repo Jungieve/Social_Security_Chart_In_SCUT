@@ -1,15 +1,5 @@
 package org.scut.mychart.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import javax.annotation.Resource;  
-
-import org.datanucleus.store.types.backed.Map;
-import org.springframework.stereotype.Service;
-
-import com.github.abel533.echarts.Option;
 import com.github.abel533.echarts.axis.CategoryAxis;
 import com.github.abel533.echarts.axis.ValueAxis;
 import com.github.abel533.echarts.code.Magic;
@@ -18,12 +8,21 @@ import com.github.abel533.echarts.code.Tool;
 import com.github.abel533.echarts.code.Trigger;
 import com.github.abel533.echarts.data.PointData;
 import com.github.abel533.echarts.feature.MagicType;
+import com.github.abel533.echarts.json.GsonOption;
 import com.github.abel533.echarts.series.Bar;
 import com.github.abel533.echarts.series.Line;
+import org.scut.mychart.mapper.AC01Mapper;
+import org.scut.mychart.mapper.ChartsMapper;
+import org.scut.mychart.model.AC01;
+import org.scut.mychart.model.Chart01;
+import org.scut.mychart.model.Chart03;
+import org.scut.mychart.service.IUserService;
+import org.springframework.stereotype.Service;
 
-import org.scut.mychart.model.*;
-import org.scut.mychart.mapper.*;
-import org.scut.mychart.service.IUserService;  
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
   
 @Service("userService")  
 public class UserServiceImpl implements IUserService {  
@@ -54,9 +53,9 @@ public class UserServiceImpl implements IUserService {
     	return this.chartsDao.selectChart01Payment(param);
     }
     
-    public Option getChart01Option(String title){
-    	
-    	Option option = new Option();
+    public GsonOption getChart01Option(String title){
+
+		GsonOption option = new GsonOption();
     	List<Chart01> list = getChart01Payment(title);
     	
     	option.title("社保待遇支付统计");  
@@ -154,9 +153,9 @@ public class UserServiceImpl implements IUserService {
     
     
     //应用2
-    public Option getChart02Option(String title){
+    public GsonOption getChart02Option(String title){
     	
-    	Option option = new Option();
+    	GsonOption option = new GsonOption();
     	
     	List<Chart01> list = getChart01Payment(title);
     	
@@ -240,9 +239,9 @@ public class UserServiceImpl implements IUserService {
     	return this.chartsDao.selectChart03Payment(new HashMap());
     }
     
-    public Option getChart03Option(){
+    public GsonOption getChart03Option(){
     	
-    	Option option = new Option();
+    	GsonOption option = new GsonOption();
     	
     	return option;
     }
