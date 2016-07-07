@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.abel533.echarts.Option;
 
 @Controller  
-@RequestMapping("/charts")  
+@RequestMapping(value = "/charts",produces = "text/html;charset=UTF-8")
 public class Chart01Controller {  
     @Resource  
     private IUserService userService;  

@@ -23,19 +23,19 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-  
-@Service("userService")  
-public class UserServiceImpl implements IUserService {  
-    @Resource  
+
+@Service("userService")
+public class UserServiceImpl implements IUserService {
+    @Resource
     private AC01Mapper ac01Dao;
-    @Resource  
+    @Resource
     private ChartsMapper chartsDao;
-    
-    public AC01 getAC01ById(String aac001) {  
-        // TODO Auto-generated method stub  
-        return this.ac01Dao.selectByPrimaryKey(aac001);  
-    }  
-    
+
+    public AC01 getAC01ById(String aac001) {
+        // TODO Auto-generated method stub
+        return this.ac01Dao.selectByPrimaryKey(aac001);
+    }
+
     public List<Chart01> getChart01Payment(String tittle){
     	HashMap<String,String> param = new HashMap<String,String>();
     	if(tittle=="endowment") {
@@ -52,32 +52,32 @@ public class UserServiceImpl implements IUserService {
     	}
     	return this.chartsDao.selectChart01Payment(param);
     }
-    
+
     public GsonOption getChart01Option(String title){
 
 		GsonOption option = new GsonOption();
-    	List<Chart01> list = getChart01Payment(title);
-    	
-    	option.title("社保待遇支付统计");  
-    	option.tooltip().trigger(Trigger.axis);
-    	option.legend().data("男","女");
+		List<Chart01> list = getChart01Payment(title);
+
+		option.title("社保待遇支付统计");
+		option.tooltip().trigger(Trigger.axis);
+		option.legend().data("男","女");
     	option.toolbox().show(true).feature(Tool.mark, Tool.dataView, new MagicType(Magic.line, Magic.bar),
     			Tool.restore, Tool.saveAsImage);
     	option.calculable(true);
-    	
+
     	//生成category 和 series
     	List<HashMap<String,Integer>> data = new ArrayList<HashMap<String,Integer>>();
-    	
-    	CategoryAxis category = new CategoryAxis(); 
+
+    	CategoryAxis category = new CategoryAxis();
     	Bar male = new Bar();
     	Bar female = new Bar();
-  
+
     	HashMap<String,Integer> currentMap = new HashMap<String, Integer>();
     	double malePayment = 0.0;
     	double femalePayment = 0.0;
     	//sum
     	for(Chart01 chart:list){
-    		
+
     		if(!currentMap.containsKey("year") || currentMap.get("year").intValue()!=chart.getyear().intValue()){
 
     			if(currentMap.containsKey("year")){
@@ -93,14 +93,14 @@ public class UserServiceImpl implements IUserService {
     			currentMap = new HashMap<String, Integer>();
     			currentMap.put("year", chart.getyear());
     		}
-    		
+
     		if(chart.getsex().equals("1")){
     			malePayment += chart.gettotal_payment();
     		}
     		else{
     			femalePayment += chart.gettotal_payment();
     		}
-    		
+
     	}
 		currentMap.put("male", (int)malePayment);
 		currentMap.put("female", (int)femalePayment);
@@ -108,14 +108,14 @@ public class UserServiceImpl implements IUserService {
 		System.out.println("year: "+currentMap.get("year").intValue()+
 				", male:　"+currentMap.get("male").intValue()+
 				", female: "+currentMap.get("female").intValue());
-		
-		
+
+
 		int max1=0,min1=0,max2=0,min2=0,count=0;
 		double avg1=0.0,sum1=0.0,avg2=0.0,sum2=0.0;
 
 		//for each year
 		for(HashMap<String,Integer> map:data){
-			
+
 			category.data(map.get("year")+"年");
 			male.data(map.get("male"));
 			female.data(map.get("female"));
@@ -141,20 +141,20 @@ public class UserServiceImpl implements IUserService {
     	male.markLine().data(new PointData().type(MarkType.average).name("平均值"));
     	female.markPoint().data(new PointData().type(MarkType.max).name("最大值"), new PointData().type(MarkType.min).name("最小值"));
     	female.markLine().data(new PointData().type(MarkType.average).name("平均值"));
-		male.name("男");  
+		male.name("男");
 		female.name("女");
-		
+
 		option.xAxis(category);
     	option.yAxis(new ValueAxis());  //金额
 	    option.series(male,female);
-    	
+
     	return option;
     }
-    
-    
+
+
     //应用2
     public GsonOption getChart02Option(String title){
-    	
+
     	GsonOption option = new GsonOption();
     	
     	List<Chart01> list = getChart01Payment(title);
