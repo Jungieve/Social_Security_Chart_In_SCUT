@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 import javax.jws.WebResult;
 import javax.servlet.http.HttpServletRequest;
 
+import com.github.abel533.echarts.json.GsonOption;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;  
 import org.springframework.web.bind.annotation.RequestMapping;  
@@ -22,11 +23,9 @@ public class Chart01Controller {
       
     @RequestMapping("/chart01")
     @ResponseBody
-    public String toIndex(HttpServletRequest request,Model model){
-
-    	Option option = this.userService.getChart01Option("endowment");
-    	model.addAttribute("data", option); 
-        return "showChart01";  //view?
-
+    public String toIndex(){
+        GsonOption option = this.userService.getChart01Option("endowment");
+        System.out.println(option.toString());
+        return option.toString();  //view?
     }  
 }  
