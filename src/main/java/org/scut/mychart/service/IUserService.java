@@ -16,5 +16,5 @@ public interface IUserService {
     public GsonOption getChart02Option(String title);
     
     public List<Chart03> getChart03Payment();
-    
+    public GsonOption getChart03Option();
 }

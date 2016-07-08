@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.abel533.echarts.Option;
 
+import com.github.abel533.echarts.Option;
+
 @Controller  
 @RequestMapping(value = "/charts",produces = "text/html;charset=UTF-8")
 public class Chart01Controller {  
@@ -28,4 +30,5 @@ public class Chart01Controller {
         System.out.println(option.toString());
         return option.toString();  //view?
     }  
-}  
+}   
+

@@ -191,15 +191,15 @@
 		  <artifactId>ECharts</artifactId>
 		  <version>2.2.7</version>
 	  </dependency>
-	  <!--gson libaray-->
-	  <dependency>
-		  <groupId>com.google.code.gson</groupId>
-		  <artifactId>gson</artifactId>
-		  <version>2.2.4</version>
-	  </dependency>
+	  <!-- gson library -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.2.4</version>
+		</dependency>
+	  
   </dependencies>
   <build>
-
     <finalName>mychart</finalName>
     <plugins>
     	<plugin>

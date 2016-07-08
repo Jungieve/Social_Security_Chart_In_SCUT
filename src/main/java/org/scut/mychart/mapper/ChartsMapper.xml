@@ -15,11 +15,14 @@
   	<select id="selectChart03Payment" parameterType="java.util.Map" resultType="org.scut.mychart.model.Chart03" statementType="STATEMENT">
     	select count(distinct ac20.aac001) as "person_num",
     	sum(aac123) as "total_charges",
-    	aac004 as "sex",aac012 as "occupation",
-    	the_year as "year", month_of_year as "month" 
+    	aac004 as "sex",aaa103 as "occupation",
+    	the_year as "year"
     	from ac20 join time on the_date=aab193 
     	join ac01 on ac01.aac001=ac20.aac001
-    	group by aac004,aac012,the_year,month_of_year
-    	order by the_year,month_of_year,aac004,aac012
+    	join aa10 on aaa100='AAC012' and aaa102=aac012 
+    	group by aac004,aaa103,the_year
+    	order by the_year,aaa103,aac004
   	</select>
+  	
+  	
 </mapper>
