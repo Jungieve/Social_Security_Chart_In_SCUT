@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
   
 import com.alibaba.fastjson.JSON;
 import com.github.abel533.echarts.Option;
+import com.github.abel533.echarts.json.GsonOption;
 
 import org.scut.mychart.model.AC01;
 import org.scut.mychart.model.Chart03;
@@ -46,24 +47,24 @@ public class TestMybatis {
 //      logger.info(JSON.toJSONString(ac01));  
 //  	Option option = userService.getChart01Option("endowment");
 //		Option option = userService.getChart02Option("endowment");
-//		logger.info(JSON.toJSONString(option,true)); 
-//		logger.info(option.getxAxis());
-//		logger.info(option.getyAxis());
-    	 List<Chart03> chart03 = userService.getChart03Payment();
-         JSONArray json = new JSONArray();
-         for(Chart03 c : chart03){
-             JSONObject jo = new JSONObject();
-             try {
- 				jo.put("sex", c.getsex());
- 				jo.put("year", c.getyear());
- 				jo.put("person_num", c.getperson_num());
- 				jo.put("total_payment", c.gettotal_payment());
-             } catch (JSONException e) {
- 				// TODO Auto-generated catch block
- 				e.printStackTrace();
- 			}
-             json.put(jo);
-         }
-         logger.info(json.toString());
+		GsonOption option = userService.getChart03Option();
+		logger.info(JSON.toJSONString(option,true)); 
+		logger.info(option.toString());
+//    	 List<Chart03> chart03 = userService.getChart03Payment();
+//         JSONArray json = new JSONArray();
+//         for(Chart03 c : chart03){
+//             JSONObject jo = new JSONObject();
+//             try {
+// 				jo.put("sex", c.getsex());
+// 				jo.put("year", c.getyear());
+// 				jo.put("person_num", c.getperson_num());
+// 				jo.put("total_payment", c.gettotal_payment());
+//             } catch (JSONException e) {
+// 				// TODO Auto-generated catch block
+// 				e.printStackTrace();
+// 			}
+//             json.put(jo);
+//         }
+//         logger.info(json.toString());
     }  
 } 

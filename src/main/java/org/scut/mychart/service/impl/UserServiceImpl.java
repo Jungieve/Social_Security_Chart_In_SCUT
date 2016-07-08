@@ -1,16 +1,22 @@
 package org.scut.mychart.service.impl;
 
+import com.github.abel533.echarts.Data;
+import com.github.abel533.echarts.Option;
 import com.github.abel533.echarts.axis.CategoryAxis;
 import com.github.abel533.echarts.axis.ValueAxis;
 import com.github.abel533.echarts.code.Magic;
 import com.github.abel533.echarts.code.MarkType;
 import com.github.abel533.echarts.code.Tool;
 import com.github.abel533.echarts.code.Trigger;
+import com.github.abel533.echarts.data.PieData;
 import com.github.abel533.echarts.data.PointData;
+import com.github.abel533.echarts.data.SeriesData;
 import com.github.abel533.echarts.feature.MagicType;
 import com.github.abel533.echarts.json.GsonOption;
 import com.github.abel533.echarts.series.Bar;
 import com.github.abel533.echarts.series.Line;
+import com.github.abel533.echarts.series.Pie;
+
 import org.scut.mychart.mapper.AC01Mapper;
 import org.scut.mychart.mapper.ChartsMapper;
 import org.scut.mychart.model.AC01;
@@ -61,7 +67,7 @@ public class UserServiceImpl implements IUserService {
     	option.title("社保待遇支付统计");  
     	option.tooltip().trigger(Trigger.axis);
     	option.legend().data("男","女");
-    	option.toolbox().show(true).feature(Tool.mark, Tool.dataView, new MagicType(Magic.line, Magic.bar),
+    	option.toolbox().show(true).feature(Tool.mark, Tool.dataView, new MagicType(Magic.bar),
     			Tool.restore, Tool.saveAsImage);
     	option.calculable(true);
     	
@@ -162,7 +168,7 @@ public class UserServiceImpl implements IUserService {
     	option.title("社保待遇支付统计");  
     	option.tooltip().trigger(Trigger.axis);
     	option.legend().data("男","女","人数");
-    	option.toolbox().show(true).feature(Tool.mark, Tool.dataView, new MagicType(Magic.line, Magic.bar,Magic.stack,Magic.tiled),
+    	option.toolbox().show(true).feature(Tool.mark, Tool.dataView, new MagicType(Magic.line,Magic.stack,Magic.tiled),
     			Tool.restore, Tool.saveAsImage);
     	option.calculable(true);
     	
@@ -241,10 +247,96 @@ public class UserServiceImpl implements IUserService {
     
     public GsonOption getChart03Option(){
     	
-    	GsonOption option = new GsonOption();
+    	GsonOption optionGroup = new GsonOption(); //timeline option
     	
-    	return option;
+    	//process data
+    	List<Chart03> chartList = getChart03Payment();
+    	ArrayList<ArrayList<Integer>> dataList = new ArrayList<ArrayList<Integer>>();
+    	ArrayList<ArrayList<String>> occupationList = new ArrayList<ArrayList<String>>();
+    	ArrayList<Integer> currentCount = new ArrayList<Integer>();
+    	ArrayList<String> currentOccupation = new ArrayList<String>();
+    	
+    	int maxIndex = 0;
+    	for(Chart03 chart : chartList){
+    		
+    		if(currentCount.size()!=0 && currentCount.get(0).intValue() != chart.getyear().intValue()){
+    			dataList.add(currentCount);
+    			occupationList.add(currentOccupation);
+    			if(occupationList.get(maxIndex).size()<currentOccupation.size()){
+    				maxIndex = occupationList.size()-1;
+    			}
+    			currentCount = new ArrayList<Integer>();
+    			currentOccupation = new ArrayList<String>();
+    		}
+    		if(currentCount.size()==0){
+    			currentCount.add(chart.getyear().intValue());
+    			currentCount.add(0);//male  index =1
+    			currentCount.add(0);//female  index =2
+    		}
+    		if(currentOccupation.size()==0 || !currentOccupation.get(currentOccupation.size()-1).equals(chart.getoccupation())){
+    			currentOccupation.add(chart.getoccupation());
+    			currentCount.add(0);
+    		}
+    		//occupation count
+    		currentCount.set(currentOccupation.size()-1+3, currentCount.get(currentOccupation.size()-1+3)+chart.getperson_num());
+    		//sex count
+    		if(chart.getsex().equals("1")){
+    			currentCount.set(1, currentCount.get(1)+chart.getperson_num());
+    		}
+    		else{
+    			currentCount.set(2, currentCount.get(2)+chart.getperson_num());
+    		}
+    	}
+    	if(currentOccupation.size()>0){
+        	dataList.add(currentCount);
+    		occupationList.add(currentOccupation);
+    	}
+		if(occupationList.get(maxIndex).size()<currentOccupation.size()){
+			maxIndex = occupationList.size()-1;
+		}
+		
+		List<Option> options = new ArrayList<Option>();
+		Option option = new Option();
+		option.title("社保人员占比分析");  
+    	option.tooltip().trigger(Trigger.item).formatter("{a} <br/>{b} : {c} ({d}%)");
+    	for(int i=0;i<occupationList.get(maxIndex).size();i++){
+    		option.legend().data(occupationList.get(maxIndex).get(i));//("工人","干部","居民","男","女");
+    	}
+    	option.legend().data("男","女");
+    	option.toolbox().show(true).feature(Tool.mark, Tool.dataView, new MagicType(Magic.pie,Magic.funnel),
+    			Tool.restore, Tool.saveAsImage);
+    	option.calculable(true);
+
+    	//timeline.data  series
+		for(int i=0;i<dataList.size();i++){
+			
+			//timeline
+			optionGroup.timeline().data(dataList.get(i).get(0).intValue()+"年");
+			
+			//series
+			Pie occupation = new Pie();
+			occupation.name("职业");
+			occupation.radius("50%");
+			occupation.center("30%","45%");
+			Pie sex = new Pie();
+			sex.name("性别");
+			sex.radius("50%");
+			sex.center("70%","45%");
+			for(int j=0;j<occupationList.get(i).size();j++){
+				occupation.data(new PieData(occupationList.get(i).get(j), dataList.get(i).get(j+3)));
+			}
+			sex.data(new PieData("男", dataList.get(i).get(1)));
+			sex.data(new PieData("女", dataList.get(i).get(2)));
+			option.series(occupation,sex);
+			
+			//add option
+			options.add(option);
+			option = new Option();
+		}
+		//set options
+		optionGroup.options(options);
+    	
+    	return optionGroup;
     }
-    
     
 }
