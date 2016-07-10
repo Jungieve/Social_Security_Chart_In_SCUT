@@ -20,8 +20,7 @@ import com.alibaba.fastjson.JSON;
 import com.github.abel533.echarts.Option;
 import com.github.abel533.echarts.json.GsonOption;
 
-import org.scut.mychart.model.AC01;
-import org.scut.mychart.model.Chart03;
+import org.scut.mychart.model.*;
 import org.scut.mychart.service.IUserService;  
   
 @RunWith(SpringJUnit4ClassRunner.class)     //表示继承了SpringJUnit4ClassRunner类  
@@ -66,5 +65,30 @@ public class TestMybatis {
 //             json.put(jo);
 //         }
 //         logger.info(json.toString());
-    }  
+    } 
+    
+    @Test  
+    public void test3() {  
+//        AC01 ac01 = userService.getAC01ById("0010161257");  
+//        System.out.println(ac01.getAac005());  
+        List<Chart03> chart03 = userService.getChart03Charges();
+        JSONArray json = new JSONArray();
+        for(Chart03 c : chart03){
+            JSONObject jo = new JSONObject();
+            try {
+				jo.put("sex", c.getsex());
+				jo.put("year", c.getyear());
+				jo.put("person_num", c.getperson_num());
+				jo.put("total_charges", c.gettotal_charges());
+            } catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            json.put(jo);
+        }
+        //System.out.println(chart01);
+        //logger.info("springMVC test:"+ac01.getAac005());  
+        logger.info(json.toString());
+        //logger.info(JSON.toJSONString(chart01, true));
+    }
 } 

@@ -7,5 +7,7 @@ import org.scut.mychart.model.*;
 
 public interface ChartsMapper {
 	List<Chart01> selectChart01Payment(Map<String,String> param);
-	List<Chart03> selectChart03Payment(Map<String,String> param);
+	List<Chart03> selectChart03Charges();
+	int selectChart10Personnum(List<String> param);
 }	
+
