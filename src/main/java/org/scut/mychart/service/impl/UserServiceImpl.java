@@ -318,7 +318,7 @@ public class UserServiceImpl implements IUserService {
 		for(int i=0;i<dataList.size();i++){
 			
 			//timeline
-			optionGroup.timeline().data(dataList.get(i).get(0).intValue()+"年");
+			optionGroup.timeline().data(dataList.get(i).get(0).intValue());
 			
 			//series
 			Pie occupation = new Pie();
@@ -329,9 +329,22 @@ public class UserServiceImpl implements IUserService {
 			sex.name("性别");
 			sex.radius("50%");
 			sex.center("70%","45%");
-			for(int j=0;j<occupationList.get(i).size();j++){
-				occupation.data(new PieData(occupationList.get(i).get(j), dataList.get(i).get(j+3)));
-			}
+			for(int j=0;j<occupationList.get(maxIndex).size();j++){
+				
+	    		boolean isExist = false;
+	    		
+	    		for(int k=0;k<occupationList.get(i).size();k++){
+	    			if(occupationList.get(maxIndex).get(j).equals(occupationList.get(i).get(k))){
+	    				occupation.data(new PieData(occupationList.get(i).get(k), dataList.get(i).get(k+3)));
+	    				isExist = true;
+	    				break;
+	    			}
+				}
+	    		if(!isExist){
+	    			occupation.data(new PieData(occupationList.get(maxIndex).get(j),0));
+	    		}
+	    	}
+			
 			sex.data(new PieData("男", dataList.get(i).get(1)));
 			sex.data(new PieData("女", dataList.get(i).get(2)));
 			option.series(occupation,sex);
