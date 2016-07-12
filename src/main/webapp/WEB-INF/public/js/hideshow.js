@@ -1,4 +1,4 @@
-index.html//  Andy Langton's show/hide/mini-accordion @ http://andylangton.co.uk/jquery-show-hide
+//index.html//  Andy Langton's show/hide/mini-accordion @ http://andylangton.co.uk/jquery-show-hide
 
 // this tells jquery to run the function below once the DOM is ready
 $(document).ready(function() {
