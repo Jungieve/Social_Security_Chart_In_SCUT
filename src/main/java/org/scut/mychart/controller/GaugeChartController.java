@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.scut.mychart.mapper.GaugeChartMapper;
+import org.scut.mychart.model.ChartTypeConstant;
 import org.scut.mychart.model.GaugeChartModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,10 +22,11 @@ public class GaugeChartController {
 	
 	@RequestMapping("/chart07")
     @ResponseBody
-    public Map toIndex(){
+    public Map<String, Object> toIndex(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<GaugeChartModel> chartData = gaugeChartMapper.getChartTotalByYear();
-		map.put("test", chartData);
+		map.put("type", ChartTypeConstant.GAUGE);
+		map.put("data", chartData);
         return map;
     }  
 }
