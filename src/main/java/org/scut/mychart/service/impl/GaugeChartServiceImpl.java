@@ -1,8 +1,12 @@
 package org.scut.mychart.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.scut.mychart.controller.Chart01Controller;
 import org.scut.mychart.mapper.GaugeChartMapper;
+import org.scut.mychart.model.ChartTypeConstant;
 import org.scut.mychart.model.GaugeChartModel;
 import org.scut.mychart.service.GaugeChartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,18 +22,64 @@ public class GaugeChartServiceImpl implements GaugeChartService {
 	private GaugeChartMapper gaugeChartMapper;
 
 	@Override
-	public GsonOption getGaugeChartOption() {
-		GsonOption option = new GsonOption();
+	public Map<String, Object> getOutworkData() {
+		Map<String, Object> data = new HashMap<String, Object>();
+		List<GaugeChartModel> list = gaugeChartMapper.getOutworkCoverageTotalByYear();
+
+		data.put("data", list);
+		data.put("type", ChartTypeConstant.GAUGE);
+		data.put("total", ChartTypeConstant.TOTAL_PEOPLE);
 		
-		/**
-		 * 暂时获取jc14  失业支付的年份人数信息
-		 */
-		List<GaugeChartModel> chartData = gaugeChartMapper.getChartTotalByYear();
-		
-		option.tooltip().formatter("{a} <br/>{b} : {c}%");
-		option.toolbox().show(false);
-		
-		return option;
+		return data;
 	}
+
+	@Override
+	public Map<String, Object> getOldData() {
+		Map<String, Object> data = new HashMap<String, Object>();
+		List<GaugeChartModel> list = gaugeChartMapper.getOldCoverageTotalByYear();
+
+		data.put("data", list);
+		data.put("type", ChartTypeConstant.GAUGE);
+		data.put("total", ChartTypeConstant.TOTAL_PEOPLE);
+		
+		return data;
+	}
+
+	@Override
+	public Map<String, Object> getMedicineData() {
+		Map<String, Object> data = new HashMap<String, Object>();
+		List<GaugeChartModel> list = gaugeChartMapper.getMedicineCoverageTotalByYear();
+
+		data.put("data", list);
+		data.put("type", ChartTypeConstant.GAUGE);
+		data.put("total", ChartTypeConstant.TOTAL_PEOPLE);
+		
+		return data;
+	}
+
+	@Override
+	public Map<String, Object> getBirthData() {
+		Map<String, Object> data = new HashMap<String, Object>();
+		List<GaugeChartModel> list = gaugeChartMapper.getBirthCoverageTotalByYear();
+
+		data.put("data", list);
+		data.put("type", ChartTypeConstant.GAUGE);
+		data.put("total", ChartTypeConstant.TOTAL_PEOPLE);
+		
+		return data;
+	}
+
+	@Override
+	public Map<String, Object> getInjuryData() {
+		Map<String, Object> data = new HashMap<String, Object>();
+		List<GaugeChartModel> list = gaugeChartMapper.getInjuryCoverageTotalByYear();
+
+		data.put("data", list);
+		data.put("type", ChartTypeConstant.GAUGE);
+		data.put("total", ChartTypeConstant.TOTAL_PEOPLE);
+		
+		return data;
+	}
+
 
 }

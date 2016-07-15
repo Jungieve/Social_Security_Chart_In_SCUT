@@ -59,6 +59,15 @@
 	background-color: #eee;
 }
 
+.left-content .sub-item .sub-item-wrap.active .icon {
+	background-color: #08c;
+}
+
+.left-content .sub-item .sub-item-wrap.active .type {
+	cursor: pointer;
+	background-color: #eee;
+}
+
 .left-content .sub-item .sub-item-wrap {
 	display: flex;
 	height: 30px;

@@ -1,4 +1,5 @@
 var echart, myChart, charts = { length: 5 };
+var timer = null; //主要用于仪表盘等定时器的句柄
 //chart1, chart2, chart3, chart4, chart5
 
 
@@ -29,8 +30,12 @@ $(function() {
 /**** 用于绑定处理点击事件 ****/
 	//主题点击
 	$('.item').on('click', function() {
+		//清除定时器
+		clearInterval(timer);
+		
 		$('.right-content .single').hide();
 		$('.right-content .multi').show();
+		$('.sub-item-wrap.active').removeClass('active');
 		var self = $(this);
 		if(!self.hasClass('active')) {
 			$('.sub-' + $('.item.active').data('index')).slideToggle();
@@ -42,7 +47,11 @@ $(function() {
 	
 	//子主题的点击
 	$(document).on('click', '.sub-item-wrap .type', function() {
-		console.log($(this).parent().parent().siblings(".active").length);
+		//清除定时器
+		clearInterval(timer);
+		
+		$('.sub-item-wrap.active').removeClass('active');
+		$(this).parent().addClass('active');
 		var param = {};
 		param.url = $(this).data('url');
 		getAjax(param);
@@ -67,6 +76,7 @@ function setMultiCharts() {
 	
 	var index = 1;
 	$.each(options, function(key, value) {
+		//初始化用于获得设置echarts的句柄
 		charts['chart'+index] = echart.init(document.getElementById('chart'+index));
 		charts['chart'+index].setOption(value);
 		index++;
@@ -106,6 +116,7 @@ function formatOptionConfig(data) {
 	$('.right-content .single').show();
 	$('.right-content .multi').hide();
 	
+	//初始化用于获得设置echarts的句柄
 	myChart = echart.init(document.getElementById('chartMain'));
 	
 	if(!data.type) {
@@ -113,7 +124,7 @@ function formatOptionConfig(data) {
 	}else {
 		switch(data.type) {
 			case 'gauge': 
-				setGaugeOption(data.data);
+				setGaugeOption(data);
 				break;
 			default:
 		}
@@ -121,8 +132,14 @@ function formatOptionConfig(data) {
 }
 
 //设置仪表盘option
-function setGaugeOption(data) {
+function setGaugeOption(obj) {
+	var type = $('.item.active label').html().substring(0,4);
+	var data = obj.data;
 	var option = {
+		title : {
+			text : type+'覆盖率',
+			x : 'center'
+		},
 		tooltip : {
 			formatter : "{a} <br/>{b} : {c}%"
 		},
@@ -141,7 +158,7 @@ function setGaugeOption(data) {
 			}
 		},
 		series : [ {
-			name : '失业保险覆盖率',
+			name : type+'覆盖率',
 			type : 'gauge',
 			detail : {
 				formatter : '{value}%'
@@ -154,11 +171,25 @@ function setGaugeOption(data) {
 	};
 	
 	option.series[0].data[0] = {
-		value : data[0].total,
+		value : (data[0].total / obj.total * 100).toFixed(2) - 0,
 		name : data[0].year + "覆盖率"
 	};
 	
 	myChart.setOption(option);
+	
+	var dataIndex = 1; //用于记录数据的展示索引
+	timer = setInterval(function() {
+		if(dataIndex >= data.length) {
+			dataIndex = 0;
+		}
+		
+		option.series[0].data[0] = {
+			value : (data[dataIndex].total / obj.total * 100).toFixed(2) - 0,
+			name : data[dataIndex].year + "覆盖率"
+		};
+		dataIndex++;
+		myChart.setOption(option, true);
+	}, 2000);
 }
 /*** 结束设置 ***/
 
