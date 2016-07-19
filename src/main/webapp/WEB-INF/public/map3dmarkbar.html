@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+<body>
+
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<br><br><br><br>
+<div id="main3" style="height:500px;width:100%;float:left; display:inline;background: linear-gradient(#22466F, #452525);"></div>
+<!--<div id="main3" style="height:500px;width:100%;float:left; display:inline;"></div>-->
+    <!-- ECharts单文件引入 -->
+<script src="js/echarts-2.2.7/build/dist/echarts.js"></script>
+<!-- 引入 ECharts-X 主文件 -->
+<script src="js/echarts-x-0.2.0/build/dist/echarts-x.js"></script>
+<script src="js/header.js"></script>
+
+<script type="text/javascript">
+
+    // 路径配置
+    require.config({
+        paths: {
+            'echarts': 'js/echarts-2.2.7/build/dist',
+            'echarts-x': 'js/echarts-x-0.2.0/build/dist'
+        }
+    });
+    require(
+            [
+                'echarts',
+                'echarts-x',
+                'echarts/chart/map',   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表
+                'echarts-x/chart/map3d'
+            ],
+            function (ec) {
+                // 自定义扩展图表类型：mapType = jiangmen
+                var mapGeoData = require('echarts/util/mapData/params');
+//                console.log(mapGeoData);
+                mapGeoData.params.jiangmen = {
+                    getGeoJson: function (callback) {
+                        $.getJSON('jsons/jiangmen.json', function (data) {
+                            // 压缩后的地图数据必须使用 decode 函数转换
+//                            console.log(data);
+                            callback(mapGeoData.decode(data));
+                        });
+                    }
+                };
+
+                var myChart1 = ec.init(document.getElementById('main3'));
+                $.ajax({
+                    url: 'charts/chartMap3dMarkBar/charges/endowment/count',
+                    success: function (rs) {
+                        var data =rs.data;
+                        var yearList=rs.yearList;
+                        var mymax=rs.max;
+                        var mymin=rs.min;
+                        var seriesarray=new Array();
+//                        console.log(data);
+//                        console.log(yearList);
+                        var index=0;
+                        yearList.forEach(function (year) {
+                            var yeardata=data[year];
+//                            console.log(yeardata);
+                            yeardata.forEach(function (item) {
+                                mymax = Math.max(item.value, mymax);
+                                item.geoCoord[0]=item.geoCoord[0]-0.04*index+0.1;
+                                item.barHeight = (item.value-mymin) / (mymax-mymin)*7 * 20 + 0.1;
+                            });
+
+                            var series={
+//                                    background:"asset/background.jpg",
+                                name:year,
+                                type: 'map3d',
+                                mapType: 'jiangmen',
+                                baseLayer: {
+                                    backgroundColor: 'rgba(0, 150, 200, 0.0)'
+                                },
+                                data: yeardata,
+//                                hoverable: false,
+                                itemStyle: {
+                                    normal: {
+                                        label: {
+                                            textStyle: {
+                                                color: 'gray',
+                                                fontSize: 12,
+                                                fontWeight:'lighter'
+                                            },
+                                            show: true
+                                        },
+
+                                        areaStyle: {
+                                            color: "rgba(0, 150, 200, 0.3)"
+                                        },
+                                        borderColor: '#777',
+                                        borderWidth:4
+                                    },
+                                    emphasis: {
+                                        label:{position:'top'}
+                                    }
+                                },
+                                light:{
+                                    show:true,
+                                    ambientIntensity: 1
+                                },
+                                flat:true,
+//                                flatAngle: 30,
+                                roam: {
+//                                    autoRotate: true,
+                                    minZoom: 1,
+                                    zoom: 7,
+                                    maxZoom: 15
+                                },
+                                markBar: {
+
+                                    barSize: 15,
+                                    data:yeardata
+                                }
+                            };
+                            seriesarray[index]=series;
+                            index++;
+                        });
+
+                        console.log(data);
+                        console.log(mymax);
+
+                        myChart1.setOption({
+
+                            title : {
+                                text: '养老保险人员地区分布',
+                                x:'center',
+                                y:'top',
+                                textStyle: {
+                                    color: 'gray'
+                                }
+                            },
+                            tooltip: {
+                                formatter: '{b}:{c}',
+                                trigger:"item"
+
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                x:'left',
+                                textStyle: {
+                                    color: 'gray'
+                                },
+                                data:yearList
+                            },
+                            toolbox: {
+                                show : true,
+                                orient : 'vertical',
+                                x: 'right',
+                                y: 'center',
+                                feature : {
+                                    mark : {show: true},
+                                    dataView : {show: true, readOnly: false},
+//                                    restore : {show: true},
+//                                    saveAsImage : {show: true}
+                                }
+                            },
+
+//                            dataRange: {
+//                                min: 0,
+//                                max: mymax,
+//                                text:['High','Low'],
+//                                realtime: false,
+//                                calculable : true,
+//                                color: ['red','yellow','lightskyblue']
+//                            },
+                            series:seriesarray
+                        });
+                    }
+                });
+
+            }
+    );
+</script>
+</body>

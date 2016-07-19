@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.scut.mychart.mapper.MapChartMapper">
+	<!-- 开启二级缓存 -->
+	<cache size="1024" readOnly="true" />
+  	<select id="selectMapChartPayment" parameterType="java.util.Map" resultType="org.scut.mychart.model.MapChartModel" statementType="STATEMENT">
+    	select sum(${payment}) as "total_money",
+    	avg(${payment}) as "average_money",
+    	count(DISTINCT ${table}.aac001) as "count_person",
+    	ac01.aae006 as "area",
+    	year(${table}.aae036) as "year"
+    	from ${table} join ac01 on ac01.aac001=${table}.aac001
+    	group by year,area
+    	order by year,area
+  	</select>
+  	<select id="selectMapChartCharges" parameterType="java.util.Map" resultType="org.scut.mychart.model.MapChartModel" statementType="STATEMENT">
+    	select count(distinct ac20.aac001) as "count_person",
+    	sum(aac123) as "total_money",
+    	avg(aac123) as "average_money",
+		aae006 as "area",
+		substr(aae002,1,4) as "year"
+		from ac20 join ac01 on ac01.aac001=ac20.aac001
+		where aae140="${insurance_type}"
+		group by year,area
+		order by year,area
+  	</select>
+</mapper>

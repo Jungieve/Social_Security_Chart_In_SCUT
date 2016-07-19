@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+<body>
+
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<br><br><br><br>
+<!--<div id="main1" style="height:500px;width:50%;float:left; display:inline"></div>-->
+<!--<div id="main2" style="height:500px;width:50%;float:left; display:inline"></div>-->
+<div id="main3" style="height:500px;width:100%;float:left; display:inline;"></div>
+<!--<div id="main4" style="height:500px;width:33%;float:left; display:inline"></div>-->
+<!--<div id="main5" style="height:500px;width:33%;float:left; display:inline"></div>-->
+<!--<div id="main6" style="height:500px;width:33%;float:left; display:inline"></div>-->
+<!--<div id="main7" style="height:500px;width:100%;float:left; display:inline"></div>-->
+<!--<div id="main8" style="height:500px;width:100%;float:left; display:inline"></div>-->
+    <!-- ECharts单文件引入 -->
+<script src="js/echarts-2.2.7/build/dist/echarts.js"></script>
+<!-- 引入 ECharts-X 主文件 -->
+<script src="js/echarts-x-0.2.0/build/dist/echarts-x.js"></script>
+<script src="js/header.js"></script>
+
+<script type="text/javascript">
+
+    // 路径配置
+    require.config({
+        paths: {
+            'echarts': 'js/echarts-2.2.7/build/dist',
+            'echarts-x': 'js/echarts-x-0.2.0/build/dist'
+        }
+    });
+    require(
+            [
+                'echarts',
+                'echarts-x',
+                'echarts/chart/map',   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表
+                'echarts-x/chart/map3d'
+            ],
+            function (ec) {
+                // 自定义扩展图表类型：mapType = jiangmen
+                var mapGeoData = require('echarts/util/mapData/params');
+//                console.log(mapGeoData);
+                mapGeoData.params.jiangmen = {
+                    getGeoJson: function (callback) {
+                        $.getJSON('jsons/jiangmen.json', function (data) {
+                            // 压缩后的地图数据必须使用 decode 函数转换
+//                            console.log(data);
+                            callback(mapGeoData.decode(data));
+                        });
+                    }
+                };
+
+                var myChart1 = ec.init(document.getElementById('main3'));
+                var mydata;
+                var mymax= -Infinity;
+                $.ajax({
+                    url: 'jsons/map3ddata.json',
+                    success: function (series) {
+                        console.log(mydata);
+                        console.log(mymax);
+                        series=series.map(function (data) {
+                            data = data.map(function (item) {
+                                mymax = Math.max(item[2], mymax);
+                                return {
+                                    geoCoord: item.slice(0, 2),
+                                    value: item[2]+Math.random()*100
+                                }
+                            });
+                            return data;
+                        });
+                        var index=0;
+                        series.forEach(function (data) {
+                            index++;
+                            data.forEach(function (item) {
+                                item.geoCoord[0]=item.geoCoord[0]-0.04*index+0.1;
+//                                console.log(index);
+//                                console.log(item.geoCoord[0]);
+                                item.barHeight = item.value / mymax * 100 + 0.1
+                            });
+                        });
+                        console.log(index);
+                        mydata=series;
+                        console.log(mydata);
+                        console.log(mymax);
+
+                        myChart1.setOption({
+
+                            title : {
+                                text: '社保情况地图',
+//                                subtext: '来源社保局',
+//                                sublink : 'http://sedac.ciesin.columbia.edu/data/set/gpw-v3-population-density/data-download#close',
+                                x:'center',
+                                y:'top'
+//                                textStyle: {
+//                                    color: 'white'
+//                                }
+                            },
+                            tooltip: {
+                                trigger:"item",
+                                formatter: '{b}'
+                            },
+                            legend: {
+                                orient: 'vertical',
+                                x:'left',
+                                data:['人数','平均金额','总金额','2014','2015']
+                            },
+                            toolbox: {
+                                show : true,
+                                orient : 'vertical',
+                                x: 'right',
+                                y: 'center',
+                                feature : {
+                                    mark : {show: true},
+                                    dataView : {show: true, readOnly: false},
+                                    restore : {show: true},
+                                    saveAsImage : {show: true}
+                                }
+                            },
+//                            dataRange: {
+//                                min: 0,
+//                                max: mymax,
+//                                text:['High','Low'],
+//                                realtime: false,
+//                                calculable : true,
+//                                color: ['red','yellow','lightskyblue']
+//                            },
+                            series: [
+                                {
+//                                    background:"asset/background.jpg",
+                                    name:'人数',
+                                    type: 'map3d',
+                                mapType: 'jiangmen',
+                                baseLayer: {
+                                    backgroundColor: 'rgba(0, 150, 200, 0.0)'
+                                },
+                                data: [{}],
+//                                hoverable: false,
+                                itemStyle: {
+                                    normal: {
+                                        label: {
+                                            textStyle: {
+                                                color: 'gray',
+                                                fontSize: 12,
+                                                fontWeight:'lighter'
+                                            },
+                                            show: true
+                                        },
+
+                                        areaStyle: {
+                                            color: "rgba(0, 150, 200, 0.1)"
+                                        },
+                                        borderColor: '#777',
+                                        borderWidth:4
+                                    }
+                                },
+                                flat:true,
+//                                flatAngle: 45,
+                                roam: {
+//                                    autoRotate: true,
+                                    minZoom: 1,
+                                    zoom: 7,
+                                    maxZoom: 15
+                                },
+                                markBar: {
+                                    barSize: 15,
+                                    data:mydata[0]
+//                                    data: [
+//                                        {
+//                                            barHeight:100.564357248399278,
+//                                            geoCoord:[112.793414,22.250713],
+//                                            value:40
+//                                        },
+//                                        {
+//                                            barHeight:10.564357248399278,
+//                                            geoCoord:[112.314051,22.182956],
+//                                            value:50
+//                                        },
+//                                        {
+//                                            barHeight:10.564357248399278,
+//                                            geoCoord:[112.692262, 22.366286],
+//                                            value:60
+//                                        },
+//                                        {
+//                                            barHeight:10.564357248399278,
+//                                            geoCoord:[112.961795,22.768104],
+//                                            value:70
+//                                        },
+//                                        {
+//                                            barHeight:10.564357248399278,
+//                                            geoCoord:[113.038584,22.520247],
+//                                            value:80
+//                                        },
+//                                        {
+//                                            barHeight:10.564357248399278,
+//                                            geoCoord:[113.07859,22.59677],
+//                                            value:90
+//                                        },
+//                                        {
+//                                            barHeight:10.564357248399278,
+//                                            geoCoord:[113.120601,22.572211],
+//                                            value:100
+//                                        }
+//                                    ]
+                                }
+                            },
+                                {
+//                                background: 'http://echarts.baidu.com/echarts2/x/doc/example/asset/starfield.jpg',
+//                                backgroundColor: 'dark',
+                                    name:'平均金额',
+                                    type: 'map3d',
+                                    mapType: 'jiangmen',
+                                    baseLayer: {
+                                        backgroundColor: 'rgba(0, 150, 200, 0.0)',
+                                    },
+                                    data: [{}],
+                                    hoverable: false,
+                                    itemStyle: {
+                                        normal: {
+                                            label: {
+                                                textStyle: {
+                                                    color: 'white',
+                                                    fontSize: 10
+                                                },
+                                                show: true
+                                            },
+
+//                                            areaStyle: {
+//                                                color: "rgba(0, 150, 200, 0.3)"
+//                                            },
+                                            borderColor: '#777',
+                                            borderWidth:4
+                                        }
+                                    },
+                                    flat:true,
+                                    flatAngle: 45,
+                                    roam: {
+//                                    autoRotate: true,
+                                        minZoom: 1,
+                                        zoom: 7,
+                                        maxZoom: 15
+                                    },
+                                    markBar: {
+                                        barSize: 15,
+                                    data:mydata[1]
+                                    }
+                                },
+                                {
+//                                background: 'http://echarts.baidu.com/echarts2/x/doc/example/asset/starfield.jpg',
+//                                backgroundColor: 'dark',
+                                    name:'总金额',
+                                    type: 'map3d',
+                                    mapType: 'jiangmen',
+                                    baseLayer: {
+                                        backgroundColor: 'rgba(0, 150, 200, 0.0)'
+                                    },
+                                    data: [{}],
+                                    hoverable: false,
+                                    itemStyle: {
+                                        normal: {
+                                            label: {
+                                                textStyle: {
+                                                    color: 'white',
+                                                    fontSize: 10
+                                                },
+                                                show: true
+                                            },
+
+                                            areaStyle: {
+                                                color: "rgba(0, 150, 200, 0.3)"
+                                            },
+                                            borderColor: '#777',
+                                            borderWidth:4
+                                        }
+                                    },
+                                    flat:true,
+                                    flatAngle: 45,
+                                    roam: {
+//                                    autoRotate: true,
+                                        minZoom: 1,
+                                        zoom: 7,
+                                        maxZoom: 15
+                                    },
+                                    markBar: {
+                                        barSize: 15,
+                                        data:mydata[2]
+                                    }
+                                },
+                                {
+//                                background: 'http://echarts.baidu.com/echarts2/x/doc/example/asset/starfield.jpg',
+//                                backgroundColor: 'dark',
+                                    name:'2014',
+                                    type: 'map3d',
+                                    mapType: 'jiangmen',
+                                    baseLayer: {
+                                        backgroundColor: 'rgba(0, 150, 200, 0.0)'
+                                    },
+                                    data: [{}],
+                                    hoverable: false,
+                                    itemStyle: {
+                                        normal: {
+                                            label: {
+                                                textStyle: {
+                                                    color: 'white',
+                                                    fontSize: 10
+                                                },
+                                                show: true
+                                            },
+
+                                            areaStyle: {
+                                                color: "rgba(0, 150, 200, 0.3)"
+                                            },
+                                            borderColor: '#777',
+                                            borderWidth:4
+                                        }
+                                    },
+                                    flat:true,
+                                    flatAngle: 45,
+                                    roam: {
+//                                    autoRotate: true,
+                                        minZoom: 1,
+                                        zoom: 7,
+                                        maxZoom: 15
+                                    },
+                                    markBar: {
+                                        barSize: 15,
+                                        data:mydata[3]
+                                    }
+                                },
+                                {
+//                                background: 'http://echarts.baidu.com/echarts2/x/doc/example/asset/starfield.jpg',
+//                                backgroundColor: 'dark',
+                                    name:'2015',
+                                    type: 'map3d',
+                                    mapType: 'jiangmen',
+                                    baseLayer: {
+                                        backgroundColor: 'rgba(0, 150, 200, 0.0)'
+                                    },
+                                    data: [{}],
+                                    hoverable: false,
+                                    itemStyle: {
+                                        normal: {
+                                            label: {
+                                                textStyle: {
+                                                    color: 'white',
+                                                    fontSize: 10
+                                                },
+                                                show: true
+                                            },
+
+                                            areaStyle: {
+                                                color: "rgba(0, 150, 200, 0.3)"
+                                            },
+                                            borderColor: '#777',
+                                            borderWidth:4
+                                        }
+                                    },
+                                    flat:true,
+                                    flatAngle: 45,
+                                    roam: {
+//                                    autoRotate: true,
+                                        minZoom: 1,
+                                        zoom: 7,
+                                        maxZoom: 15
+                                    },
+                                    markBar: {
+                                        barSize: 15,
+                                        data:mydata[4]
+                                    }
+                                }
+                            ]
+                        });
+                    }
+                });
+
+
+
+
+//                myChart1.showLoading({text: '正在努力的读取数据中...'});
+//                       $.get("charts/chartMap/charges/endowment/sum", function (data) {
+//                       if (data) {
+//                         console.log(data.option);
+//                       myChart1.setOption(eval('('+ data+')'));
+//                       myChart1.hideLoading();
+//                       } else {
+//                       alert('提示,出錯！' );
+//                       }
+//                       });
+//                var myChart2 = ec.init(document.getElementById('main2'));
+//                $.get("charts/chartMapSub/charges/endowment/avg", function (data) {
+//                    if (data) {
+//                        console.log(data.option);
+//                        myChart2.setOption(eval('('+ data+')'));
+//                    } else {
+//                        alert('提示,出錯！' );
+//                    }
+//                });
+//                var myChart3 = ec.init(document.getElementById('main1'));
+//                $.get("charts/chartMapMarkPoint/charges/endowment/count", function (data) {
+//                    if (data) {
+//                        console.log(data.option);
+//                        myChart3.setOption(eval('('+ data+')'));
+//                    } else {
+//                        alert('提示,出錯！' );
+//                    }
+//                });
+                // var myChart4 = ec.init(document.getElementById('main4'));
+                // $.get("charts/chartMapSub/payment/endowment/count", function (data) {
+                //     if (data) {
+                //         console.log(data.option);
+                //         myChart4.setOption(eval('('+ data+')'));
+                //     } else {
+                //         alert('提示,出錯！' );
+                //     }
+                // });
+                // var myChart5 = ec.init(document.getElementById('main5'));
+                // $.get("charts/chartMapSub/payment/endowment/avg", function (data) {
+                //     if (data) {
+                //         console.log(data.option);
+                //         myChart5.setOption(eval('('+ data+')'));
+                //     } else {
+                //         alert('提示,出錯！' );
+                //     }
+                // });
+                // var myChart6 = ec.init(document.getElementById('main6'));
+                // $.get("charts/chartMapSub/payment/endowment/sum", function (data) {
+                //     if (data) {
+                //         console.log(data.option);
+                //         myChart6.setOption(eval('('+ data+')'));
+                //     } else {
+                //         alert('提示,出錯！' );
+                //     }
+                // });
+                // var myChart7 = ec.init(document.getElementById('main7'));
+                // myChart7.showLoading({text: '正在努力的读取数据中...'});
+                //         $.get("charts/chartMap/charges/endowment/count", function (data) {
+                //         if (data) {
+                //           console.log(data.option);
+                //         myChart7.setOption(eval('('+ data+')'));
+                //         myChart7.hideLoading();
+                //         } else {
+                //         alert('提示,出錯！' );
+                //         }
+                //         });
+                // var myChart8 = ec.init(document.getElementById('main8'));
+
+                //  myChart8.showLoading({text: '正在努力的读取数据中...'});
+                //         $.get("charts/chartMapMarkPoint/charges/endowment/count", function (data) {
+                //         if (data) {
+                //           console.log(data.option);
+                //         myChart8.setOption(eval('('+ data+')'));
+                //         myChart8.hideLoading();
+                //         } else {
+                //         alert('提示,出錯！' );
+                //         }
+                //         });
+            }
+    );
+</script>
+</body>

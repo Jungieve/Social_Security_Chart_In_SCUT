@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+<body>
+
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<br><br><br><br>
+<div id="main1" style="height:500px;width:50%;float:left; display:inline"></div>
+<div id="main2" style="height:500px;width:50%;float:left; display:inline"></div>
+<div id="main3" style="height:500px;width:100%;float:left; display:inline;"></div>
+<div id="main4" style="height:500px;width:33%;float:left; display:inline"></div>
+<div id="main5" style="height:500px;width:33%;float:left; display:inline"></div>
+<div id="main6" style="height:500px;width:33%;float:left; display:inline"></div>
+<div id="main7" style="height:500px;width:100%;float:left; display:inline"></div>
+<div id="main8" style="height:500px;width:100%;float:left; display:inline"></div>
+    <!-- ECharts单文件引入 -->
+<script src="js/echarts.js"></script>
+<script src="js/header.js"></script>
+
+<script type="text/javascript">
+
+    // 路径配置
+    require.config({
+        paths: {
+            echarts: 'http://echarts.baidu.com/build/dist'
+        }
+    });
+    require(
+            [
+                'echarts',
+                'echarts/chart/map'   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表
+
+            ],
+            function (ec) {
+                // 自定义扩展图表类型：mapType = jiangmen
+                var mapGeoData = require('echarts/util/mapData/params');
+//                console.log(mapGeoData);
+                mapGeoData.params.jiangmen = {
+                    getGeoJson: function (callback) {
+                        $.getJSON('jsons/jiangmen.json', function (data) {
+                            // 压缩后的地图数据必须使用 decode 函数转换
+//                            console.log(data);
+                            callback(mapGeoData.decode(data));
+                        });
+                    }
+                };
+
+                var myChart1 = ec.init(document.getElementById('main1'));
+                myChart1.showLoading({text: '正在努力的读取数据中...'});
+                       $.get("charts/chartMap/charges/endowment/sum", function (data) {
+                       if (data) {
+                         console.log(data.option);
+                       myChart1.setOption(eval('('+ data+')'));
+                       myChart1.hideLoading();
+                       } else {
+                       alert('提示,出錯！' );
+                       }
+                       });
+                var myChart2 = ec.init(document.getElementById('main2'));
+                $.get("charts/chartMapSub/charges/endowment/avg", function (data) {
+                    if (data) {
+                        console.log(data.option);
+                        myChart2.setOption(eval('('+ data+')'));
+                    } else {
+                        alert('提示,出錯！' );
+                    }
+                });
+                var myChart3 = ec.init(document.getElementById('main3'));
+                $.get("charts/chartMapMarkPoint/charges/endowment/count", function (data) {
+                    if (data) {
+                        console.log(data.option);
+                        myChart3.setOption(eval('('+ data+')'));
+                    } else {
+                        alert('提示,出錯！' );
+                    }
+                });
+                // var myChart4 = ec.init(document.getElementById('main4'));
+                // $.get("charts/chartMapSub/payment/endowment/count", function (data) {
+                //     if (data) {
+                //         console.log(data.option);
+                //         myChart4.setOption(eval('('+ data+')'));
+                //     } else {
+                //         alert('提示,出錯！' );
+                //     }
+                // });
+                // var myChart5 = ec.init(document.getElementById('main5'));
+                // $.get("charts/chartMapSub/payment/endowment/avg", function (data) {
+                //     if (data) {
+                //         console.log(data.option);
+                //         myChart5.setOption(eval('('+ data+')'));
+                //     } else {
+                //         alert('提示,出錯！' );
+                //     }
+                // });
+                // var myChart6 = ec.init(document.getElementById('main6'));
+                // $.get("charts/chartMapSub/payment/endowment/sum", function (data) {
+                //     if (data) {
+                //         console.log(data.option);
+                //         myChart6.setOption(eval('('+ data+')'));
+                //     } else {
+                //         alert('提示,出錯！' );
+                //     }
+                // });
+                // var myChart7 = ec.init(document.getElementById('main7'));
+                // myChart7.showLoading({text: '正在努力的读取数据中...'});
+                //         $.get("charts/chartMap/charges/endowment/count", function (data) {
+                //         if (data) {
+                //           console.log(data.option);
+                //         myChart7.setOption(eval('('+ data+')'));
+                //         myChart7.hideLoading();
+                //         } else {
+                //         alert('提示,出錯！' );
+                //         }
+                //         });
+                // var myChart8 = ec.init(document.getElementById('main8'));
+
+                //  myChart8.showLoading({text: '正在努力的读取数据中...'});
+                //         $.get("charts/chartMapMarkPoint/charges/endowment/count", function (data) {
+                //         if (data) {
+                //           console.log(data.option);
+                //         myChart8.setOption(eval('('+ data+')'));
+                //         myChart8.hideLoading();
+                //         } else {
+                //         alert('提示,出錯！' );
+                //         }
+                //         });
+            }
+    );
+</script>
+</body>
