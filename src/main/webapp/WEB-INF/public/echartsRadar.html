@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+<body>
+
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="height:400px;margin-top:100px"></div>
+<label>Radar</label>
+<textarea id="test" name="test" cols="100" rows="100">test</textarea>
+
+<!-- ECharts单文件引入 -->
+<script src="js/echarts.js"></script>
+<script src="js/header.js"></script>
+<script type="text/javascript">
+    // 路径配置
+    require.config({
+        paths: {
+            echarts: 'http://echarts.baidu.com/build/dist'
+        }
+    });
+
+    // 使用
+    require(
+            [
+                'echarts',
+                'echarts/chart/radar' // 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main'));
+
+                var xmlhttp;
+                if (window.XMLHttpRequest)
+                {// code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp=new XMLHttpRequest();
+                }
+                else
+                {// code for IE6, IE5
+                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange=function()
+                {
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                    {
+                        //alert("成功！");
+                        myChart.setOption(eval('('+ xmlhttp.responseText+')'));
+                        document.getElementById('test').value=xmlhttp.responseText;
+                    }
+                    else if(xmlhttp.readyState==4 && xmlhttp.status==404){
+                        alert("页面加载失败，请刷新或联系管理员。");
+                    }
+                    else if(xmlhttp.readyState==4){
+                        alert("页面加载失败，请刷新或联系管理员。");
+                        // alert("失败！" + xmlhttp.status); //0?
+                    }
+                };
+                var url = "/charts/chartRadar";
+                xmlhttp.cache = false;
+                xmlhttp.open("GET",url,true);
+                xmlhttp.send();
+
+                /*var option= {
+                    color : (function (){
+                        var zrColor = require('zrender/tool/color');
+                        return zrColor.getStepColors('yellow', 'red', 28);
+                    })(),
+                    title : {
+                        text: '五险参保人数雷达图',
+                        subtext: '测试用',
+                        x:'right',
+                        y:'bottom'
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        backgroundColor : 'rgba(0,0,250,0.2)'
+                    },
+                    legend: {
+                        // orient : 'vertical',
+                        //x : 'center',
+                        data: function (){
+                            var list = [];
+                            for (var i = 1; i <=6; i++) {
+                                list.push(i + 2010);
+                            }
+                            return list;
+                        }()
+                    },
+                    toolbox: {
+                        show : true,
+                        orient : 'vertical',
+                        y:'center',
+                        feature : {
+                            mark : {show: true},
+                            dataView : {show: true, readOnly: false},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    polar : [
+                        {
+                            indicator : [
+                                { text: '养老保险', max: 400},
+                                { text: '失业保险', max: 400},
+                                { text: '医疗保险', max: 400},
+                                { text: '生育保险', max: 400},
+                                { text: '工伤保险', max: 400}
+                            ],
+                            center : ['50%', 240],
+                            radius : 150
+                        }
+                    ],
+                    calculable : false,
+                    series : (function (){
+                        var series = [];
+                        for (var i = 1; i <= 6; i++) {
+                            series.push({
+                                name:'参保人数',
+                                type:'radar',
+                                symbol:'none',
+                                itemStyle: {
+                                    normal: {
+                                        lineStyle: {
+                                            width:1
+                                        }
+                                    },
+                                    emphasis : {
+                                        areaStyle: {color:'rgba(0,250,0,0.3)'}
+                                    }
+                                },
+                                data:[
+                                    {
+                                        value:[
+                                            (i - 1) * 80,
+                                            i * 80 % 401,
+                                            (i + 1) * 80 % 401,
+                                            (i + 2) * 80 % 401,
+                                            (i + 3) * 80 % 401
+                                        ],
+                                        name:i + 2010
+                                    }
+                                ]
+                            })
+                        }
+                        return series;
+                    })()
+                };
+                myChart.setOption(option);*/
+            }
+    );
+</script>
+</body>

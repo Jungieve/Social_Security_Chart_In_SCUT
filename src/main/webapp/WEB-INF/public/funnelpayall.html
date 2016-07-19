@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>社保大数据业务平台</title>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="js/header2.js"></script>
+
+</head>
+<body>
+<section id="main1" class="column">
+<!--养老保险-->
+    <article class="module width_full">
+        <header><h3>养老保险</h3></header>
+        <div id="container" style="min-width:800px;height:600px"></div>
+        <!-- ECharts单文件引入 -->
+        <script src="js/echarts.js"></script>
+        <!--<script src="js/header.js"></script>-->
+        <script type="text/javascript">
+            // 路径配置
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+
+            require(
+                    [
+                        'echarts',
+                        'echarts/chart/funnel' // 使用柱状图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('container'));
+
+                        var xmlhttp;
+                        if (window.XMLHttpRequest)
+                        {// code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                        {// code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.onreadystatechange=function()
+                        {
+                            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                            {
+                                //alert("成功！");
+                                myChart.setOption(eval('('+ xmlhttp.responseText+')'));
+                            }
+                            else if(xmlhttp.readyState==4 && xmlhttp.status==404){
+                                alert("页面加载失败，请刷新或联系管理员。");
+                            }
+                            else if(xmlhttp.readyState==4){
+                                alert("页面加载失败，请刷新或联系管理员。");
+                                // alert("失败！" + xmlhttp.status); //0?
+                            }
+                        };
+                        var url = "/charts/funnelChartPay/endowment";
+                        xmlhttp.cache = false;
+                        xmlhttp.open("GET",url,true);
+                        xmlhttp.send();
+
+                    }
+            );
+        </script>
+        <div class="clear"></div>
+        </div>
+    </article><!-- end of stats article -->
+
+<!--失业保险-->
+    <article class="module width_full">
+        <header><h3>失业保险</h3></header>
+        <div id="container1" style="min-width:800px;height:600px"></div>
+        <!-- ECharts单文件引入 -->
+        <script src="js/echarts.js"></script>
+        <!--<script src="js/header.js"></script>-->
+        <script type="text/javascript">
+            // 路径配置
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+
+            require(
+                    [
+                        'echarts',
+                        'echarts/chart/funnel' // 使用柱状图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('container1'));
+
+                        var xmlhttp;
+                        if (window.XMLHttpRequest)
+                        {// code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                        {// code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.onreadystatechange=function()
+                        {
+                            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                            {
+                                //alert("成功！");
+                                myChart.setOption(eval('('+ xmlhttp.responseText+')'));
+                            }
+                            else if(xmlhttp.readyState==4 && xmlhttp.status==404){
+                                alert("页面加载失败，请刷新或联系管理员。");
+                            }
+                            else if(xmlhttp.readyState==4){
+                                alert("页面加载失败，请刷新或联系管理员。");
+                                // alert("失败！" + xmlhttp.status); //0?
+                            }
+                        };
+                        var url = "/charts/funnelChartPay/unemployment";
+                        xmlhttp.cache = false;
+                        xmlhttp.open("GET",url,true);
+                        xmlhttp.send();
+
+                    }
+            );
+        </script>
+        <div class="clear"></div>
+        </div>
+    </article><!-- end of stats article -->
+
+    <!--医疗保险-->
+    <article class="module width_full">
+        <header><h3>医疗保险</h3></header>
+        <div id="container2" style="min-width:800px;height:600px"></div>
+        <!-- ECharts单文件引入 -->
+        <script src="js/echarts.js"></script>
+        <!--<script src="js/header.js"></script>-->
+        <script type="text/javascript">
+            // 路径配置
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+
+            require(
+                    [
+                        'echarts',
+                        'echarts/chart/funnel' // 使用柱状图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('container2'));
+
+                        var xmlhttp;
+                        if (window.XMLHttpRequest)
+                        {// code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                        {// code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.onreadystatechange=function()
+                        {
+                            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                            {
+                                //alert("成功！");
+                                myChart.setOption(eval('('+ xmlhttp.responseText+')'));
+                            }
+                            else if(xmlhttp.readyState==4 && xmlhttp.status==404){
+                                alert("页面加载失败，请刷新或联系管理员。");
+                            }
+                            else if(xmlhttp.readyState==4){
+                                alert("页面加载失败，请刷新或联系管理员。");
+                                // alert("失败！" + xmlhttp.status); //0?
+                            }
+                        };
+                        var url = "/charts/funnelChartPay/medical";
+                        xmlhttp.cache = false;
+                        xmlhttp.open("GET",url,true);
+                        xmlhttp.send();
+
+                    }
+            );
+        </script>
+        <div class="clear"></div>
+        </div>
+    </article><!-- end of stats article -->
+
+    <!--工伤保险-->
+    <article class="module width_full">
+        <header><h3>工伤保险</h3></header>
+        <div id="container3" style="min-width:800px;height:600px"></div>
+        <!-- ECharts单文件引入 -->
+        <script src="js/echarts.js"></script>
+        <!--<script src="js/header.js"></script>-->
+        <script type="text/javascript">
+            // 路径配置
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+
+            require(
+                    [
+                        'echarts',
+                        'echarts/chart/funnel' // 使用柱状图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('container3'));
+
+                        var xmlhttp;
+                        if (window.XMLHttpRequest)
+                        {// code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                        {// code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.onreadystatechange=function()
+                        {
+                            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                            {
+                                //alert("成功！");
+                                myChart.setOption(eval('('+ xmlhttp.responseText+')'));
+                            }
+                            else if(xmlhttp.readyState==4 && xmlhttp.status==404){
+                                alert("页面加载失败，请刷新或联系管理员。");
+                            }
+                            else if(xmlhttp.readyState==4){
+                                alert("页面加载失败，请刷新或联系管理员。");
+                                // alert("失败！" + xmlhttp.status); //0?
+                            }
+                        };
+                        var url = "/charts/funnelChartPay/injury";
+                        xmlhttp.cache = false;
+                        xmlhttp.open("GET",url,true);
+                        xmlhttp.send();
+
+                    }
+            );
+        </script>
+        <div class="clear"></div>
+        </div>
+    </article><!-- end of stats article -->
+
+    <!--生育保险-->
+    <article class="module width_full">
+        <header><h3>生育保险</h3></header>
+        <div id="container4" style="min-width:800px;height:600px"></div>
+        <!-- ECharts单文件引入 -->
+        <script src="js/echarts.js"></script>
+        <!--<script src="js/header.js"></script>-->
+        <script type="text/javascript">
+            // 路径配置
+            require.config({
+                paths: {
+                    echarts: 'http://echarts.baidu.com/build/dist'
+                }
+            });
+
+            require(
+                    [
+                        'echarts',
+                        'echarts/chart/funnel' // 使用柱状图就加载bar模块，按需加载
+                    ],
+                    function (ec) {
+                        // 基于准备好的dom，初始化echarts图表
+                        var myChart = ec.init(document.getElementById('container4'));
+
+                        var xmlhttp;
+                        if (window.XMLHttpRequest)
+                        {// code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                        {// code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.onreadystatechange=function()
+                        {
+                            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                            {
+                                //alert("成功！");
+                                myChart.setOption(eval('('+ xmlhttp.responseText+')'));
+                            }
+                            else if(xmlhttp.readyState==4 && xmlhttp.status==404){
+                                alert("页面加载失败，请刷新或联系管理员。");
+                            }
+                            else if(xmlhttp.readyState==4){
+                                alert("页面加载失败，请刷新或联系管理员。");
+                                // alert("失败！" + xmlhttp.status); //0?
+                            }
+                        };
+                        var url = "/charts/funnelChartPay/maternity";
+                        xmlhttp.cache = false;
+                        xmlhttp.open("GET",url,true);
+                        xmlhttp.send();
+
+                    }
+            );
+        </script>
+        <div class="clear"></div>
+        </div>
+    </article><!-- end of stats article -->
+</section>
+
+</body>
+
+</html>

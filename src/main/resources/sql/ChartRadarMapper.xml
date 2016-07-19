@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.scut.mychart.mapper.ChartRadarMapper">
+	<!-- 开启二级缓存 -->
+	<cache size="1024" readOnly="true" />
+	<select id="selectChartRadar" parameterType="java.util.Map" resultType="org.scut.mychart.model.ChartRadar" statementType="STATEMENT">
+		select substr(aae002,1,4) as "year",aae140 as "type",count(distinct aac001) as "person_num"
+		from ac20
+		group by year,type
+		order by year,type;
+	</select>
+</mapper>
