@@ -172,7 +172,7 @@ function setGaugeOption(obj) {
 	
 	option.series[0].data[0] = {
 		value : (data[0].total / obj.total * 100).toFixed(2) - 0,
-		name : data[0].year + "覆盖率"
+		name : data[0].year + '年' + type + "覆盖率"
 	};
 	
 	myChart.setOption(option);
@@ -185,7 +185,7 @@ function setGaugeOption(obj) {
 		
 		option.series[0].data[0] = {
 			value : (data[dataIndex].total / obj.total * 100).toFixed(2) - 0,
-			name : data[dataIndex].year + "覆盖率"
+			name : data[dataIndex].year + '年' + type + "覆盖率"
 		};
 		dataIndex++;
 		myChart.setOption(option, true);
