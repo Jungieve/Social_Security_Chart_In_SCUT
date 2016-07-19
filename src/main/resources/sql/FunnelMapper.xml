@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.scut.mychart.mapper.FunnelMapper">
+	<!-- 开启二级缓存 -->
+	<cache size="1024" readOnly="true" />
+  	<select id="selectFunnelNum"  resultType="org.scut.mychart.model.FunnelChart" >
+	select
+	count(distinct ac20.aac001) as "person_num",
+	substr(aae002,1,4) as "year",
+	aae140 as "insurance_type",
+	year(ac01.aac006) as "birth"
+	from ac20 join ac01 on ac01.aac001=ac20.aac001
+	group by insurance_type,year,birth
+	order by insurance_type,year,birth
+  	</select>
+	<select id="selectFunnelPayment" parameterType="java.util.Map" resultType="org.scut.mychart.model.FunnelChartPay" statementType="STATEMENT">
+		select sum(${payment}) as "per_payment",
+    	the_year as "year", year(ac01.aac006) as "birth_year"
+    	from ${table} join time on the_date= aae036
+    	join ac01 on ac01.aac001=${table}.aac001
+    	group by the_year,birth_year
+    	order by the_year,birth_year
+	</select>
+</mapper>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+<body>
+
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="height:400px"></div>
+
+<!-- ECharts单文件引入 -->
+<script src="js/echarts.js"></script>
+<!--<script src="js/header.js"></script>-->
+<script type="text/javascript">
+    // 路径配置
+    require.config({
+        paths: {
+            echarts: 'http://echarts.baidu.com/build/dist'
+        }
+    });
+
+    require(
+            [
+                'echarts',
+                'echarts/chart/funnel' // 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main'));
+
+               var xmlhttp;
+                if (window.XMLHttpRequest)
+               {// code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp=new XMLHttpRequest();
+                }
+                else
+               {// code for IE6, IE5
+                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+               }
+                xmlhttp.onreadystatechange=function()
+                {
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                    {
+                        //alert("成功！");
+                        myChart.setOption(eval('('+ xmlhttp.responseText+')'));
+                    }
+                    else if(xmlhttp.readyState==4 && xmlhttp.status==404){
+                        alert("页面加载失败，请刷新或联系管理员。");
+                    }
+                    else if(xmlhttp.readyState==4){
+                       alert("页面加载失败，请刷新或联系管理员。");
+                        // alert("失败！" + xmlhttp.status); //0?
+                    }
+                };
+                var url = "/charts/funnelchart";
+                xmlhttp.cache = false;
+               xmlhttp.open("GET",url,true);
+                xmlhttp.send();
+
+            }
+    );
+</script>
+</body>

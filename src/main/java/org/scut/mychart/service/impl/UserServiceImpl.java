@@ -26,7 +26,8 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-  
+import java.util.logging.Formatter;
+
 @Service("userService")  
 public class UserServiceImpl implements IUserService {  
     @Resource  
@@ -227,9 +228,9 @@ public class UserServiceImpl implements IUserService {
 		currentMap.put("female", femaleNum);
 		currentMap.put("total", maleNum+femaleNum);
 		data.add(currentMap);
-		System.out.println("year: "+currentMap.get("year").intValue()+
-				", male:　"+currentMap.get("male").intValue()+
-				", female: "+currentMap.get("female").intValue());
+		System.out.println("year: " + currentMap.get("year").intValue() +
+				", male:　" + currentMap.get("male").intValue() +
+				", female: " + currentMap.get("female").intValue());
 		
 
 		//for each year
@@ -309,9 +310,9 @@ public class UserServiceImpl implements IUserService {
     	for(int i=0;i<occupationList.get(maxIndex).size();i++){
     		option.legend().data(occupationList.get(maxIndex).get(i));//("工人","干部","居民","男","女");
     	}
-    	option.legend().data("男","女");
-    	option.toolbox().show(true).feature(Tool.mark, Tool.dataView, new MagicType(Magic.pie,Magic.funnel),
-    			Tool.restore, Tool.saveAsImage);
+    	option.legend().data("男", "女");
+    	option.toolbox().show(true).feature(Tool.mark, Tool.dataView, new MagicType(Magic.pie, Magic.funnel),
+				Tool.restore, Tool.saveAsImage);
     	option.calculable(true);
 
     	//timeline.data  series
@@ -358,6 +359,22 @@ public class UserServiceImpl implements IUserService {
     	
     	return optionGroup;
     }
-    
+
+	//漏斗图option
+	/*public GsonOption getChart04Option(String title){
+		GsonOption option = new GsonOption();
+
+
+		option.title("社保待遇支付统计");
+		option.tooltip().trigger(Trigger.item).formatter("{a} <br/>{b} : {c}%");
+				option.legend().data("18-35", "36-45", "46-55", "56-70", "71-90");
+		option.toolbox().show(true).feature(Tool.mark, Tool.dataView,Tool.restore, Tool.saveAsImage);
+		option.calculable(true);
+
+		return option;
+
+
+
+	}*/
 }
 

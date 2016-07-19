@@ -16,5 +16,6 @@ public interface IUserService {
     public GsonOption getChart01Option(String title);
     public GsonOption getChart02Option(String title);
     public GsonOption getChart03Option();
-    
+   // public GsonOption getChart04Option(String title);
+
 }
