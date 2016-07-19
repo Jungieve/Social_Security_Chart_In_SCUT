@@ -12,7 +12,7 @@
     	group by aac004,the_year,month_of_year
     	order by the_year,month_of_year,sex
   	</select>
-  	<select id="selectChart03Payment" parameterType="java.util.Map" resultType="org.scut.mychart.model.Chart03" statementType="STATEMENT">
+  	<select id="selectChart03Charges" resultType="org.scut.mychart.model.Chart03">
     	select count(distinct ac20.aac001) as "person_num",
     	sum(aac123) as "total_charges",
     	aac004 as "sex",aaa103 as "occupation",
@@ -23,6 +23,16 @@
     	group by aac004,aaa103,the_year
     	order by the_year,aaa103,aac004
   	</select>
-  	
-  	
+  	<select id="selectChart09Payment" parameterType="java.util.List" resultType="Integer">
+    	select count(distinct aac001) from ac20 where 
+    	<foreach item="item" collection="list" open="" separator="AND" close="">
+    		aae140 like #{item}
+    	</foreach>
+  	</select>
+  	<select id="selectChart10Payment" parameterType="java.util.List" resultType="Integer">
+    	select count(distinct aac001) from ac20 where 
+    	<foreach item="item" collection="list" open="" separator="AND" close="">
+    		aae140 like #{item}
+    	</foreach>
+  	</select>
 </mapper>

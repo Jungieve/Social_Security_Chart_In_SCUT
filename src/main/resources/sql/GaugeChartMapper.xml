@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.scut.mychart.mapper.GaugeChartMapper">
+	<!-- 开启二级缓存 -->
+	<cache size="1024" readOnly="true" />
+	
+	<select id="getOutworkCoverageTotalByYear" resultType="org.scut.mychart.model.GaugeChartModel" useCache="true">
+		<![CDATA[
+			select year, count(*) as total from (select year(aae036) as year,count(distinct(AAC001)) as total from jc14 group by year(aae036),AAC001) temp group by year order by year
+		]]>
+	</select>
+	
+	<select id="getOldCoverageTotalByYear" resultType="org.scut.mychart.model.GaugeChartModel" useCache="true">
+		<![CDATA[
+			select year, count(*) as total from (select year(aae036) as year,count(distinct(AAC001)) as total from ic15 group by year(aae036),AAC001) temp group by year order by year
+		]]>
+	</select>
+	
+	<select id="getMedicineCoverageTotalByYear" resultType="org.scut.mychart.model.GaugeChartModel" useCache="true">
+		<![CDATA[
+			select year, count(*) as total from (select year(aae036) as year,count(distinct(AAC001)) as total from kc24 group by year(aae036),AAC001) temp group by year order by year
+		]]>
+	</select>
+	
+	<select id="getBirthCoverageTotalByYear" resultType="org.scut.mychart.model.GaugeChartModel" useCache="true">
+		<![CDATA[
+			select year, count(*) as total from (select year(aae036) as year,count(distinct(AAC001)) as total from bc34 group by year(aae036),AAC001) temp group by year order by year
+		]]>
+	</select>
+	
+	<select id="getInjuryCoverageTotalByYear" resultType="org.scut.mychart.model.GaugeChartModel" useCache="true">
+		<![CDATA[
+			select year, count(*) as total from (select year(aae036) as year,count(distinct(AAC001)) as total from wc44 group by year(aae036),AAC001) temp group by year order by year
+		]]>
+	</select>
+</mapper>

@@ -9,7 +9,7 @@ public class Chart03 {
 //	private Integer  month;
 	//private String   the_month;
 	
-	public Double gettotal_payment() {
+	public Double gettotal_charges() {
         return total_charges;
     }
 	public Integer getperson_num() {

@@ -6,7 +6,7 @@
 <body>
 
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-<div id="main" style="height:400px"></div>
+<div id="main" style="height:400px;margin-top:100px"></div>
 
 <!-- ECharts单文件引入 -->
 <script src="js/echarts.js"></script>
@@ -23,7 +23,7 @@
     require(
             [
                 'echarts',
-                'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+                'echarts/chart/venn' // 加载venn模块，按需加载
             ],
             function (ec) {
                 // 基于准备好的dom，初始化echarts图表
@@ -53,7 +53,7 @@
                         // alert("失败！" + xmlhttp.status); //0?
                     }
                 };
-                var url = "/mychart/charts/chart01";
+                var url = "/charts/chartvenn";
                 xmlhttp.cache = false;
                 xmlhttp.open("GET",url,true);
                 xmlhttp.send();

@@ -1,0 +1,178 @@
+@CHARSET "UTF-8";
+
+.scut-container {
+	width: 80%;
+	margin: 100px auto 0 auto;
+	position: relative;
+}
+
+.left-content {
+	position: fixed;
+	width: 14%;
+	/*border-radius: 6px;
+				box-shadow: 0 1px 4px rgba(0,0,0,.065);
+				border: 2px solid #E5E5E5;*/
+}
+
+.left-content .item {
+	width: 100%;
+	height: 36px;
+	line-height: 36px;
+	border: 1px solid #E5E5E5;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .065);
+	margin-bottom: -1px;
+}
+
+.left-content .item.active {
+	background-color: #08c;
+	color: #fff;
+}
+
+.left-content .item:hover {
+	cursor: pointer;
+	background-color: #08c;
+	color: #fff;
+}
+
+.left-content .item label {
+	display: inline-block;
+	width: 100%;
+	text-indent: 10px;
+}
+
+.left-content .item label:hover {
+	cursor: pointer;
+}
+
+.left-content .sub-item {
+	padding-left: 16px;
+	margin-bottom: 6px;
+	display: none;
+}
+
+.left-content .sub-item .sub-item-wrap:hover .icon {
+	background-color: #08c;
+}
+
+.left-content .sub-item .sub-item-wrap:hover .type {
+	cursor: pointer;
+	background-color: #eee;
+}
+
+.left-content .sub-item .sub-item-wrap.active .icon {
+	background-color: #08c;
+}
+
+.left-content .sub-item .sub-item-wrap.active .type {
+	cursor: pointer;
+	background-color: #eee;
+}
+
+.left-content .sub-item .sub-item-wrap {
+	display: flex;
+	height: 30px;
+	line-height: 30px;
+	margin-top: 6px;
+}
+
+.left-content .sub-item .sub-item-wrap .icon {
+	display: inline-block;
+	width: 2px;
+	/* background-color: #08c; */
+	background-color: #C8C8C8;
+}
+
+.left-content .sub-item .sub-item-wrap .type {
+	flex-grow: 1;
+	text-indent: 4px;
+	/* background-color: #eee; */
+	border: 1px solid #eee;
+	border-left: none;
+}
+
+.right-content {
+	width: 82%;
+	min-height: 100px;
+	position: absolute;
+	left: 20%;
+}
+
+.right-content .single {
+	width: 100%;	
+	visibility: hidden;
+}
+
+.right-content .single #chartMain {
+	width: 100%;
+	height: 400px;
+}
+
+.right-content .multi {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.right-content .multi .multi-chart {
+	width: 50%;
+	height: 300px;
+	flex-grow: 1;
+	padding-right: 20px;
+}
+
+/* 用于设置加载动画loading */
+.spinner {
+  position: absolute;
+  left: 50%;
+  top: 80px;
+  margin: 100px auto;
+  width: 50px;
+  height: 60px;
+  text-align: center;
+  font-size: 10px;
+}
+ 
+.spinner > div {
+  background-color: #08c;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+   
+  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+  animation: stretchdelay 1.2s infinite ease-in-out;
+}
+ 
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+ 
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+ 
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+ 
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+ 
+@-webkit-keyframes stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) } 
+  20% { -webkit-transform: scaleY(1.0) }
+}
+ 
+@keyframes stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }  20% {
+    transform: scaleY(1.0);
+    -webkit-transform: scaleY(1.0);
+  }
+}
