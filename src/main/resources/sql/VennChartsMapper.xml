@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.scut.mychart.mapper.VennChartsMapper">
+	<!-- 开启二级缓存 -->
+	<cache size="1024" readOnly="true" />
+	<select id="selectChart10Personnum1" parameterType="java.util.Map" resultType="java.lang.Integer" statementType="STATEMENT">
+     select
+     count (distinct ${table1}.aac001)
+     from
+     ${table1}
+
+  	</select>
+	<select id="selectChart10Personnum2" parameterType="java.util.Map" resultType="java.lang.Integer" statementType="STATEMENT">
+		select
+		count (distinct ${table2}.aac001)
+		from ${table2}
+	</select>
+	<select id="selectChart10Personnum3" parameterType="java.util.Map" resultType="java.lang.Integer" statementType="STATEMENT">
+
+        SELECT count(distinct ${table1}.aac001)
+        FROM ${table1}
+        INNER JOIN ${table2}
+        ON ${table1}.aac001=${table2}.aac001
+
+	</select>
+</mapper>
