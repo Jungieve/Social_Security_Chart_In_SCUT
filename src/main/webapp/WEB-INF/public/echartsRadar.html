@@ -8,7 +8,7 @@
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
 <div id="main" style="height:400px;margin-top:100px"></div>
 <label>Radar</label>
-<textarea id="test" name="test" cols="100" rows="100">test</textarea>
+<!--<textarea id="test" name="test" cols="100" rows="100">test</textarea>-->
 
 <!-- ECharts单文件引入 -->
 <script src="js/echarts.js"></script>
@@ -46,7 +46,7 @@
                     {
                         //alert("成功！");
                         myChart.setOption(eval('('+ xmlhttp.responseText+')'));
-                        document.getElementById('test').value=xmlhttp.responseText;
+                        //document.getElementById('test').value=xmlhttp.responseText;
                     }
                     else if(xmlhttp.readyState==4 && xmlhttp.status==404){
                         alert("页面加载失败，请刷新或联系管理员。");
