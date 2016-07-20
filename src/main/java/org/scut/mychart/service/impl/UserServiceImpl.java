@@ -44,6 +44,12 @@ public class UserServiceImpl implements IUserService {
     	}else if(tittle.equalsIgnoreCase("medical")){
     		param.put("table","kc24");
     		param.put("payment","akc263");
+		}else if(tittle.equals("injury")){
+			param.put("table","wc44");
+			param.put("payment","aic144");
+		}else if(tittle.equals("birth")) {
+			param.put("table","bc34");
+			param.put("payment","aic144");
     	}else{
     		return null;
     	}
