@@ -1,6 +1,7 @@
 var echart, myChart, charts = { length: 5 };
 var timer = null; //主要用于仪表盘等定时器的句柄，每当新的展示需要重置操作
 //chart1, chart2, chart3, chart4, chart5
+var mapGeoData; //用于保存地图数据
 
 
 //初始化设置
@@ -49,7 +50,7 @@ $(function() {
 	$(document).on('click', '.sub-item-wrap .type', function() {
 		//清除定时器
 		clearInterval(timer);
-		
+
 		$('.sub-item-wrap.active').removeClass('active');
 		$(this).parent().addClass('active');
 		var param = {};
@@ -94,20 +95,25 @@ function setMultiCharts() {
 function getAjax(param) {
 	showLoading();
 	
-	$.ajax({
-		type: 'get',
-		url: param.url,
-		async: true,
-		dataType: 'json',
-		success: function(res) {
-			formatOptionConfig(res);
-			hideLoading();
-		},
-		error: function(err) {
-			alert("ajax请求错误： " + err);
-			hideLoading();
-		}
-	});
+//	$.ajax({
+//		type: 'get',
+//		url: param.url,
+//		async: true,
+//		dataType: 'json',
+//		success: function(res) {
+//			formatOptionConfig(res);
+//			hideLoading();
+//		},
+//		error: function(err) {
+//			alert("ajax请求错误： " + JSON.stringify(err));
+//			hideLoading();
+//		}
+//	});
+	
+	$.get(param.url, function (res) {
+        formatOptionConfig(res);
+		hideLoading();
+    });
 }
 /*** 结束设置 ***/
 
@@ -120,7 +126,7 @@ function formatOptionConfig(data) {
 	myChart = echart.init(document.getElementById('chartMain'));
 	
 	if(!data.type) {
-		myChart.setOption(data);
+		myChart.setOption(eval('('+ data+')'));
 	}else {
 		switch(data.type) {
 			case 'gauge': 
@@ -207,21 +213,32 @@ function hideLoading() {
 // 路径配置
 require.config({
 	paths : {
-		echarts : 'http://echarts.baidu.com/build/dist',
+		'echarts': 'http://echarts.baidu.com/build/dist',
+        'echarts-x': 'js/echarts-x-0.2.0/build/dist'
 	}
 });
 
-require([ 'echarts', 'echarts/chart/gauge', 'echarts/chart/bar', 'echarts/chart/pie', 'echarts/chart/line', 'echarts/chart/funnel' ], function(ec) {
-	//初始化用于获得设置echarts的句柄
-//	myChart = ec.init(document.getElementById('chartMain'));
-//	charts.chart1  = ec.init(document.getElementById('chart1'));
-//	charts.chart2  = ec.init(document.getElementById('chart2'));
-//	charts.chart3  = ec.init(document.getElementById('chart3'));
-//	charts.chart4  = ec.init(document.getElementById('chart4'));
-//	charts.chart5  = ec.init(document.getElementById('chart5'));
+require([ 'echarts', 'echarts/chart/gauge', 'echarts/chart/bar', 
+          'echarts/chart/pie', 'echarts/chart/line', 'echarts/chart/funnel',
+          'echarts/chart/wordCloud', 'echarts/chart/venn', 'echarts/chart/radar',
+          
+          'echarts/chart/map'   // 按需加载所需图表，如需动态类型切换功能，别忘了同时加载相应图表
+          ], 
+function(ec) {
 	
 	//将echart的实例保存起来用于下次更换图表的再次初始化
 	echart = ec;
+	
+	//获取地图数据
+	mapGeoData = require('echarts/util/mapData/params');
+	mapGeoData.params.jiangmen = {
+      getGeoJson: function (callback) {
+          $.getJSON('jsons/jiangmen.json', function (data) {
+              // 压缩后的地图数据必须使用 decode 函数转换
+              callback(mapGeoData.decode(data));
+          });
+      }
+	};
 	
 	setMultiCharts();
 });

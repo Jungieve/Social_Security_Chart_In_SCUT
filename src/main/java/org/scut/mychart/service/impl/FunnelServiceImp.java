@@ -161,7 +161,7 @@ public class FunnelServiceImp implements IFunnelService {
             Option option = new Option();
             option.title().text("社保各年龄段参保人数占当年参保总人数百分比统计").subtext(year+"年度漏斗图分析");
             option.tooltip().trigger(Trigger.item).formatter("{a} <br/>{b} : {c}%");
-            option.legend().data("18-35岁", "36-45岁", "46-55岁", "56-70岁", "71-90岁");
+            option.legend().data("","18-35岁", "36-45岁", "46-55岁", "56-70岁", "71-90岁");
             option.toolbox().show(true).feature(Tool.mark, Tool.dataView,
                     Tool.restore, Tool.saveAsImage);
             option.calculable(true);
@@ -272,7 +272,7 @@ public class FunnelServiceImp implements IFunnelService {
             Option option = new Option();
             option.title().text("各年龄段参保人员"+TEXT+"待遇支付金额占当年参保待遇支付总金额百分比统计").subtext(year+"年度漏斗图分析");
             option.tooltip().trigger(Trigger.item).formatter("{a} <br/>{b} : {c}%");
-            option.legend().data("18-35岁", "36-45岁", "46-55岁", "56-70岁", "71-90岁");
+            option.legend().data("","18-35岁", "36-45岁", "46-55岁", "56-70岁", "71-90岁");
             option.toolbox().show(true).feature(Tool.mark, Tool.dataView,
                     Tool.restore, Tool.saveAsImage);
             option.calculable(true);
