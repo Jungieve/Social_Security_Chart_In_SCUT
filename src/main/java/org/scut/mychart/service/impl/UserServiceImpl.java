@@ -35,13 +35,13 @@ public class UserServiceImpl implements IUserService {
     
     public List<Chart01> getChart01Payment(String tittle){
     	HashMap<String,String> param = new HashMap<String,String>();
-    	if(tittle=="endowment") {
+    	if(tittle.equalsIgnoreCase("endowment")) {
     		param.put("table","ic15");
     		param.put("payment","aic263");
-    	}else if(tittle=="unemployment"){
+    	}else if(tittle.equalsIgnoreCase("unemployment")){
     		param.put("table","jc14");
     		param.put("payment","ajc159");
-    	}else if(tittle=="medical"){
+    	}else if(tittle.equalsIgnoreCase("medical")){
     		param.put("table","kc24");
     		param.put("payment","akc263");
     	}else{
@@ -57,15 +57,15 @@ public class UserServiceImpl implements IUserService {
     public int getChart10Personnum(String... tittle){
     	List<String> param = new ArrayList<String>();
     	for(String t:tittle){
-    		if(t=="endowment") {
+    		if(t.equalsIgnoreCase("endowment")) {
     			param.add("1_");
-    		}else if(t=="unemployment"){
+    		}else if(t.equalsIgnoreCase("unemployment")){
     			param.add("2_");
-    		}else if(t=="medical"){
+    		}else if(t.equalsIgnoreCase("medical")){
     			param.add("3_");
-    		}else if(t=="injury"){
+    		}else if(t.equalsIgnoreCase("injury")){
     			param.add("4_");
-    		}else if(t=="birth"){
+    		}else if(t.equalsIgnoreCase("birth")){
     			param.add("5_");
     		}
     	}

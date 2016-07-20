@@ -2,6 +2,7 @@ var echart, myChart, charts = { length: 5 };
 var timer = null; //主要用于仪表盘等定时器的句柄，每当新的展示需要重置操作
 //chart1, chart2, chart3, chart4, chart5
 var mapGeoData; //用于保存地图数据
+var isInit = true; //用于初始化处理单独显示的div宽高获取不到的情况
 
 
 //初始化设置
@@ -44,6 +45,8 @@ $(function() {
 			self.addClass('active');
 			$('.sub-' + self.data('index')).slideToggle();
 		}
+		
+		setMultiCharts();
 	});
 	
 	//子主题的点击
@@ -77,14 +80,18 @@ function setMultiCharts() {
 	
 	var index = 1;
 	$.each(options, function(key, value) {
+		$('#chart' + index).css('visibility','visible');
 		//初始化用于获得设置echarts的句柄
 		charts['chart'+index] = echart.init(document.getElementById('chart'+index));
 		charts['chart'+index].setOption(value);
 		index++;
 	});
 	
-	//这样写是为了能够让echarts能够得到所设置的width，而不是使用默认的width。 设置完毕后进行hide隐藏掉
-	$('.right-content .single').css('visibility','visible').hide();
+	if(isInit) {
+		//这样写是为了能够让echarts能够得到所设置的width，而不是使用默认的width。 设置完毕后进行hide隐藏掉
+		$('.right-content .single').css('visibility','visible').hide();
+		isInit = false;
+	}
 	
 	hideLoading();
 	
@@ -141,40 +148,230 @@ function formatOptionConfig(data) {
 function setGaugeOption(obj) {
 	var type = $('.item.active label').html().substring(0,4);
 	var data = obj.data;
-	var option = {
-		title : {
-			text : type+'覆盖率',
-			x : 'center'
-		},
-		tooltip : {
-			formatter : "{a} <br/>{b} : {c}%"
-		},
-		toolbox : {
-			show : false,
-			feature : {
-				mark : {
-					show : true
-				},
-				restore : {
-					show : true
-				},
-				saveAsImage : {
-					show : true
-				}
-			}
-		},
-		series : [ {
-			name : type+'覆盖率',
-			type : 'gauge',
-			detail : {
-				formatter : '{value}%'
-			},
-			data : [ {
-				value : 0,
-				name : '覆盖率'
-			} ]
-		} ]
-	};
+	var option = null;
+	
+	//修改仪表盘的样式
+	switch(type) {
+		case '养老保险':
+			option = {
+				title : {
+			        text: type+'年份覆盖率',
+			        x:'center'
+			    },
+			    tooltip : {
+			        formatter: "{a} <br/>{b} : {c}%"
+			    },
+			    toolbox: {
+			        show : false,
+			        feature : {
+			            mark : {show: true},
+			            restore : {show: true},
+			            saveAsImage : {show: true}
+			        }
+			    },
+			    series : [
+			        {
+			            name:type+'覆盖率',
+			            type:'gauge',
+			            center : ['50%', '50%'],    // 默认全局居中
+			            radius : [0, '75%'],
+			            startAngle: 140,
+			            endAngle : -140,
+			            min: 0,                     // 最小值
+			            max: 100,                   // 最大值
+			            precision: 0,               // 小数精度，默认为0，无小数点
+			            splitNumber: 10,             // 分割段数，默认为5
+			            axisLine: {            // 坐标轴线
+			                show: true,        // 默认显示，属性show控制显示与否
+			                lineStyle: {       // 属性lineStyle控制线条样式
+			                    color: [[0.2, 'lightgreen'],[0.8, 'skyblue'],[1, '#ff4500']], 
+			                    width: 30
+			                }
+			            },
+			            axisTick: {            // 坐标轴小标记
+			                show: true,        // 属性show控制显示与否，默认不显示
+			                splitNumber: 5,    // 每份split细分多少段
+			                length :8,         // 属性length控制线长
+			                lineStyle: {       // 属性lineStyle控制线条样式
+			                    color: '#eee',
+			                    width: 1,
+			                    type: 'solid'
+			                }
+			            },
+			            axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
+			                show: true,
+			                formatter: function(v){
+			                    switch (v+''){
+			                        case '10': return '低';
+			                        case '50': return '中';
+			                        case '90': return '高';
+			                        default: return '';
+			                    }
+			                },
+			                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+			                    color: '#333'
+			                }
+			            },
+			            splitLine: {           // 分隔线
+			                show: true,        // 默认显示，属性show控制显示与否
+			                length :30,         // 属性length控制线长
+			                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+			                    color: '#eee',
+			                    width: 2,
+			                    type: 'solid'
+			                }
+			            },
+			            pointer : {
+			                length : '80%',
+			                width : 8,
+			                color : 'auto'
+			            },
+			            title : {
+			                show : true,
+			                offsetCenter: ['-65%', -10],       // x, y，单位px
+			                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+			                    color: '#333',
+			                    fontSize : 15
+			                }
+			            },
+			            detail : {
+			                show : true,
+			                backgroundColor: 'rgba(0,0,0,0)',
+			                borderWidth: 0,
+			                borderColor: '#ccc',
+			                width: 100,
+			                height: 40,
+			                offsetCenter: ['-60%', 10],       // x, y，单位px
+			                formatter:'{value}%',
+			                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+			                    color: 'auto',
+			                    fontSize : 30
+			                }
+			            },
+			            data:[{value: 0, name: '覆盖率'}]
+			        }
+			    ]
+			};
+			break;
+			
+		case '失业保险':
+			option = {
+				title : {
+			        text: type+'年份覆盖率',
+			        x:'center'
+			    },
+			    tooltip : {
+			        formatter: "{a} <br/>{b} : {c}%"
+			    },
+			    toolbox: {
+			        show : false,
+			        feature : {
+			            mark : {show: true},
+			            restore : {show: true},
+			            saveAsImage : {show: true}
+			        }
+			    },
+			    series : [
+			        {
+			            name:type+'覆盖率',
+			            type:'gauge',
+			            startAngle: 180,
+			            endAngle: 0,
+			            center : ['50%', '90%'],    // 默认全局居中
+			            radius : 320,
+			            axisLine: {            // 坐标轴线
+			                lineStyle: {       // 属性lineStyle控制线条样式
+			                    width: 200
+			                }
+			            },
+			            axisTick: {            // 坐标轴小标记
+			                splitNumber: 10,   // 每份split细分多少段
+			                length :12,        // 属性length控制线长
+			            },
+			            axisLabel: {           // 坐标轴文本标签，详见axis.axisLabel
+			                formatter: function(v){
+			                    switch (v+''){
+			                        case '10': return '低';
+			                        case '50': return '中';
+			                        case '90': return '高';
+			                        default: return '';
+			                    }
+			                },
+			                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+			                    color: '#fff',
+			                    fontSize: 15,
+			                    fontWeight: 'bolder'
+			                }
+			            },
+			            pointer: {
+			                width:50,
+			                length: '90%',
+			                color: 'rgba(255, 255, 255, 0.8)'
+			            },
+			            title : {
+			                show : true,
+			                offsetCenter: [0, '-60%'],       // x, y，单位px
+			                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+			                    color: '#fff',
+			                    fontSize: 30
+			                }
+			            },
+			            detail : {
+			                show : true,
+			                backgroundColor: 'rgba(0,0,0,0)',
+			                borderWidth: 0,
+			                borderColor: '#ccc',
+			                width: 100,
+			                height: 40,
+			                offsetCenter: [0, -40],       // x, y，单位px
+			                formatter:'{value}%',
+			                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+			                    fontSize : 50
+			                }
+			            },
+			            data:[{value: 0, name: '覆盖率'}]
+			        }
+			    ]
+			};
+			break;
+			
+			default:
+				option = {
+					title : {
+						text : type+'覆盖率',
+						x : 'center'
+					},
+					tooltip : {
+						formatter : "{a} <br/>{b} : {c}%"
+					},
+					toolbox : {
+						show : false,
+						feature : {
+							mark : {
+								show : true
+							},
+							restore : {
+								show : true
+							},
+							saveAsImage : {
+								show : true
+							}
+						}
+					},
+					series : [ {
+						name : type+'覆盖率',
+						type : 'gauge',
+						detail : {
+							formatter : '{value}%'
+						},
+						data : [ {
+							value : 0,
+							name : '覆盖率'
+						} ]
+					} ]
+			};
+	}
+	
 	
 	option.series[0].data[0] = {
 		value : (data[0].total / obj.total * 100).toFixed(2) - 0,
