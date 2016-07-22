@@ -21,7 +21,6 @@ public class GaugeChartServiceImpl implements GaugeChartService {
 	@Autowired
 	private GaugeChartMapper gaugeChartMapper;
 
-	@Override
 	public Map<String, Object> getOutworkData() {
 		Map<String, Object> data = new HashMap<String, Object>();
 		List<GaugeChartModel> list = gaugeChartMapper.getOutworkCoverageTotalByYear();
@@ -33,7 +32,6 @@ public class GaugeChartServiceImpl implements GaugeChartService {
 		return data;
 	}
 
-	@Override
 	public Map<String, Object> getOldData() {
 		Map<String, Object> data = new HashMap<String, Object>();
 		List<GaugeChartModel> list = gaugeChartMapper.getOldCoverageTotalByYear();
@@ -45,7 +43,6 @@ public class GaugeChartServiceImpl implements GaugeChartService {
 		return data;
 	}
 
-	@Override
 	public Map<String, Object> getMedicineData() {
 		Map<String, Object> data = new HashMap<String, Object>();
 		List<GaugeChartModel> list = gaugeChartMapper.getMedicineCoverageTotalByYear();
@@ -57,7 +54,6 @@ public class GaugeChartServiceImpl implements GaugeChartService {
 		return data;
 	}
 
-	@Override
 	public Map<String, Object> getBirthData() {
 		Map<String, Object> data = new HashMap<String, Object>();
 		List<GaugeChartModel> list = gaugeChartMapper.getBirthCoverageTotalByYear();
@@ -69,7 +65,6 @@ public class GaugeChartServiceImpl implements GaugeChartService {
 		return data;
 	}
 
-	@Override
 	public Map<String, Object> getInjuryData() {
 		Map<String, Object> data = new HashMap<String, Object>();
 		List<GaugeChartModel> list = gaugeChartMapper.getInjuryCoverageTotalByYear();
