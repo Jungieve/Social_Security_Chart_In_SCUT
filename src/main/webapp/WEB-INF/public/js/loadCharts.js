@@ -62,6 +62,16 @@ $(function() {
 	});
 	
 /****     结束配置    ****/
+	
+/*** 配置滚动条 ***/
+	$(window).on("load",function(){
+		$(".left-content").mCustomScrollbar({
+			autoHideScrollbar:true,
+			theme:"dark-thick"
+		});
+		
+	});
+/*** 结束配置 ***/
 });
 
 /*** 进行设置多图展示的函数 ***/
