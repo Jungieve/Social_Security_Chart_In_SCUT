@@ -1,6 +1,6 @@
 var echart, myChart, charts = { length: 6 };
 var timer = null; //主要用于仪表盘等定时器的句柄，每当新的展示需要重置操作
-//chart1, chart2, chart3, chart4, chart5
+//chart1, chart2, chart3, chart4, chart5 在相应的展示时初始化
 var mapGeoData; //用于保存地图数据
 var isInit = true; //用于初始化处理单独显示的div宽高获取不到的情况
 
