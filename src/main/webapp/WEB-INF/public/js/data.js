@@ -2488,7 +2488,7 @@ var chartsOption = {
 
 				{
 					title : {
-						text : '社保展示',
+						text : '社保展示样例',
 						subtext : '',
 						x : 'center'
 					},
