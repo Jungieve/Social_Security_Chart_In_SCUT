@@ -142,6 +142,7 @@ public class MapChartServiceImpl implements MapChartService {
 					.y(xylocationlist[7][1])
 					.text("高", "低")
 					.calculable(true);
+			option.dataRange().color("#ff3333", "orange", "yellow","lime","aqua");
 			option.toolbox()
 					.show(true)
 					.orient(Orient.vertical)
@@ -153,7 +154,7 @@ public class MapChartServiceImpl implements MapChartService {
 			for(int index=0;index<yeardataList.size();index++) {
 				MapData i=yeardataList.get(index);
 				Map map = new Map();
-				map.itemStyle().normal().label().setShow(true);
+				map.itemStyle().normal().label().show(true).formatter("{a}\n{b}");
 				map.itemStyle().emphasis().label().setShow(true);
 				map.name(seriesname)
 						.type(SeriesType.map)
