@@ -1,5 +1,6 @@
 package org.scut.mychart.service.impl;
 
+import com.github.abel533.echarts.Option;
 import com.github.abel533.echarts.code.LineType;
 import com.github.abel533.echarts.code.Trigger;
 import com.github.abel533.echarts.data.MapData;
@@ -13,7 +14,10 @@ import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.core.task.SyncTaskExecutor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 @Service
 public class VennUserServiceImpl implements VennUserService {
 	@Autowired
@@ -76,10 +80,24 @@ public class VennUserServiceImpl implements VennUserService {
     public GsonOption getChartVennOption(String tittle1,String tittle2) {
         // TODO Auto-generated method stub
         GsonOption option = new GsonOption();
-        Chartvenn list=getChart10Personnum(tittle1,tittle2);
+        Option option1 = new GsonOption();
+        Option option2 = new GsonOption();
+        Option option3 = new GsonOption();
+        String name1="endowment";
+        String name2="gongshang";
+        String name3="medical";
+        String name11="养老保险";
+        String name22="工伤保险";
+        String name33="医疗保险";
+
+        Chartvenn list1=getChart10Personnum(tittle1,tittle2);
+        Chartvenn list2=getChart10Personnum(name1,name2);
+        Chartvenn list3=getChart10Personnum(name3,name1);
         option.title("社保缴费韦恩图");
         option.calculable(true);
-        Venn data=new Venn();
+        Venn data1=new Venn();
+        Venn data2=new Venn();
+        Venn data3=new Venn();
         HashMap<String, Object> tem = new HashMap<String, Object>();
         String nametrasfer01="";
         String nametrasfer02="";
@@ -123,19 +141,58 @@ public class VennUserServiceImpl implements VennUserService {
             nametrasfer02="工伤保险";
 
         }
-        tem.put("value",list.getperson_num1());tem.put("name",nametrasfer01);
-        data.data(tem);
+        option.timeline().data("1","2").zlevel(0);
+        List<Option> optionlist=new ArrayList <Option>();
+        tem.put("value",list1.getperson_num1());tem.put("name",nametrasfer01);
+        data1.data(tem);
         tem = new HashMap<String, Object>();
-        tem.put("value",list.getperson_num2());tem.put("name",nametrasfer02);
-        data.data(tem);
+        tem.put("value",list1.getperson_num2());tem.put("name",nametrasfer02);
+        data1.data(tem);
         tem = new HashMap<String, Object>();
-        tem.put("value",list.getperson_num3());tem.put("name","公共");
-        data.data(tem);
-        option.series(data);
-        data.itemStyle().normal().label().show(true).textStyle().fontFamily("Arial, Verdana, sans-serif").fontSize(16).fontWeight("bolder");
-        data.itemStyle().normal().labelLine().show(false).length(10).lineStyle().width(1).type(LineType.solid);
-        data.itemStyle().emphasis().color("#cc99cc").borderWidth(3).borderColor("#996699");
-        option.tooltip().trigger(Trigger.item).formatter("{b}: {c}");
+        tem.put("value",list1.getperson_num3());tem.put("name","公共");
+        data1.data(tem);
+        data1.itemStyle().normal().label().show(true).textStyle().fontFamily("Arial, Verdana, sans-serif").fontSize(16).fontWeight("bolder");
+        data1.itemStyle().normal().labelLine().show(false).length(10).lineStyle().width(1).type(LineType.solid);
+        data1.itemStyle().emphasis().color("#cc99cc").borderWidth(3).borderColor("#996699");
+        option1.series(data1);
+        option1.tooltip().trigger(Trigger.item).formatter("{b}: {c}");
+        optionlist.add(option1);
+
+        /*tem = new HashMap<String, Object>();
+        tem.put("value",list2.getperson_num1());tem.put("name",name11);
+        data2.data(tem);
+        tem = new HashMap<String, Object>();
+        tem.put("value",list2.getperson_num2());tem.put("name",name22);
+        data2.data(tem);
+        tem = new HashMap<String, Object>();
+        tem.put("value",list2.getperson_num3());tem.put("name","公共");
+        data2.data(tem);
+        data2.itemStyle().normal().label().show(true).textStyle().fontFamily("Arial, Verdana, sans-serif").fontSize(16).fontWeight("bolder");
+        data2.itemStyle().normal().labelLine().show(false).length(10).lineStyle().width(1).type(LineType.solid);
+        data2.itemStyle().emphasis().color("#cc99cc").borderWidth(3).borderColor("#996699");
+        data2.data(tem);
+        option2.tooltip().trigger(Trigger.item).formatter("{b}: {c}");
+        option2.series(data2);
+        optionlist.add(option2);*/
+
+        tem = new HashMap<String, Object>();
+        tem.put("value",list3.getperson_num1());tem.put("name",name33);
+        data3.data(tem);
+        tem = new HashMap<String, Object>();
+        tem.put("value",list3.getperson_num2());tem.put("name",name11);
+        data3.data(tem);
+        tem = new HashMap<String, Object>();
+        tem.put("value",list3.getperson_num3());tem.put("name","公共");
+        data3.data(tem);
+        data3.itemStyle().normal().label().show(true).textStyle().fontFamily("Arial, Verdana, sans-serif").fontSize(16).fontWeight("bolder");
+        data3.itemStyle().normal().labelLine().show(false).length(10).lineStyle().width(1).type(LineType.solid);
+        data3.itemStyle().emphasis().color("#cc99cc").borderWidth(3).borderColor("#996699");
+        option3.tooltip().trigger(Trigger.item).formatter("{b}: {c}");
+        option3.series(data3);
+        optionlist.add(option3);
+
+        option.options(optionlist);
+
 
         System.out.println(option.toString());
         return option;
