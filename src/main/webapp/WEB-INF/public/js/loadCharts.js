@@ -1,4 +1,4 @@
-var echart, myChart, charts = { length: 5 };
+var echart, myChart, charts = { length: 6 };
 var timer = null; //主要用于仪表盘等定时器的句柄，每当新的展示需要重置操作
 //chart1, chart2, chart3, chart4, chart5
 var mapGeoData; //用于保存地图数据
