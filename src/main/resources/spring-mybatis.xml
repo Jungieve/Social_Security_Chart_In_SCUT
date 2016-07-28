@@ -12,10 +12,10 @@
    <!-- 自动扫描 -->  
     <context:component-scan base-package="org.scut.mychart" />  
     <!-- 引入配置文件 -->  
-    <bean id="propertyConfigurer"  
-        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
-        <property name="location" value="classpath:jdbc.properties" />  
-    </bean>  
+<!--     <bean id="propertyConfigurer"   -->
+<!--         class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">   -->
+<!--         <property name="location" value="classpath:jdbc.properties" />   -->
+<!--     </bean>   -->
   
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  
         destroy-method="close">  

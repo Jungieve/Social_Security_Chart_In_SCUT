@@ -7,6 +7,7 @@ import java.util.Map;
 import org.scut.mychart.mapper.GaugeChartMapper;
 import org.scut.mychart.model.ChartTypeConstant;
 import org.scut.mychart.model.GaugeChartModel;
+import org.scut.mychart.redis.GaugeRedisDao;
 import org.scut.mychart.service.GaugeChartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ import com.github.abel533.echarts.json.GsonOption;
 public class GaugeChartController {
 	@Autowired
 	private GaugeChartService gaugeChartService;
+	
+	@Autowired
+	private GaugeRedisDao gaugeRedisDao;
 	
 	@RequestMapping("/outworkGauge")
     @ResponseBody
@@ -54,5 +58,11 @@ public class GaugeChartController {
 	public Map<String, Object> injuryGauge(){
 		Map<String, Object> map =  gaugeChartService.getInjuryData();
 		return map;
+	}
+	
+	@RequestMapping("/testRedis")
+	@ResponseBody
+	public void testRedis(){
+		gaugeRedisDao.setGaugeData("Guia");
 	}  
 }

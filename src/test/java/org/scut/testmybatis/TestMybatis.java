@@ -46,9 +46,9 @@ public class TestMybatis {
 //      logger.info(JSON.toJSONString(ac01));  
 //  	Option option = userService.getChart01Option("endowment");
 //		Option option = userService.getChart02Option("endowment");
-		GsonOption option = userService.getChart03Option();
-		logger.info(JSON.toJSONString(option,true)); 
-		logger.info(option.toString());
+//		GsonOption option = userService.getChart03Option();
+//		logger.info(JSON.toJSONString(option,true)); 
+//		logger.info(option.toString());
 //    	 List<Chart03> chart03 = userService.getChart03Payment();
 //         JSONArray json = new JSONArray();
 //         for(Chart03 c : chart03){

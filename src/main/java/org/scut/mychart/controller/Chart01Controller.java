@@ -27,25 +27,28 @@ public class Chart01Controller {
     @RequestMapping("/chart01/{tittle}")
     @ResponseBody
     public String toIndex(@PathVariable String tittle) {
-        GsonOption option = this.userService.getChart01Option(tittle);
-        System.out.println(option.toString());
-        return option.toString();  //view?
+//        GsonOption option = this.userService.getChart01Option(tittle);
+    	String data = this.userService.getChart01Option(tittle);
+        System.out.println(data);
+        return data;  //view?
     }
     
     @RequestMapping("/chart02/{tittle}")
     @ResponseBody
     public String getChart02(@PathVariable String tittle) {
-    	GsonOption option = this.userService.getChart02Option(tittle);
-    	System.out.println(option.toString());
-    	return option.toString();  //view?
+//    	GsonOption option = this.userService.getChart02Option(tittle);
+    	String data = this.userService.getChart02Option(tittle);
+    	System.out.println(data);
+    	return data;  //view?
     }
     
     @RequestMapping("/chart03")
     @ResponseBody
     public String getChart03() {
-    	GsonOption option = this.userService.getChart03Option();
-    	System.out.println(option.toString());
-    	return option.toString();  //view?
+//    	GsonOption option = this.userService.getChart03Option();
+    	String data = this.userService.getChart03Option();
+    	System.out.println(data);
+    	return data;  //view?
     }
 }
 

@@ -19,10 +19,15 @@ import com.github.abel533.echarts.series.Pie;
 
 import org.scut.mychart.mapper.ChartsMapper;
 import org.scut.mychart.model.*;
+import org.scut.mychart.redis.BarRedisDao;
+import org.scut.mychart.redis.LineRedisDao;
+import org.scut.mychart.redis.PieRedisDao;
 import org.scut.mychart.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +37,15 @@ import java.util.logging.Formatter;
 public class UserServiceImpl implements IUserService {  
     @Resource  
     private ChartsMapper chartsDao;
+    
+    @Autowired
+    private BarRedisDao barRedisDao;
+    
+    @Autowired
+    private LineRedisDao lineRedisDao;
+    
+    @Autowired
+    private PieRedisDao pieRedisDao;
     
     public List<Chart01> getChart01Payment(String tittle){
     	HashMap<String,String> param = new HashMap<String,String>();
@@ -78,7 +92,46 @@ public class UserServiceImpl implements IUserService {
     	return this.chartsDao.selectChart10Personnum(param);
     }
     
-    public GsonOption getChart01Option(String title){
+    /**
+     * 根据title来获取redis的key
+     */
+    public String getBarRedisKey(String title) {
+    	if(title.equalsIgnoreCase("endowment")) {
+    		return ChartTypeConstant.ENDOWMENT_BAR_REDIS;
+    	}else if(title.equalsIgnoreCase("unemployment")){
+    		return ChartTypeConstant.UNEMPLOYMENT_BAR_REDIS;
+    	}else if(title.equalsIgnoreCase("medical")){
+    		return ChartTypeConstant.MEDICAL_BAR_REDIS;
+		}else if(title.equals("injury")){
+			return ChartTypeConstant.INJURY_BAR_REDIS;
+		}else {
+			return ChartTypeConstant.BIRTH_BAR_REDIS;
+    	}
+    }
+    
+    public String getLineRedisKey(String title) {
+    	if(title.equalsIgnoreCase("endowment")) {
+    		return ChartTypeConstant.ENDOWMENT_LINE_REDIS;
+    	}else if(title.equalsIgnoreCase("unemployment")){
+    		return ChartTypeConstant.UNEMPLOYMENT_LINE_REDIS;
+    	}else if(title.equalsIgnoreCase("medical")){
+    		return ChartTypeConstant.MEDICAL_LINE_REDIS;
+		}else if(title.equals("injury")){
+			return ChartTypeConstant.INJURY_LINE_REDIS;
+		}else {
+			return ChartTypeConstant.BIRTH_LINE_REDIS;
+    	}
+    }
+   /** --------------------------------------------------------- **/
+    public String getChart01Option(String title){
+    	
+    	String type = getBarRedisKey(title);
+    	
+    	String barData = barRedisDao.getBarData(type);
+    	
+    	if(barData != null && !barData.isEmpty()) {
+    		return barData;
+    	}
 
 		GsonOption option = new GsonOption();
     	List<Chart01> list = getChart01Payment(title);
@@ -173,12 +226,23 @@ public class UserServiceImpl implements IUserService {
     	option.yAxis(new ValueAxis());  //金额
 	    option.series(male,female);
     	
-    	return option;
+	    //插入缓存中
+	    barRedisDao.setBarData(type, option.toString());
+	    
+    	return option.toString();
     }
     
     
     //应用2
-    public GsonOption getChart02Option(String title){
+    public String getChart02Option(String title){
+    	
+    	String type = getLineRedisKey(title);
+    	
+    	String lineData = lineRedisDao.getLineData(type);
+    	
+    	if(lineData != null && !lineData.isEmpty()) {
+    		return lineData;
+    	}
     	
     	GsonOption option = new GsonOption();
     	
@@ -256,10 +320,19 @@ public class UserServiceImpl implements IUserService {
     	option.yAxis(new ValueAxis());  //人数
 	    option.series(male,female,total);
 	    
-    	return option;
+	    //插入redis
+	    lineRedisDao.setLineData(type, option.toString());
+	    
+    	return option.toString();
     }
     
-    public GsonOption getChart03Option(){
+    public String getChart03Option(){
+    	
+    	String data = pieRedisDao.getPieData(ChartTypeConstant.ANALYSIS_PIE_REDIS);
+    	
+    	if(data != null && !data.isEmpty()) {
+    		return data;
+    	}
     	
     	GsonOption optionGroup = new GsonOption(); //timeline option
     	
@@ -362,8 +435,11 @@ public class UserServiceImpl implements IUserService {
 		}
 		//set options
 		optionGroup.options(options);
+		
+		//插入redis
+		pieRedisDao.setPieData(ChartTypeConstant.ANALYSIS_PIE_REDIS, optionGroup.toString());
     	
-    	return optionGroup;
+    	return optionGroup.toString();
     }
 
 	//漏斗图option

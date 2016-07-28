@@ -13,9 +13,9 @@ public interface IUserService {
     public List<Chart03> getChart03Charges();
     public int getChart10Personnum(String... tittle);
     
-    public GsonOption getChart01Option(String title);
-    public GsonOption getChart02Option(String title);
-    public GsonOption getChart03Option();
+    public String getChart01Option(String title);
+    public String getChart02Option(String title);
+    public String getChart03Option();
    // public GsonOption getChart04Option(String title);
 
 }
