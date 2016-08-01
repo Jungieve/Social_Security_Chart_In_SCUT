@@ -83,4 +83,6 @@ public interface ChartTypeConstant {
 	//韦恩图
 	public static final String Venn_REDIS = "Venn_REDIS";
 
+	//字符云
+	public static final String WORDCLOUD_REDIS = "WORDCLOUD_REDIS";
 }

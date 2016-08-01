@@ -8,5 +8,6 @@ import java.util.List;
 public interface IUserService09 {
     public List<Chart09> getChart09Payment(String title);
     public GsonOption getChart09Option();
+    public String getWordcloudChartOption();
     public List<Chart09> getChart09Age();
 }

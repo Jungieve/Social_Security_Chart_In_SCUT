@@ -16,10 +16,17 @@ public class Chart09Controller {
       
     @RequestMapping("/chart09")
     @ResponseBody
+//    public String toIndex(){
+//        GsonOption option = this.userService09.getChart09Option();
+//        System.out.println(option.toString());
+//        return option.toString();  //view?
+//    }
+
+
     public String toIndex(){
-        GsonOption option = this.userService09.getChart09Option();
-        System.out.println(option.toString());
-        return option.toString();  //view?
-    }  
+        String data = this.userService09.getWordcloudChartOption();
+        System.out.println(data);
+        return data;
+    }
 }   
 
