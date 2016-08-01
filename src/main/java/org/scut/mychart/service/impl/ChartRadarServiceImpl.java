@@ -15,11 +15,13 @@ import com.github.abel533.echarts.*;
 
 import com.github.abel533.echarts.style.LineStyle;
 import com.github.abel533.echarts.style.itemstyle.Emphasis;
+import org.scut.mychart.redis.RadarRedisDao;
 import org.scut.mychart.mapper.ChartRadarMapper;
 import org.scut.mychart.mapper.ChartsMapper;
 import org.scut.mychart.model.*;
 import org.scut.mychart.service.ChartRadarService;
 import org.scut.mychart.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,6 +33,9 @@ import java.util.List;
 public class ChartRadarServiceImpl implements ChartRadarService {
 	@Resource
 	private ChartRadarMapper chartsDao;
+
+	@Autowired
+	private RadarRedisDao radarRedisDao;
 
 	public List<ChartRadar> getChartRadarData(){
 		return this.chartsDao.selectChartRadar();
@@ -46,7 +51,16 @@ public class ChartRadarServiceImpl implements ChartRadarService {
 		else return 5;
 	}
 
-	public GsonOption getChartRadarOption() {
+	public String getChartRadarOption() {
+
+		String type = ChartTypeConstant.Radar_REDIS;
+
+		String RadarData = radarRedisDao.getRadarData(type);
+
+		if(RadarData != null && !RadarData.isEmpty()) {
+			return RadarData;
+		}
+
 		GsonOption option = new GsonOption();
 		List<ChartRadar> list = getChartRadarData();
 
@@ -118,7 +132,9 @@ public class ChartRadarServiceImpl implements ChartRadarService {
 		polar.radius(150);
 		option.polar(polar);
 
-		return option;
+		radarRedisDao.setRadarData(type, option.toString());
+
+		return option.toString();
 	}
 
 }

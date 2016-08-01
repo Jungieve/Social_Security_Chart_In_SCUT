@@ -58,5 +58,8 @@ public interface ChartTypeConstant {
 	
 	//综合分析饼图
 	public static final String ANALYSIS_PIE_REDIS = "ANALYSIS_PIE_REDIS";
+
+	//雷达图
+	public static final String Radar_REDIS = "Radar_REDIS";
 	
 }

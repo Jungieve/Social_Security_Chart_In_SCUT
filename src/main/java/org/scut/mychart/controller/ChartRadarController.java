@@ -19,9 +19,10 @@ public class ChartRadarController {
     @RequestMapping("/chartRadar")
     @ResponseBody
     public String toIndex(){
-        GsonOption option = this.chartRadarService.getChartRadarOption();
-        System.out.println(option.toString());
-        return option.toString();  //view?
+        //GsonOption option = this.chartRadarService.getChartRadarOption();
+        String data = this.chartRadarService.getChartRadarOption();
+        System.out.println(data);
+        return data;  //view?
     }  
 }   
 
