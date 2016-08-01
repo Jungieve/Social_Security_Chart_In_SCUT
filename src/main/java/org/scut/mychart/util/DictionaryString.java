@@ -7,6 +7,10 @@ import java.util.List;
  * Created by gzw on 2016/7/15.
  */
 public class DictionaryString {
+    static public final String MAP="MAP";
+    static public final String MAP_SUBMODE="MAP_SUBMODE";
+    static public final String MAP_MARKPOINT="MAP_MARKPOINT";
+
     static public final String endowment="endowment";
     static public final String unemployment="unemployment";
     static public final String medical="medical";

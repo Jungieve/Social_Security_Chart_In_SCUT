@@ -37,7 +37,7 @@ public interface MapChartService {
      * @param option 人口计数：count，金额求和：sum，金额求均：avg
      * @return
      */
-    public GsonOption getChartMapOptionSubMode(String title,String type,String option);
+    public String getChartMapOptionSubMode(String title,String type,String option);
 
     /**
      * 获取标准地图option
@@ -46,7 +46,7 @@ public interface MapChartService {
      * @param option 人口计数：count，金额求和：sum，金额求均：avg
      * @return
      */
-    public GsonOption getChartMapOption(String title,String type,String option);
+    public String getChartMapOption(String title,String type,String option);
 
     /**
      * 获取炫光特效地图option
@@ -55,6 +55,6 @@ public interface MapChartService {
      * @param option 人口计数：count，金额求和：sum，金额求均：avg
      * @return
      */
-    public GsonOption getChartMapOptionMarkPointMode(String title,String type,String option);
+    public String getChartMapOptionMarkPointMode(String title,String type,String option);
 
 }

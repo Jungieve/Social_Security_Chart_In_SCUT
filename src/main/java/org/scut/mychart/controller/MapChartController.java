@@ -24,23 +24,23 @@ public class MapChartController {
     @RequestMapping("/chartMapSub/{type}/{title}/{measure}")
     @ResponseBody
     public String getChartMapOptionSubAreaMode(@PathVariable String title,@PathVariable String type,@PathVariable String measure){
-        GsonOption option = this.chartMapService.getChartMapOptionSubMode(title,type,measure);
-        System.out.println(option.toString());
-        return option.toString();  //view?
+        String option = this.chartMapService.getChartMapOptionSubMode(title,type,measure);
+        System.out.println(option);
+        return option;  //view?
     }
     @RequestMapping("/chartMapMarkPoint/{type}/{title}/{measure}")
     @ResponseBody
     public String getChartMapOptionMarkPointMode(@PathVariable String title,@PathVariable String type,@PathVariable String measure){
-        GsonOption option = this.chartMapService.getChartMapOptionMarkPointMode(title,type,measure);
-        System.out.println(option.toString());
-        return option.toString();  //view?
+        String option = this.chartMapService.getChartMapOptionMarkPointMode(title,type,measure);
+        System.out.println(option);
+        return option;  //view?
     }
     @RequestMapping("/chartMap/{type}/{title}/{measure}")
     @ResponseBody
     public String getChartMapOption(@PathVariable String title,@PathVariable String type,@PathVariable String measure){
-        GsonOption option = this.chartMapService.getChartMapOption(title,type,measure);
-        System.out.println(option.toString());
-        return option.toString();  //view?
+        String option = this.chartMapService.getChartMapOption(title,type,measure);
+        System.out.println(option);
+        return option;  //view?
     }
 
     /**

@@ -8,8 +8,10 @@ import com.github.abel533.echarts.series.Map;
 import com.github.abel533.echarts.series.MarkPoint;
 import org.scut.mychart.mapper.MapChartMapper;
 import org.scut.mychart.model.MapChartModel;
+import org.scut.mychart.redis.MapRedisDao;
 import org.scut.mychart.service.MapChartService;
 import org.scut.mychart.util.DictionaryString;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,6 +24,13 @@ import java.util.*;
 public class MapChartServiceImpl implements MapChartService {
     @Resource  
     private MapChartMapper chartsDao;
+	@Autowired
+	private MapRedisDao mapRedisDao;
+
+
+	public String getMapRedisKey(String title,String type,String op,String map) {
+		return title.toUpperCase()+"_"+type.toUpperCase()+"_"+op.toUpperCase()+"_"+map.toUpperCase()+"_REDIS";
+	}
 	public String[] getNameArray(String title,String type,String op){
 		String titlename= DictionaryString.getStringChinese(title);
 		String typename= DictionaryString.getStringChinese(type);
@@ -84,7 +93,15 @@ public class MapChartServiceImpl implements MapChartService {
 		else if(type.equals(DictionaryString.charges)) return getMapChartCharges(title);
 		else return null;
 	}
-	public GsonOption getChartMapOptionSubMode(String title,String type,String op) {
+	public String getChartMapOptionSubMode(String title,String type,String op) {
+		String redisKey = getMapRedisKey(title,type,op,DictionaryString.MAP_SUBMODE);
+		//读取缓存
+		String mapredisData = mapRedisDao.getMapData(redisKey);
+		if(mapredisData != null && !mapredisData.isEmpty()) {
+			return mapredisData;
+		}
+
+
 		String[][] xylocationlist={
 				{"5%","10%"},{"55%","10%"},{"30%","10%"},{"76%","10%"},
 				{"5%","50%"},{"55%","50%"},{"30%","50%"},{"85%","50%"}};
@@ -172,9 +189,19 @@ public class MapChartServiceImpl implements MapChartService {
 		}
 		//set options
 		optionGroup.options(options);
-		return optionGroup;
+
+		//插入缓存中
+		mapRedisDao.setMapData(redisKey, optionGroup.toString());
+
+		return optionGroup.toString();
 	}
-	public GsonOption getChartMapOption(String title,String type,String op) {
+	public String getChartMapOption(String title,String type,String op) {
+		String redisKey = getMapRedisKey(title,type,op,DictionaryString.MAP);
+		//读取缓存
+		String mapredisData = mapRedisDao.getMapData(redisKey);
+		if(mapredisData != null && !mapredisData.isEmpty()) {
+			return mapredisData;
+		}
 		String[] result=getNameArray(title,type,op);
 		String charttitle=result[0];
 		String seriesname=result[1];
@@ -253,9 +280,18 @@ public class MapChartServiceImpl implements MapChartService {
 		}
 		//set options
 		optionGroup.options(options);
-		return optionGroup;
+		//插入缓存中
+		mapRedisDao.setMapData(redisKey, optionGroup.toString());
+
+		return optionGroup.toString();
 	}
-	public GsonOption getChartMapOptionMarkPointMode(String title,String type,String op) {
+	public String getChartMapOptionMarkPointMode(String title,String type,String op) {
+		String redisKey = getMapRedisKey(title,type,op,DictionaryString.MAP_MARKPOINT);
+		//读取缓存
+		String mapredisData = mapRedisDao.getMapData(redisKey);
+		if(mapredisData != null && !mapredisData.isEmpty()) {
+			return mapredisData;
+		}
 		String[] result=getNameArray(title,type,op);
 		String charttitle=result[0];
 		String seriesname=result[1];
@@ -368,7 +404,10 @@ public class MapChartServiceImpl implements MapChartService {
 		}
 		//set options
 		optionGroup.options(options);
-		return optionGroup;
+		//插入缓存中
+		mapRedisDao.setMapData(redisKey, optionGroup.toString());
+
+		return optionGroup.toString();
 	}
 
 }
