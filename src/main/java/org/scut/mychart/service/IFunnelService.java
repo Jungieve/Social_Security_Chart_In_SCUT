@@ -9,10 +9,10 @@ import java.util.List;
 public interface IFunnelService {
     
 
-    public GsonOption getChart04Option();
+    public String getChart04Option();
     //public String getTitleName(String title);
     public List<FunnelChart> getFunnelChartList();
-    public GsonOption getChart05Option(String title);
+    public String getChart05Option(String title);
     public List<FunnelChartPay> getFunnelPayment(String tittle);
     public String getTittle(String tittle);
     

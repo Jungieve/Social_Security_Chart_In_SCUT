@@ -12,12 +12,16 @@ import com.github.abel533.echarts.json.GsonOption;
 import com.github.abel533.echarts.series.*;
 
 import org.scut.mychart.mapper.FunnelMapper;
+import org.scut.mychart.model.ChartTypeConstant;
 import org.scut.mychart.model.FunnelChart;
 import org.scut.mychart.model.FunnelChartPay;
+import org.scut.mychart.redis.FunnelRedisDao;
 import org.scut.mychart.service.IFunnelService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
 import java.awt.geom.Line2D;
 import java.text.DecimalFormat;
 import java.util.*;
@@ -27,6 +31,9 @@ import java.util.Map;
 public class FunnelServiceImp implements IFunnelService {
     @Resource
     private FunnelMapper chartsDao;
+    
+    @Autowired
+    private FunnelRedisDao funnelRedisDao;
 
     //拼接标题
     public String getTittle(String tittle) {
@@ -76,6 +83,23 @@ public class FunnelServiceImp implements IFunnelService {
         }
         return this.chartsDao.selectFunnelPayment(param);
     }
+    
+    /**
+     * redis的漏斗图key值返回
+     */
+    public String getFunnelRedisKey(String title) {
+    	if(title.equals("endowment")) {
+            return ChartTypeConstant.ENDOWMENT_FUNNEL_PAY_REDIS;
+        }else if(title.equals("unemployment")){
+            return ChartTypeConstant.UNEMPLOYMENT_FUNNEL_PAY_REDIS;
+        }else if(title.equals("medical")){
+            return ChartTypeConstant.MEDICAL_FUNNEL_PAY_REDIS;
+        }else if(title.equals("injury")){
+            return ChartTypeConstant.INJURY_FUNNEL_PAY_REDIS;
+        }else {
+            return ChartTypeConstant.BIRTH_FUNNEL_PAY_REDIS;
+        }
+    }
 
     //返回人数数据对象
     public List<FunnelChart> getFunnelChartList(){
@@ -83,9 +107,17 @@ public class FunnelServiceImp implements IFunnelService {
     }
 
     //人数统计option
-    public GsonOption getChart04Option() {
+    public String getChart04Option() {
         GsonOption optionGroup = new GsonOption();
 
+        /**
+         * 首先获取redis缓存数据
+         */
+        String funnelData = funnelRedisDao.getFunnelData(ChartTypeConstant.FUNNEL_REDIS);
+        if(funnelData != null && !funnelData.isEmpty()) {
+        	return funnelData;
+        }
+        
         List<FunnelChart> funnelList=getFunnelChartList();
         java.util.Map<String,List<MapData>> data=new HashMap<String, List<MapData>>();
         List<String> yearList=new ArrayList();
@@ -185,13 +217,29 @@ public class FunnelServiceImp implements IFunnelService {
         }
 
         optionGroup.options(options);
-        return optionGroup;
+        
+        /**
+         * 存入redis缓存
+         */
+        funnelRedisDao.setFunnelData(ChartTypeConstant.FUNNEL_REDIS, optionGroup.toString());
+        
+        return optionGroup.toString();
 
     }
 
     //支付统计option
-    public GsonOption getChart05Option(String tittle) {
+    public String getChart05Option(String tittle) {
         GsonOption optionGroup = new GsonOption();
+        
+        String redisKey = getFunnelRedisKey(tittle);
+        
+        /**
+         * 获取redis缓存数据
+         */
+        String funnelData = funnelRedisDao.getFunnelData(redisKey);
+        if(funnelData != null && !funnelData.isEmpty()) {
+        	return funnelData;
+        }
 
         List<FunnelChartPay> funnelList=getFunnelPayment(tittle);
         java.util.Map<String,List<MapData>> data=new HashMap<String, List<MapData>>();
@@ -296,7 +344,12 @@ public class FunnelServiceImp implements IFunnelService {
         }
 
         optionGroup.options(options);
-        return optionGroup;
+        
+        /**
+         * 加入redis缓存
+         */
+        funnelRedisDao.setFunnelData(redisKey, optionGroup.toString());
+        return optionGroup.toString();
 
     }
 

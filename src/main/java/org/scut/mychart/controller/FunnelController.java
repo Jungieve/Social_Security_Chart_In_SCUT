@@ -29,17 +29,19 @@ public class FunnelController {
         @RequestMapping("/funnelchart")
         @ResponseBody
         public String toIndex() {
-            GsonOption option = this.funnelService.getChart04Option();
-            System.out.println(option.toString());
-            return option.toString();
+//            GsonOption option = this.funnelService.getChart04Option();
+        	String data = this.funnelService.getChart04Option();
+            System.out.println(data);
+            return data;
         }
 
         @RequestMapping("/funnelChartPay/{tittle}")
         @ResponseBody
         public String toIndex1(@PathVariable String tittle){
-            GsonOption option=this.funnelService.getChart05Option(tittle);
-            System.out.println(option.toString());
-            return option.toString();
+//            GsonOption option=this.funnelService.getChart05Option(tittle);
+        	String data = this.funnelService.getChart05Option(tittle);
+            System.out.println(data);
+            return data;
         }
 
 

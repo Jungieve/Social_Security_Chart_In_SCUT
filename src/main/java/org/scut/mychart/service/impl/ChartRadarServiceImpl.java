@@ -64,7 +64,7 @@ public class ChartRadarServiceImpl implements ChartRadarService {
 		GsonOption option = new GsonOption();
 		List<ChartRadar> list = getChartRadarData();
 
-		option.title("五险参保人数雷达图","测试用");
+		option.title("五险参保人数雷达图");
 		//option.title().x(X.right);option.title().y(Y.bottom);
 		//option.color("(function (){var zrColor = require('zrender/tool/color');return zrColor.getStepColors('yellow', 'red', 28);})()");
 		option.tooltip(Trigger.item);
