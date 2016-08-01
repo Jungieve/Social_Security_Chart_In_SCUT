@@ -62,4 +62,21 @@ public interface ChartTypeConstant {
 	//雷达图
 	public static final String Radar_REDIS = "Radar_REDIS";
 	
+	//漏斗图
+	public static final String FUNNEL_REDIS = "FUNNEL_REDIS";
+	
+	//失业支付漏斗图
+	public static final String UNEMPLOYMENT_FUNNEL_PAY_REDIS = "UNEMPLOYMENT_FUNNEL_PAY_REDIS";
+	
+	//养老支付漏斗图
+	public static final String ENDOWMENT_FUNNEL_PAY_REDIS = "ENDOWMENT_FUNNEL_PAY_REDIS";
+	
+	//医疗支付漏斗图
+	public static final String MEDICAL_FUNNEL_PAY_REDIS = "MEDICAL_FUNNEL_PAY_REDIS";
+	
+	//生育支付漏斗图
+	public static final String BIRTH_FUNNEL_PAY_REDIS = "BIRTH_FUNNEL_PAY_REDIS";
+	
+	//工伤支付漏斗图
+	public static final String INJURY_FUNNEL_PAY_REDIS = "INJURY_FUNNEL_PAY_REDIS";
 }
