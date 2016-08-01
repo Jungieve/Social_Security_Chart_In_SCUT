@@ -11,5 +11,5 @@ public interface ChartRadarService {
 
     public List<ChartRadar> getChartRadarData();
     public Integer getTypeint(String type);
-    public GsonOption getChartRadarOption();
+    public String getChartRadarOption();
 }
