@@ -82,7 +82,12 @@ public class VennUserServiceImpl implements VennUserService {
 
     public String getChartVennOption(String tittle1,String tittle2) {
         // TODO Auto-generated method stub
-        String type = ChartTypeConstant.Radar_REDIS;
+        String type = ChartTypeConstant.Venn_REDIS;
+        String VennData = vennRedisDao.getVennData(type);
+
+        if(VennData != null && !VennData.isEmpty()) {
+            return VennData;
+        }
         GsonOption option = new GsonOption();
         Option option1 = new GsonOption();
         Option option2 = new GsonOption();

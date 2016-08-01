@@ -79,4 +79,8 @@ public interface ChartTypeConstant {
 	
 	//工伤支付漏斗图
 	public static final String INJURY_FUNNEL_PAY_REDIS = "INJURY_FUNNEL_PAY_REDIS";
+
+	//韦恩图
+	public static final String Venn_REDIS = "Venn_REDIS";
+
 }
