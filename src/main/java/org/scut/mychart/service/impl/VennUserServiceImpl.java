@@ -7,7 +7,9 @@ import com.github.abel533.echarts.data.MapData;
 import com.github.abel533.echarts.json.GsonOption;
 import com.github.abel533.echarts.series.Venn;
 import org.scut.mychart.mapper.VennChartsMapper;
+import org.scut.mychart.model.ChartTypeConstant;
 import org.scut.mychart.model.Chartvenn;
+import org.scut.mychart.redis.VennRediaDao;
 import org.scut.mychart.service.VennUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.SystemEnvironmentPropertySource;
@@ -22,7 +24,8 @@ import java.util.List;
 public class VennUserServiceImpl implements VennUserService {
 	@Autowired
      private VennChartsMapper chartsDao;
-
+    @Autowired
+    private VennRediaDao vennRedisDao;
 
 
       public Chartvenn getChart10Personnum(String tittle1, String tittle2){
@@ -77,8 +80,9 @@ public class VennUserServiceImpl implements VennUserService {
           return chart;
         }
 
-    public GsonOption getChartVennOption(String tittle1,String tittle2) {
+    public String getChartVennOption(String tittle1,String tittle2) {
         // TODO Auto-generated method stub
+        String type = ChartTypeConstant.Radar_REDIS;
         GsonOption option = new GsonOption();
         Option option1 = new GsonOption();
         Option option2 = new GsonOption();
@@ -192,10 +196,11 @@ public class VennUserServiceImpl implements VennUserService {
         optionlist.add(option3);
 
         option.options(optionlist);
-
+        vennRedisDao.setVennData(type, option.toString());
 
         System.out.println(option.toString());
-        return option;
+
+        return option.toString();
     }
 
 

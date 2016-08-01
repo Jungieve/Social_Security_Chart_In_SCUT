@@ -17,8 +17,9 @@ public class ChartvennController {
     @RequestMapping("/chartvenn")
     @ResponseBody
     public String toIndex(){
-        GsonOption option = this.vennUserService.getChartVennOption("endowment","unemployment");
-        System.out.println(option.toString());
-        return option.toString();  //view?
+        String data = this.vennUserService.getChartVennOption("endowment","unemployment");
+       // GsonOption option = this.vennUserService.getChartVennOption("endowment","unemployment");
+        System.out.println(data);
+        return data;  //view?
     }  
 }
