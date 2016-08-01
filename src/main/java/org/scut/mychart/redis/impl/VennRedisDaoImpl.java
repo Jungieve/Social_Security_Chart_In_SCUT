@@ -3,10 +3,12 @@ package org.scut.mychart.redis.impl;
 import org.apache.log4j.Logger;
 import org.scut.mychart.redis.RedisBase;
 import org.scut.mychart.redis.VennRediaDao;
+import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 /**
  * Created by linqidi on 2016/8/1.
  */
+@Service
 public class VennRedisDaoImpl extends RedisBase implements VennRediaDao {
     private static final Logger log = Logger.getLogger(VennRedisDaoImpl.class);
     @Override
