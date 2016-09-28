@@ -6,7 +6,7 @@
   	<select id="selectRecommendResult" parameterType="java.util.Map" resultType="org.scut.mychart.model.RecommendResultModel" statementType="STATEMENT">
     	select *
     	from recommendresult
-    	where id="${id}"
+    	where person_id="${id}"
 
   	</select>
 	<!--<select id="selectRecommendResult" parameterType="java.util.Map" resultType="org.scut.mychart.model.RecommendResultModel" statementType="STATEMENT">-->

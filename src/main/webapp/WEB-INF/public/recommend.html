@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>社保大数据业务平台</title>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+	<link href="css/semantic.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" />
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="js/semantic.min.js"></script>
+	
+	<style>
+		.main {
+			margin-top: 4%;
+			
+		}
+		
+		.ui.input{
+			width: 30%;
+			margin-left: 20%;
+		}
+		
+		.user {
+			width: 90%;
+			margin: 2% auto 0;
+			font-size: 18px;
+		}
+		
+		.user .info {
+			text-align: center;
+		}
+		
+		.user .tag {
+			font-weight: bold;
+		}
+		
+		.ui.grid {
+			margin: 0 6%;
+			text-align: center;
+		}
+		
+		.company {
+			width: 96%;
+			margin: 2% auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="navbar navbar-fixed-top navbar-inverse" >
+	    <div class="container">
+	        <a id="logo" href="/">社保大数据业务平台</a>
+	    </div>
+	</div>
+	
+	<div class="main">
+<!-- 		<div class="ui huge icon input"> -->
+<!-- 		  <input type="text" placeholder="请输入搜索用户ID"> -->
+<!-- 		  <i class="inverted circular search link icon"></i> -->
+<!-- 		</div> -->
+		<div class="ui left icon huge action input">
+		    <i class="search icon"></i>
+		    <input type="text" class="content" placeholder="请输入搜索用户ID">
+		    <div class="ui blue submit button">搜索</div>
+		</div>
+		<h4 class="ui horizontal divider header"><i class="bar chart icon"></i> 搜索结果 </h4>
+		<div class="user">
+<!-- 			<div class="row"> -->
+<!-- 			  <div class="col-md-3 info"><span class="tag">用户ID：</span><span>2222222</span></div> -->
+<!-- 			  <div class="col-md-3 info">.col-md-3 .col-md-offset-3</div> -->
+<!-- 			  <div class="col-md-3 info">.col-md-3 .col-md-offset-3</div> -->
+<!-- 			  <div class="col-md-3 info">.col-md-3 .col-md-offset-3</div> -->
+<!-- 			</div> -->
+		
+			<div class="ui grid">
+			  <div class="four wide column"><span class="tag">用户ID：</span><span class="user-id"></span></div>
+			  <div class="four wide column"><span class="tag">年龄：</span><span class="user-age"></span></div>
+			  <div class="four wide column"><span class="tag">性别：</span><span class="user-sex"></span></div>
+			  <div class="four wide column"><span class="tag">历史工作1：</span><span class="user-history-job"></span></div>
+			  <div class="four wide column"><span class="tag">历史工作2：</span><span class="user-history-job"></span></div>
+			  <div class="four wide column"><span class="tag">历史工作3：</span><span class="user-history-job"></span></div>
+			  <div class="four wide column"><span class="tag">历史工作4：</span><span class="user-history-job"></span></div>
+			  <div class="four wide column"><span class="tag">历史工作5：</span><span class="user-history-job"></span></div>
+			  <div class="four wide column"><span class="tag">意向工作1：</span><span class="user-wish-job"></span></div>
+			  <div class="four wide column"><span class="tag">意向工作2：</span><span class="user-wish-job"></span></div>
+			  <div class="four wide column"><span class="tag">意向工作3：</span><span class="user-wish-job"></span></div>
+			  <div class="four wide column"><span class="tag">意向工作4：</span><span class="user-wish-job"></span></div>
+			  <div class="four wide column"><span class="tag">意向工作5：</span><span class="user-wish-job"></span></div>
+			  <div class="four wide column"><span class="tag">工作性质：</span><span class="user-job-way"></span></div>
+			  <div class="four wide column"><span class="tag">工资：</span><span class="user-job-wage"></span></div>
+			  <div class="four wide column"><span class="tag">文化程度：</span><span class="user-edu"></span></div>
+			  <div class="four wide column"><span class="tag">所在市：</span><span class="user-city"></span></div>
+			  <div class="four wide column"><span class="tag">希望工作开始时间：</span><span class="user-wish-start-time"></span></div>
+			  <div class="four wide column"><span class="tag">希望工作结束时间：</span><span class="user-wish-end-time"></span></div>
+			</div>
+		</div>
+		<div class="ui horizontal divider"> 推荐企业工作 </div>
+		<div class="company">
+			<div class="ui segment">
+			  <div class="ui inverted dimmer">
+			    <div class="ui small text loader">Loading</div>
+			  </div>
+			  <table class="ui celled table">
+				  <tbody>
+				    <tr>
+				      <td>企业ID</td>
+				      <td class="company-id"></td>
+				      <td class="company-id"></td>
+				      <td class="company-id"></td>
+				      <td class="company-id"></td>
+				      <td class="company-id"></td>
+				    </tr>
+				    <tr>
+				      <td>所在市</td>
+				      <td class="company-city"></td>
+				      <td class="company-city"></td>
+				      <td class="company-city"></td>
+				      <td class="company-city"></td>
+				      <td class="company-city"></td>
+				    </tr>
+				    <tr>
+				      <td>工种</td>
+				      <td class="company-job"></td>
+				      <td class="company-job"></td>
+				      <td class="company-job"></td>
+				      <td class="company-job"></td>
+				      <td class="company-job"></td>
+				    </tr>
+				    <tr>
+				      <td>招工人数</td>
+				      <td class="company-count"></td>
+				      <td class="company-count"></td>
+				      <td class="company-count"></td>
+				      <td class="company-count"></td>
+				      <td class="company-count"></td>
+				    </tr>
+				    <tr>
+				      <td>工作性质</td>
+				      <td class="company-way"></td>
+				      <td class="company-way"></td>
+				      <td class="company-way"></td>
+				      <td class="company-way"></td>
+				      <td class="company-way"></td>
+				    </tr>
+				    <tr>
+				      <td>工资类型</td>
+				      <td class="company-wage-type"></td>
+				      <td class="company-wage-type"></td>
+				      <td class="company-wage-type"></td>
+				      <td class="company-wage-type"></td>
+				      <td class="company-wage-type"></td>
+				    </tr>
+				    <tr>
+				      <td>文化程度</td>
+				      <td class="company-edu"></td>
+				      <td class="company-edu"></td>
+				      <td class="company-edu"></td>
+				      <td class="company-edu"></td>
+				      <td class="company-edu"></td>
+				    </tr>
+				    <tr>
+				      <td>工资</td>
+				      <td class="company-wage"></td>
+				      <td class="company-wage"></td>
+				      <td class="company-wage"></td>
+				      <td class="company-wage"></td>
+				      <td class="company-wage"></td>
+				    </tr>
+				    <tr>
+				      <td>福利待遇</td>
+				      <td class="company-welfare"></td>
+				      <td class="company-welfare"></td>
+				      <td class="company-welfare"></td>
+				      <td class="company-welfare"></td>
+				      <td class="company-welfare"></td>
+				    </tr>
+				    <tr>
+				      <td>希望用工时间开始</td>
+				      <td class="company-work-start"></td>
+				      <td class="company-work-start"></td>
+				      <td class="company-work-start"></td>
+				      <td class="company-work-start"></td>
+				      <td class="company-work-start"></td>
+				    </tr>
+				    <tr>
+				      <td>希望用工时间结束</td>
+				      <td class="compay-work-end"></td>
+				      <td class="compay-work-end"></td>
+				      <td class="compay-work-end"></td>
+				      <td class="compay-work-end"></td>
+				      <td class="compay-work-end"></td>
+				    </tr>
+				    <tr>
+				      <td>应聘最低年龄</td>
+				      <td class="company-age-min"></td>
+				      <td class="company-age-min"></td>
+				      <td class="company-age-min"></td>
+				      <td class="company-age-min"></td>
+				      <td class="company-age-min"></td>
+				    </tr>
+				    <tr>
+				      <td>应聘最高年龄</td>
+				      <td class="company-age-max"></td>
+				      <td class="company-age-max"></td>
+				      <td class="company-age-max"></td>
+				      <td class="company-age-max"></td>
+				      <td class="company-age-max"></td>
+				    </tr>
+				  </tbody>
+				</table>
+			</div>
+			
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		function getWelfare(wid) {
+			wid = parseInt(wid);
+			switch(wid) {
+				case 64:
+					return '包吃';
+				case 65:
+					return '包住';
+				case 66:
+					return '包吃住';
+				case 67:
+					return '不包吃住';
+			}
+		}
+		
+		$(function() {
+			var result;
+			//var id = '1502980';
+			var index = 0;
+			
+			$('.submit').on('click', function() {
+				var id = $('.content').val();
+				if(id) {
+					$('.dimmer').addClass('active');
+					$.ajax({
+						type: 'GET',
+						url: 'recommend/result',
+						dataType: 'json',
+						data: {id: id},
+						async: true,
+						success: function(res) {
+							result = res.data;
+							if(result.length > 0) {
+								var tmp = result[0];
+								var history_job = $('.user-history-job');
+								var intend_job = $('.user-wish-job');
+								var company_id = $('.company-id');
+								var company_city = $('.company-city');
+								var company_job = $('.company-job');
+								var company_count = $('.company-count');
+								var company_way = $('.company-way');
+								var company_wage_type = $('.company-wage-type');
+								var company_edu = $('.company-edu');
+								var company_wage = $('.company-wage');
+								var company_welfare = $('.company-welfare');
+								var company_work_start = $('.company-work-start');
+								var company_work_end = $('.compay-work-end');
+								var company_age_min = $('.company-age-min');
+								var company_age_max = $('.company-age-max');
+								
+								
+								// 填写用户信息
+								$('.user-id').html(tmp.person_id);
+								$('.user-age').html(tmp.age);
+								$('.user-sex').html(tmp.sex);
+								
+								for(index = 0; index < history_job.length; index++) {
+									history_job.eq(index).html(tmp["history_job"+(index + 1)]);
+								}
+								
+								for(index = 0; index < intend_job.length; index++) {
+									intend_job.eq(index).html(tmp["intend_job"+(index + 1)]);
+								}
+								
+								$('.user-job-way').html(tmp.job_way_id);
+								$('.user-job-wage').html(tmp.intend_wage);
+								$('.user-edu').html(tmp.education_id);
+								$('.user-city').html(tmp.city_id);
+								$('.user-wish-start-time').html(tmp.work_date_start.substr(0,11));
+								$('.user-wish-end-time').html(tmp.work_date_end.substr(0,11));
+								
+								// 填写企业信息
+								for(index = 0; index < result.length; index++) {
+									company_id.eq(index).html(result[index].c_id);
+									company_city.eq(index).html(result[index].c_city_id);
+									company_job.eq(index).html(result[index].c_job_type_id);
+									company_count.eq(index).html(result[index].c_count);
+									company_way.eq(index).html(result[index].c_job_way_id);
+									company_wage_type.eq(index).html(result[index].c_wage_way);
+									company_edu.eq(index).html(result[index].c_education_id);
+									company_wage.eq(index).html(result[index].c_wage);
+									company_welfare.eq(index).html(getWelfare(result[index].c_welfare_id));
+									company_work_start.eq(index).html(result[index].c_work_date_start.substr(0,11));
+									company_work_end.eq(index).html(result[index].c_work_date_end.substr(0,11));
+									company_age_min.eq(index).html(result[index].c_age_min);
+									company_age_max.eq(index).html(result[index].c_age_max);
+								}
+								
+								$('.content').val('');
+								$('.dimmer').removeClass('active');
+								
+							}
+							
+						},
+						error: function(err) {
+							alert('获取推荐信息失败：' + err);
+						}
+					});
+				}
+			});
+			
+			
+		});
+	</script>
+</body>
+</html>
