@@ -204,7 +204,7 @@
 	    <version>1.0.1.RELEASE</version>
 	</dependency>
 	
-	<!-- https://mvnrepository.com/artifact/org.jvnet.hudson/trilead-ssh2 -->
+	<!-- https://mvnrepository.com/artifact/org.jvnet.hudson/trilead-ssh2 远程调用 -->
 	<dependency>
 	    <groupId>org.jvnet.hudson</groupId>
 	    <artifactId>trilead-ssh2</artifactId>
