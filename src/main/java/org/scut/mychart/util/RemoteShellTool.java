@@ -74,11 +74,11 @@ public class RemoteShellTool {
 		
 		String result = tool.exec("sh /home/scut/recommend.sh 1500003");
 		
-		String[] arr = result.split(",");
+//		String[] arr = result.split(",");
+//		
+//		System.out.println(arr[9]);
 		
-		System.out.println(arr[9]);
-		
-//		System.out.println(tool.exec("sh /home/scut/recommend.sh 1500003"));
+		System.out.println(tool.exec("sh /home/scut/recommend.sh 1500003"));
 //		tool = new RemoteShellTool("125.216.242.175", "root", "scut123!@#");
 //		System.out.println(tool.exec("cat /home/scut/data.txt"));
 	}
