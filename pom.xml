@@ -203,6 +203,14 @@
 	    <artifactId>spring-data-redis</artifactId>
 	    <version>1.0.1.RELEASE</version>
 	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/org.jvnet.hudson/trilead-ssh2 -->
+	<dependency>
+	    <groupId>org.jvnet.hudson</groupId>
+	    <artifactId>trilead-ssh2</artifactId>
+	    <version>build212-hudson-6</version>
+	</dependency>
+	
   </dependencies>
   <build>
     <finalName>mychart</finalName>
