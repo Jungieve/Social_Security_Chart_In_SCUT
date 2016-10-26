@@ -504,7 +504,7 @@ var chartsOption = {
 						}
 					},
 					legend : {
-						data : [ '险种1', '险种2', '险种3', '险种4', '险种5' ]
+						data : [ '', '险种1', '险种2', '险种3', '险种4', '险种5' ]
 					},
 					calculable : true,
 					series : [ {
@@ -1094,7 +1094,7 @@ var chartsOption = {
 						}
 					},
 					legend : {
-						data : [ '险种1', '险种2', '险种3', '险种4', '险种5' ]
+						data : [ '', '险种1', '险种2', '险种3', '险种4', '险种5' ]
 					},
 					calculable : true,
 					series : [ {
@@ -1684,7 +1684,7 @@ var chartsOption = {
 						}
 					},
 					legend : {
-						data : [ '险种1', '险种2', '险种3', '险种4', '险种5' ]
+						data : [ '', '险种1', '险种2', '险种3', '险种4', '险种5' ]
 					},
 					calculable : true,
 					series : [ {
@@ -2274,7 +2274,7 @@ var chartsOption = {
 						}
 					},
 					legend : {
-						data : [ '险种1', '险种2', '险种3', '险种4', '险种5' ]
+						data : [ '', '险种1', '险种2', '险种3', '险种4', '险种5' ]
 					},
 					calculable : true,
 					series : [ {
@@ -2864,7 +2864,7 @@ var chartsOption = {
 						}
 					},
 					legend : {
-						data : [ '险种1', '险种2', '险种3', '险种4', '险种5' ]
+						data : [ '', '险种1', '险种2', '险种3', '险种4', '险种5' ]
 					},
 					calculable : true,
 					series : [ {
@@ -3155,7 +3155,7 @@ var chartsOption = {
 				}
 			},
 			legend : {
-				data : [ '险种1', '险种2', '险种3', '险种4', '险种5' ]
+				data : [ '', '险种1', '险种2', '险种3', '险种4', '险种5' ]
 			},
 			calculable : true,
 			series : [ {

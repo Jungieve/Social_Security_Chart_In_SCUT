@@ -72,7 +72,7 @@ public class RemoteShellTool {
     public static void main(String[] args) {
 		RemoteShellTool tool = new RemoteShellTool("125.216.242.175", "root", "scut123!@#");
 		
-		String result = tool.exec("sh /home/scut/recommend.sh 1500003");
+//		String result = tool.exec("sh /home/scut/recommend.sh 1500003");
 		
 //		String[] arr = result.split(",");
 //		
