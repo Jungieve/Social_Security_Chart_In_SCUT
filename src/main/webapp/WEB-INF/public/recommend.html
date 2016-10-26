@@ -52,6 +52,10 @@
 			width: 96%;
 			margin: 2% auto;
 		}
+		
+		.company table .tag {
+			font-weight: bold;
+		}
 	</style>
 </head>
 <body>
@@ -71,7 +75,7 @@
 		    <input type="text" class="content" placeholder="请输入搜索用户ID">
 		    <div class="ui blue submit button">搜索</div>
 		</div>
-		<h4 class="ui horizontal divider header"><i class="bar chart icon"></i> 搜索结果 </h4>
+		<h4 class="ui horizontal divider header"><i class="bar chart icon"></i> 用户个人信息 </h4>
 		<div class="user">
 <!-- 			<div class="row"> -->
 <!-- 			  <div class="col-md-3 info"><span class="tag">用户ID：</span><span>2222222</span></div> -->
@@ -80,27 +84,113 @@
 <!-- 			  <div class="col-md-3 info">.col-md-3 .col-md-offset-3</div> -->
 <!-- 			</div> -->
 		
-			<div class="ui grid">
-			  <div class="four wide column"><span class="tag">用户ID：</span><span class="user-id"></span></div>
-			  <div class="four wide column"><span class="tag">年龄：</span><span class="user-age"></span></div>
-			  <div class="four wide column"><span class="tag">性别：</span><span class="user-sex"></span></div>
-			  <div class="four wide column"><span class="tag">历史工作1：</span><span class="user-history-job"></span></div>
-			  <div class="four wide column"><span class="tag">历史工作2：</span><span class="user-history-job"></span></div>
-			  <div class="four wide column"><span class="tag">历史工作3：</span><span class="user-history-job"></span></div>
-			  <div class="four wide column"><span class="tag">历史工作4：</span><span class="user-history-job"></span></div>
-			  <div class="four wide column"><span class="tag">历史工作5：</span><span class="user-history-job"></span></div>
-			  <div class="four wide column"><span class="tag">意向工作1：</span><span class="user-wish-job"></span></div>
-			  <div class="four wide column"><span class="tag">意向工作2：</span><span class="user-wish-job"></span></div>
-			  <div class="four wide column"><span class="tag">意向工作3：</span><span class="user-wish-job"></span></div>
-			  <div class="four wide column"><span class="tag">意向工作4：</span><span class="user-wish-job"></span></div>
-			  <div class="four wide column"><span class="tag">意向工作5：</span><span class="user-wish-job"></span></div>
-			  <div class="four wide column"><span class="tag">工作性质：</span><span class="user-job-way"></span></div>
-			  <div class="four wide column"><span class="tag">工资：</span><span class="user-job-wage"></span></div>
-			  <div class="four wide column"><span class="tag">文化程度：</span><span class="user-edu"></span></div>
-			  <div class="four wide column"><span class="tag">所在市：</span><span class="user-city"></span></div>
-			  <div class="four wide column"><span class="tag">希望开始时间：</span><span class="user-wish-start-time"></span></div>
-			  <div class="four wide column"><span class="tag">希望结束时间：</span><span class="user-wish-end-time"></span></div>
-			</div>
+<!-- 			<div class="ui grid"> -->
+<!-- 			  <div class="four wide column"><span class="tag">用户ID：</span><span class="user-id"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">年龄：</span><span class="user-age"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">性别：</span><span class="user-sex"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">历史工作1：</span><span class="user-history-job"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">历史工作2：</span><span class="user-history-job"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">历史工作3：</span><span class="user-history-job"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">历史工作4：</span><span class="user-history-job"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">历史工作5：</span><span class="user-history-job"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">意向工作1：</span><span class="user-wish-job"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">意向工作2：</span><span class="user-wish-job"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">意向工作3：</span><span class="user-wish-job"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">意向工作4：</span><span class="user-wish-job"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">意向工作5：</span><span class="user-wish-job"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">工作性质：</span><span class="user-job-way"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">工资：</span><span class="user-job-wage"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">文化程度：</span><span class="user-edu"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">所在市：</span><span class="user-city"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">希望开始时间：</span><span class="user-wish-start-time"></span></div> -->
+<!-- 			  <div class="four wide column"><span class="tag">希望结束时间：</span><span class="user-wish-end-time"></span></div> -->
+<!-- 			</div> -->
+			<table class="ui fixed celled padded table">
+			  <thead>
+			    <tr>
+			    	<th>用户ID</th>
+			    	<th>年龄</th>
+			    	<th>性别</th>
+			    	<th>历史工作1</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <td class="single line user-id"></td>
+			      <td class="single line user-age"></td>
+			      <td class="single line user-sex"></td>
+			      <td class="single line user-history-job"></td>
+			    </tr>
+			  </tbody>
+			  
+			  <thead>
+			    <tr>
+			    	<th>历史工作2</th>
+			    	<th>历史工作3</th>
+			    	<th>历史工作4</th>
+			    	<th>历史工作5</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <td class="single line user-history-job"></td>
+			      <td class="single line user-history-job"></td>
+			      <td class="single line user-history-job"></td>
+			      <td class="single line user-history-job"></td>
+			    </tr>
+			  </tbody>
+			  
+			  <thead>
+			    <tr>
+			    	<th>意向工作1</th>
+			    	<th>意向工作2</th>
+			    	<th>意向工作3</th>
+			    	<th>意向工作4</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <td class="single line user-wish-job"></td>
+			      <td class="single line user-wish-job"></td>
+			      <td class="single line user-wish-job"></td>
+			      <td class="single line user-wish-job"></td>
+			    </tr>
+			  </tbody>
+			  
+			  <thead>
+			    <tr>
+			    	<th>意向工作5</th>
+			    	<th>工作性质</th>
+			    	<th>工资</th>
+			    	<th>文化程度</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <td class="single line user-wish-job"></td>
+			      <td class="single line user-job-way"></td>
+			      <td class="single line user-job-wage"></td>
+			      <td class="single line user-edu"></td>
+			    </tr>
+			  </tbody>
+			  
+			  <thead>
+			    <tr>
+			    	<th>所在市</th>
+			    	<th>希望工作开始时间</th>
+			    	<th>希望工作结束时间</th>
+			    	<th></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <td class="single line user-city"></td>
+			      <td class="single line user-wish-start-time"></td>
+			      <td class="single line user-wish-end-time"></td>
+			      <td></td>
+			    </tr>
+			  </tbody>
+			</table>
 		</div>
 		<div class="ui horizontal divider"> 推荐企业工作 </div>
 		<div class="company">
@@ -111,7 +201,7 @@
 			  <table class="ui celled table">
 				  <tbody>
 				    <tr>
-				      <td>企业ID</td>
+				      <td class="tag">企业ID</td>
 				      <td class="company-id"></td>
 				      <td class="company-id"></td>
 				      <td class="company-id"></td>
@@ -119,7 +209,7 @@
 				      <td class="company-id"></td>
 				    </tr>
 				    <tr>
-				      <td>所在市</td>
+				      <td class="tag">所在市</td>
 				      <td class="company-city"></td>
 				      <td class="company-city"></td>
 				      <td class="company-city"></td>
@@ -127,7 +217,7 @@
 				      <td class="company-city"></td>
 				    </tr>
 				    <tr>
-				      <td>工种</td>
+				      <td class="tag">工种</td>
 				      <td class="company-job"></td>
 				      <td class="company-job"></td>
 				      <td class="company-job"></td>
@@ -135,7 +225,7 @@
 				      <td class="company-job"></td>
 				    </tr>
 				    <tr>
-				      <td>招工人数</td>
+				      <td class="tag">招工人数</td>
 				      <td class="company-count"></td>
 				      <td class="company-count"></td>
 				      <td class="company-count"></td>
@@ -143,7 +233,7 @@
 				      <td class="company-count"></td>
 				    </tr>
 				    <tr>
-				      <td>工作性质</td>
+				      <td class="tag">工作性质</td>
 				      <td class="company-way"></td>
 				      <td class="company-way"></td>
 				      <td class="company-way"></td>
@@ -151,7 +241,7 @@
 				      <td class="company-way"></td>
 				    </tr>
 				    <tr>
-				      <td>工资类型</td>
+				      <td class="tag">工资类型</td>
 				      <td class="company-wage-type"></td>
 				      <td class="company-wage-type"></td>
 				      <td class="company-wage-type"></td>
@@ -159,7 +249,7 @@
 				      <td class="company-wage-type"></td>
 				    </tr>
 				    <tr>
-				      <td>文化程度</td>
+				      <td class="tag">文化程度</td>
 				      <td class="company-edu"></td>
 				      <td class="company-edu"></td>
 				      <td class="company-edu"></td>
@@ -167,7 +257,7 @@
 				      <td class="company-edu"></td>
 				    </tr>
 				    <tr>
-				      <td>工资</td>
+				      <td class="tag">工资</td>
 				      <td class="company-wage"></td>
 				      <td class="company-wage"></td>
 				      <td class="company-wage"></td>
@@ -175,7 +265,7 @@
 				      <td class="company-wage"></td>
 				    </tr>
 				    <tr>
-				      <td>福利待遇</td>
+				      <td class="tag">福利待遇</td>
 				      <td class="company-welfare"></td>
 				      <td class="company-welfare"></td>
 				      <td class="company-welfare"></td>
@@ -183,7 +273,7 @@
 				      <td class="company-welfare"></td>
 				    </tr>
 				    <tr>
-				      <td>希望用工时间开始</td>
+				      <td class="tag">希望用工时间开始</td>
 				      <td class="company-work-start"></td>
 				      <td class="company-work-start"></td>
 				      <td class="company-work-start"></td>
@@ -191,7 +281,7 @@
 				      <td class="company-work-start"></td>
 				    </tr>
 				    <tr>
-				      <td>希望用工时间结束</td>
+				      <td class="tag">希望用工时间结束</td>
 				      <td class="compay-work-end"></td>
 				      <td class="compay-work-end"></td>
 				      <td class="compay-work-end"></td>
@@ -199,7 +289,7 @@
 				      <td class="compay-work-end"></td>
 				    </tr>
 				    <tr>
-				      <td>应聘最低年龄</td>
+				      <td class="tag">应聘最低年龄</td>
 				      <td class="company-age-min"></td>
 				      <td class="company-age-min"></td>
 				      <td class="company-age-min"></td>
@@ -207,7 +297,7 @@
 				      <td class="company-age-min"></td>
 				    </tr>
 				    <tr>
-				      <td>应聘最高年龄</td>
+				      <td class="tag">应聘最高年龄</td>
 				      <td class="company-age-max"></td>
 				      <td class="company-age-max"></td>
 				      <td class="company-age-max"></td>
