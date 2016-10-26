@@ -26,7 +26,7 @@ public class MapChartController {
     public String getChartMapOptionSubAreaMode(@PathVariable String title,@PathVariable String type,@PathVariable String measure){
         String option = this.chartMapService.getChartMapOptionSubMode(title,type,measure);
         System.out.println(option);
-        return option;  //view?
+        return option;
     }
     @RequestMapping("/chartMapMarkPoint/{type}/{title}/{measure}")
     @ResponseBody
