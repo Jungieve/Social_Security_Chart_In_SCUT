@@ -43,7 +43,7 @@ var chartsOption = {
 						trigger : 'axis'
 					},
 					legend : {
-						data : [ '险种1', '险种2' ]
+						data : [ '', '险种1', '险种2' ]
 					},
 					toolbox : {
 						show : false,
@@ -414,7 +414,7 @@ var chartsOption = {
 						trigger : 'axis'
 					},
 					legend : {
-						data : [ '险种1', '险种2' ]
+						data : [ '', '险种1', '险种2' ]
 					},
 					toolbox : {
 						show : false,
@@ -633,7 +633,7 @@ var chartsOption = {
 						trigger : 'axis'
 					},
 					legend : {
-						data : [ '险种1', '险种2' ]
+						data : [ '', '险种1', '险种2' ]
 					},
 					toolbox : {
 						show : false,
@@ -1004,7 +1004,7 @@ var chartsOption = {
 						trigger : 'axis'
 					},
 					legend : {
-						data : [ '险种1', '险种2' ]
+						data : [ '', '险种1', '险种2' ]
 					},
 					toolbox : {
 						show : false,
@@ -1223,7 +1223,7 @@ var chartsOption = {
 						trigger : 'axis'
 					},
 					legend : {
-						data : [ '险种1', '险种2' ]
+						data : [ '', '险种1', '险种2' ]
 					},
 					toolbox : {
 						show : false,
@@ -1594,7 +1594,7 @@ var chartsOption = {
 						trigger : 'axis'
 					},
 					legend : {
-						data : [ '险种1', '险种2' ]
+						data : [ '', '险种1', '险种2' ]
 					},
 					toolbox : {
 						show : false,
@@ -1813,7 +1813,7 @@ var chartsOption = {
 						trigger : 'axis'
 					},
 					legend : {
-						data : [ '险种1', '险种2' ]
+						data : [ '', '险种1', '险种2' ]
 					},
 					toolbox : {
 						show : false,
@@ -2184,7 +2184,7 @@ var chartsOption = {
 						trigger : 'axis'
 					},
 					legend : {
-						data : [ '险种1', '险种2' ]
+						data : [ '', '险种1', '险种2' ]
 					},
 					toolbox : {
 						show : false,
@@ -2403,7 +2403,7 @@ var chartsOption = {
 						trigger : 'axis'
 					},
 					legend : {
-						data : [ '险种1', '险种2' ]
+						data : [ '', '险种1', '险种2' ]
 					},
 					toolbox : {
 						show : false,
@@ -2774,7 +2774,7 @@ var chartsOption = {
 						trigger : 'axis'
 					},
 					legend : {
-						data : [ '险种1', '险种2' ]
+						data : [ '', '险种1', '险种2' ]
 					},
 					toolbox : {
 						show : false,

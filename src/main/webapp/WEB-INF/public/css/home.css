@@ -8,8 +8,10 @@
 
 .left-content {
 	position: fixed;
-	width: 16%;
+	width: 20%;
 	height: 500px;
+	margin-left: -4%;
+    min-width: 196px;
 	/*border-radius: 6px;
 				box-shadow: 0 1px 4px rgba(0,0,0,.065);
 				border: 2px solid #E5E5E5;*/
@@ -95,7 +97,7 @@
 	width: 80%;
 	min-height: 100px;
 	position: absolute;
-	left: 20%;
+	left: 24%;
 }
 
 .right-content .single {
