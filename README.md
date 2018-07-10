@@ -1,4 +1,5 @@
 # 华工社保大数据项目
+采用SSM+Echart,旨在提供社保大数据的数据可视化支撑
 >Provided by: 华南理工大学B3-435大数据应用分析团队
 
 # Contributor
